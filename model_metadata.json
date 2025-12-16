@@ -1,0 +1,32 @@
+{
+  "created_at": "2025-12-16T14:49:52.923247Z",
+  "model_file": "lgbm_ev_model.txt",
+  "model_pickle": "lgbm_ev_model.pkl",
+  "features": [
+    "ACC",
+    "AIR",
+    "ALT",
+    "AUT",
+    "AX",
+    "AY",
+    "AZ",
+    "BRK",
+    "CH",
+    "CUR",
+    "ECO",
+    "GX",
+    "GY",
+    "GZ",
+    "LAT",
+    "LON",
+    "ODO",
+    "SPD",
+    "VOL",
+    "acc_mag",
+    "acc_mag_roll",
+    "gyro_mag",
+    "road_grad",
+    "spd_roll"
+  ],
+  "target": "power"
+}
