@@ -15,6 +15,8 @@ def load_ev_data(filename="Kaggle-EV-Dataset.csv"):
     df["delta_alt"] = df.groupby("COND")["ALT"].diff().fillna(0)
     df["delta_odo"] = df.groupby("COND")["ODO"].diff().fillna(0.001)  
     df["road_grad"] = df["delta_alt"] / df["delta_odo"]
+    # Assume CUR is in deci-amps (dA), so convert to amps
+    df["CUR"] = df["CUR"] * 10
     df["power"] = df["VOL"] * df["CUR"]
 
     rolling_window = 5

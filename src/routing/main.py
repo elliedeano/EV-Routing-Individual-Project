@@ -140,7 +140,7 @@ def main():
     soc = current_soc_percent
 
     # Load mean wh_per_km_raw for this car from scaled_trip_energy.csv
-    csv_path = "../../data/raw/scaled_trip_energy.csv"
+    csv_path = "data/raw/scaled_trip_energy.csv"
     wh_per_km_list = []
     with open(csv_path, newline="") as csvfile:
         reader = csv.DictReader(csvfile)
