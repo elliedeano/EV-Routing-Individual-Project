@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environments
+.env
+.venv
+venv/
+conda-env/
+
+# Data files (raw + generated)
+data/raw/*.csv
+data/processed/*.csv
+
+# Model artifacts
+*.pkl
+model_metadata.json
+
+# OS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
