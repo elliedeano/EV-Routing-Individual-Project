@@ -5,13 +5,11 @@ import polyline
 import math
 import csv
 from pathlib import Path
-from ors_config import ORS_API_KEY
-from ocm_config import OCM_API_KEY
+
+ORS_API_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImJjMWY3ZTRiMGQ0ZTQ1NTRiMjlmNjQ4Y2NlM2I0ZTdlIiwiaCI6Im11cm11cjY0In0="
+OCM_API_KEY = "bc0fb54f-d673-4829-9bbb-f2abac2c11f8"
 
 
-# -------------------------
-# GEO + ROUTING
-# -------------------------
 def geocode_postcode(postcode):
     url = "https://api.openrouteservice.org/geocode/search"
     params = {
@@ -23,7 +21,7 @@ def geocode_postcode(postcode):
     r.raise_for_status()
     features = r.json().get("features", [])
     if not features:
-        raise ValueError(f"No geocoding result for {postcode}")
+        raise ValueError(f"No result for {postcode}")
     lon, lat = features[0]["geometry"]["coordinates"]
     return lat, lon
 
@@ -45,10 +43,7 @@ def get_route(start_coords, dest_coords):
     return polyline.decode(data["routes"][0]["geometry"])
 
 
-# -------------------------
-# CHARGERS
-# -------------------------
-def get_chargers_near_route(route_coords, max_results=6, distance_km=5):
+def get_chargers_near_route(route_coords, max_results=5, distance_km=10):
     chargers = []
     sample_points = [route_coords[0], route_coords[-1]]
 
@@ -71,15 +66,12 @@ def get_chargers_near_route(route_coords, max_results=6, distance_km=5):
         r.raise_for_status()
         chargers += r.json()
 
-    # Deduplicate by charger ID
     unique = {c["ID"]: c for c in chargers}
     return list(unique.values())
 
 
-# -------------------------
-# PHYSICS
-# -------------------------
-def haversine(lat1, lon1, lat2, lon2):
+
+def route_segment_distance(lat1, lon1, lat2, lon2):
     R = 6371.0
     p1, p2 = math.radians(lat1), math.radians(lat2)
     dp = math.radians(lat2 - lat1)
@@ -88,10 +80,8 @@ def haversine(lat1, lon1, lat2, lon2):
     return 2 * R * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
 
-# -------------------------
-# TRIP SIMULATION
-# -------------------------
-def simulate_trip_with_charging(route, car_specs, soc_percent, min_buffer_km=20):
+
+def trip_simulation(route, car_specs, soc_percent, min_buffer_km=20):
     wh_per_km = car_specs["wh_per_km"]
     battery_kwh = car_specs["battery_kwh"]
 
@@ -103,7 +93,7 @@ def simulate_trip_with_charging(route, car_specs, soc_percent, min_buffer_km=20)
     stops = []
 
     for pt in route[1:]:
-        seg = haversine(last[0], last[1], pt[0], pt[1])
+        seg = route_segment_distance(last[0], last[1], pt[0], pt[1])
         distance += seg
         remaining_km -= seg
 
@@ -121,20 +111,15 @@ def simulate_trip_with_charging(route, car_specs, soc_percent, min_buffer_km=20)
     return stops, distance
 
 
-# -------------------------
-# MAIN
-# -------------------------
-def main():
-    print("\nEV Route Planner\n")
 
+def main():
+   
     start_postcode = input("Enter start postcode: ").strip()
-    dest_postcode = input("Enter destination postcode: ").strip()
+    end_postcode = input("Enter destination postcode: ").strip()
     soc = float(input("Enter your current battery percentage: ").strip())
     car_model = input("Enter your car model (e.g., JAC iEV7s): ").strip()
 
-    # -------------------------
-    # LOAD ML RESULTS
-    # -------------------------
+   
     project_root = Path(__file__).resolve().parents[2]
     csv_path = project_root / "data" / "raw" / "scaled_trip_energy.csv"
 
@@ -144,34 +129,28 @@ def main():
         for row in reader:
             if row["Car Model"].strip().lower() == car_model.lower():
                 wh = float(row["wh_per_km_raw"])
-                if 30 < wh < 350:   # realistic EV bounds
+                if 30 < wh < 350:   
                     wh_values.append(wh)
 
     if wh_values:
         mean_wh_per_km = sum(wh_values) / len(wh_values)
         print(f"Loaded {len(wh_values)} ML trips for {car_model}")
     else:
-        print("⚠️ No ML data found — using spec fallback")
+        print("No car specific data found using a fallback.")
         mean_wh_per_km = get_car_specs(car_model)["wh_per_km"]
 
-    # -------------------------
-    # ROUTE + SIMULATION
-    # -------------------------
     start_coords = geocode_postcode(start_postcode)
-    dest_coords = geocode_postcode(dest_postcode)
+    dest_coords = geocode_postcode(end_postcode)
     route = get_route(start_coords, dest_coords)
 
     car_specs = get_car_specs(car_model)
     car_specs["wh_per_km"] = mean_wh_per_km
 
-    stops, total_km = simulate_trip_with_charging(route, car_specs, soc)
+    stops, total_km = trip_simulation(route, car_specs, soc)
 
-    # -------------------------
-    # OUTPUT
-    # -------------------------
-    print("\n--- TRIP SUMMARY ---")
+    print("\nRoute Summary")
     print(f"Total distance: {total_km:.1f} km")
-    print(f"Using consumption: {mean_wh_per_km:.1f} Wh/km")
+    print(f"Using energy consumption: {mean_wh_per_km:.1f} Wh/km")
 
     if stops:
         print(f"\nCharging stops needed: {len(stops)}")
@@ -183,12 +162,11 @@ def main():
                     print(
                         f"  Option {j}: "
                         f"{addr.get('Title', 'Unknown')} "
-                        f"({addr.get('Latitude')}, {addr.get('Longitude')})"
                     )
             else:
-                print("  ⚠️ No chargers found nearby")
+                print("No chargers found nearby")
     else:
-        print("\n✅ No charging stops needed — trip is reachable")
+        print("\nNo charging stops needed — destination is reachable")
 
 
 if __name__ == "__main__":

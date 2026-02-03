@@ -1,20 +1,19 @@
-"""
-Get battery size and energy consumption for a car model from a dictionary.
-Extendable for more cars later.
-"""
 
-CAR_SPECS = {
-    "JAC iEV7s": {
-        "battery_kwh": 42.8,
-        "wh_per_km": 173,
-    },
-    # Add more car models here as needed
-}
+
+import pandas as pd
+from pathlib import Path
 
 def get_car_specs(car_model):
-    specs = CAR_SPECS.get(car_model)
-    if specs is None:
-        raise ValueError(f"Car model '{car_model}' not found in CAR_SPECS.")
+    project_root = Path(__file__).resolve().parents[2]
+    csv_path = project_root / "data" / "raw" / "scaled_trip_energy.csv"
+    df = pd.read_csv(csv_path)
+   
+    row = df[df["Car Model"] == car_model].iloc[0]
+    print("Matched row:", row)
+    specs = {
+        "battery_kwh": row.get("battery_kwh", 42.8),  # fallback to 42.8 if not present
+        "wh_per_km": row["wh_per_km_raw"],
+    }
     return specs
 
 if __name__ == "__main__":
