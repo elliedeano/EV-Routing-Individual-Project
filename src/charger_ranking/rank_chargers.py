@@ -11,7 +11,10 @@ def parse_price(usage_cost):
 def extract_charger_features(charger):
     price = parse_price(charger.get('UsageCost'))
     connections = charger.get('Connections', [])
-    max_power = max((c.get('PowerKW', 0) or 0) for c in connections)
+    if connections:
+        max_power = max((c.get('PowerKW', 0) or 0) for c in connections)
+    else:
+        max_power = 0
     is_fast = any(c.get('Level', {}).get('IsFastChargeCapable') for c in connections)
     num_points = charger.get('NumberOfPoints', 1)
     status_type = charger.get('StatusType')

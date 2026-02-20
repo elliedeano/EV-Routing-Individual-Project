@@ -122,13 +122,13 @@ def main():
     from charger_ranking.rank_chargers import rank_and_filter_chargers
     # After charging stops and all_chargers are built, print both baseline and ranked chargers
     if all_chargers:
-        print("\nBaseline Charger Options:")
+        print("Baseline Charger Options:")
         for i, c in enumerate(all_chargers, 1):
             addr = c.get('AddressInfo', {}).get('Title', 'Unknown')
             print(f"{i}. {addr}")
         # Print ranked chargers
         ranked = rank_and_filter_chargers(all_chargers, priorities)
-        print("\nTop Filtered Charger Recommendations:")
+        print("\nFiltered Charger Recommendations:")
         for i, c in enumerate(ranked[:5], 1):
             addr = c['raw'].get('AddressInfo', {}).get('Title', 'Unknown')
             print(f"{i}. {addr} | Price: {c['price']} | Power: {c['max_power']} kW | Fast: {c['is_fast']} | Points: {c['num_points']} | Distance: {c['distance']:.2f} km | Traffic Delay: {c['traffic_delay']:.1f}%")
@@ -150,11 +150,11 @@ def main():
     }
     mean_wh_per_km = car_specs["wh_per_km"]
 
-    print("\n--- EV Routing Input ---")
-    start_postcode = input("Enter your start postcode: ").strip()
-    end_postcode = input("Enter your destination postcode: ").strip()
+    print("\n\033[1mEV Routing Input\033[0m")
+    start_postcode = input("\033[1mEnter your start postcode:\033[0m\n> ").strip()
+    end_postcode = input("\033[1mEnter your destination postcode:\033[0m\n> ").strip()
     while True:
-        soc_input = input("Enter your current battery percentage (e.g. 80): ").strip()
+        soc_input = input("\033[1mEnter your current battery percentage (e.g. 80):\033[0m\n> ").strip()
         try:
             soc = float(soc_input)
             if 0 < soc <= 100:
@@ -164,35 +164,50 @@ def main():
         except ValueError:
             print("Please enter a valid number.")
 
-    car_models = [
-        "Hyundai IONIQ 5",
-        "Hyundai Kona Electric",
-        "JAC iEV7s",
-        "Jeep Avenger",
-        "Kia EV3",
-        "Peugeot E-2008",
-        "Porsche Taycan",
-        "Renault Scenic",
-        "Skoda Enyaq",
-        "Tesla Model 3"
-    ]
+    # Load car models and specs from CSV
+    import csv
+    car_models = []
+    car_specs_dict = {}
+    csv_path = Path(__file__).resolve().parents[2] / "data" / "raw" / "car-energy-database.csv"
+    with open(csv_path, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            model = row['Car Model '].strip()
+            if model:
+                car_models.append(model)
+                # Parse energy consumption and mass, fallback to None if missing
+                try:
+                    wh_per_km = float(row['Energy Consumption (Wh/KM)']) if row['Energy Consumption (Wh/KM)'] else None
+                except Exception:
+                    wh_per_km = None
+                try:
+                    mass = float(row['Mass (kg)']) if row['Mass (kg)'] else None
+                except Exception:
+                    mass = None
+                car_specs_dict[model] = {
+                    'wh_per_km': wh_per_km,
+                    'mass': mass
+                }
+
     while True:
-        print("\nAvailable car models:")
+        print("\n\033[1mAvailable car models (select by number):\033[0m")
         for idx, model in enumerate(car_models, 1):
             print(f"  {idx}. {model}")
-        model_input = input("Select your car model by number: ").strip()
+        model_input = input("> ").strip()
         if model_input.isdigit() and 1 <= int(model_input) <= len(car_models):
             car_model = car_models[int(model_input)-1]
             break
         else:
             print("Please enter a valid number from the list above.")
 
-    # Fallback car specs
-    battery_kwh = 60
-    wh_per_km = 200
+    # Use specs from CSV, fallback if missing
+    battery_kwh = 60  # Fallback value, update if you have battery info
+    wh_per_km = car_specs_dict[car_model]['wh_per_km'] if car_specs_dict[car_model]['wh_per_km'] is not None else 200
+    mass = car_specs_dict[car_model]['mass'] if car_specs_dict[car_model]['mass'] is not None else None
     car_specs = {
         "battery_kwh": battery_kwh,
-        "wh_per_km": wh_per_km
+        "wh_per_km": wh_per_km,
+        "mass": mass
     }
     mean_wh_per_km = car_specs["wh_per_km"]
 
@@ -213,20 +228,24 @@ def main():
         ("distance", "Closest distance"),
         ("traffic_delay", "Least traffic delay (% increase)")
     ]
-    print("\nSelect your top 3 priorities by number (comma separated):")
-    for idx, (key, desc) in enumerate(priorities_list, 1):
-        print(f"  {idx}. {key} - {desc}")
+    print("\n\033[1mSelect your top 3 priorities (comma separated numbers):\033[0m")
+    for idx, (_, desc) in enumerate(priorities_list, 1):
+        print(f"  {idx}. {desc}")
     while True:
-        user_input = input("Enter 3 numbers (e.g. 1,3,6): ").strip()
+        user_input = input("> ").strip()
         nums = [n.strip() for n in user_input.split(',') if n.strip().isdigit()]
         if len(nums) == 3 and all(1 <= int(n) <= len(priorities_list) for n in nums):
             priorities = [priorities_list[int(n)-1][0] for n in nums]
             break
         else:
             print("Invalid input. Please enter 3 numbers from the list above.")
-    print("\nRoute Summary")
+    print("\n\033[1m\033[4mRoute Summary\033[0m")
     print(f"Total distance: {total_km:.1f} km")
     print(f"Using energy consumption: {mean_wh_per_km:.1f} Wh/km")
+    # Calculate estimated distance reachable on current charge
+    usable_wh = car_specs["battery_kwh"] * 1000 * (soc / 100)
+    est_reachable_km = usable_wh / mean_wh_per_km if mean_wh_per_km else 0
+    print(f"Estimated range on current charge: {est_reachable_km:.1f} km")
 
     # Traffic analysis output
     # analyze_traffic(start_coords, dest_coords, total_km)  # No longer needed; traffic handled per charger
@@ -234,14 +253,15 @@ def main():
     from traffic_analysis import get_traffic_delay_percent
     all_chargers = []
     if stops:
-        print(f"\nCharging stops needed: {len(stops)}")
-        for i, s in enumerate(stops, 1):
-            print(f"\nStop {i} at {s['at_km']:.1f} km")
+        # Instead of printing each stop and options, just print the first recommended stop distance
+        first_stop_km = stops[0]['at_km'] if stops else None
+        if first_stop_km is not None:
+            print(f"Charge stop recommended at: {first_stop_km:.1f} km")
+        # Still collect chargers for ranking/output
+        for s in stops:
             if s["chargers"]:
-                for j, c in enumerate(s["chargers"], 1):
+                for c in s["chargers"]:
                     addr = c.get("AddressInfo", {})
-                    print(f"  Option {j}: {addr.get('Title', 'Unknown')}")
-                    # Calculate traffic delay percent for this charger
                     charger_coords = (addr.get('Latitude'), addr.get('Longitude'))
                     if charger_coords[0] is not None and charger_coords[1] is not None:
                         delay_pct = get_traffic_delay_percent(start_coords, charger_coords)
@@ -249,10 +269,8 @@ def main():
                         delay_pct = 0.0
                     c['traffic_delay'] = delay_pct
                     all_chargers.append(c)
-            else:
-                print("No chargers found nearby")
     else:
-        print("\nNo charging stops needed — destination is reachable")
+        print("\nNo charging stops needed as destination is reachable based on current estimated range.")
     # Save all found chargers to baseline_chargers.json for ranking
     if all_chargers:
         import json
@@ -261,10 +279,9 @@ def main():
         out_path = out_dir / "baseline_chargers.json"
         with open(out_path, "w") as f:
             json.dump(all_chargers, f, indent=2)
-        print(f"\nSaved {len(all_chargers)} chargers to {out_path}")
 
         # Print baseline chargers
-        print("\n--- Baseline Charger Options (by distance) ---")
+        print("\n\033[1m\033[4mDistance Based Charger Recommendations\033[0m")
         for i, c in enumerate(all_chargers, 1):
             addr = c.get('AddressInfo', {}).get('Title', 'Unknown')
             dist = c.get('AddressInfo', {}).get('Distance', None)
@@ -272,35 +289,39 @@ def main():
                 print(f"{i}. {addr} ({dist:.2f} km)")
             else:
                 print(f"{i}. {addr}")
+        print("")
 
         # Rank and print chargers by user priorities
         from charger_ranking.rank_chargers import rank_and_filter_chargers
         ranked = rank_and_filter_chargers(all_chargers, priorities)
-        print("\n--- Top 3 Filtered Charger Recommendations (by your priorities) ---")
+        print("\n\033[1m\033[4mPriority Based Charger Recommendations\033[0m\n")
         top_n = min(3, len(ranked))
         if top_n == 0:
-            print("No chargers matched your filter criteria.")
+            print("No chargers matched your filter criteria. Please try again.")
         else:
+            # Map priority keys to readable column headers and value formatters
+            priority_headers = {
+                'price': ('Price (per kWh)', lambda c: c['price']),
+                'max_power': ('Charging Power (kW)', lambda c: c['max_power']),
+                'is_fast': ('Fast Charge', lambda c: 'Yes' if c['is_fast'] else 'No'),
+                'num_points': ('Number of Points', lambda c: c['num_points']),
+                'distance': ('Distance (km)', lambda c: f"{c['distance']:.2f}"),
+                'traffic_delay': ('Traffic Delay (%)', lambda c: f"{c['traffic_delay']:.1f}")
+            }
+            # Build header row
+            headers = ['No.', 'Charger'] + [priority_headers[p][0] for p in priorities]
+            col_widths = [4, 35] + [max(15, len(priority_headers[p][0])+2) for p in priorities]
+            header_fmt = ''.join([f'{{:<{w}}}' for w in col_widths])
+            print(header_fmt.format(*headers))
+            print('-' * (sum(col_widths)))
             for i, c in enumerate(ranked[:top_n], 1):
                 addr = c['raw'].get('AddressInfo', {}).get('Title', 'Unknown')
-                print(f"{i}. {addr} | Price: {c['price']} | Power: {c['max_power']} kW | Fast: {c['is_fast']} | Points: {c['num_points']} | Distance: {c['distance']:.2f} km | Traffic Delay: {c['traffic_delay']:.1f}%")
-                if i == 1:
-                    print("  --- Breakdown for top charger ---")
-                    for p in priorities:
-                        b = c['breakdown'][p]
-                        print(f"    {p}: weight={b['weight']}, normalized={b['normalized']:.2f}, points={b['points']:.2f}")
-                    print(f"    Total score: {c['score']:.2f}")
+                row = [i, addr[:33]] + [priority_headers[p][1](c) for p in priorities]
+                print(header_fmt.format(*row))
             if top_n < 3:
                 print(f"(Only {top_n} charger(s) matched your filter criteria.)")
-
-            # Print the full JSON for each filtered charger for inspection
-            import json as _json
-            print("\n--- Filtered Charger JSON Data ---")
-            for i, c in enumerate(ranked[:top_n], 1):
-                print(f"\nFiltered Charger {i} JSON:")
-                print(_json.dumps(c['raw'], indent=2))
-    else:
-        print("\nNo chargers to save for ranking.")
+        # ...existing code...
+    # else block intentionally left empty; no message needed if no chargers
 
 
 if __name__ == "__main__":

@@ -1,0 +1,427 @@
+[
+  {
+    "DataProvider": {
+      "WebsiteURL": "http://openchargemap.org",
+      "Comments": null,
+      "DataProviderStatusType": {
+        "IsProviderEnabled": true,
+        "ID": 1,
+        "Title": "Manual Data Entry"
+      },
+      "IsRestrictedEdit": false,
+      "IsOpenDataLicensed": true,
+      "IsApprovedImport": true,
+      "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "DateLastImported": null,
+      "ID": 1,
+      "Title": "Open Charge Map Contributors"
+    },
+    "OperatorInfo": {
+      "WebsiteURL": "http://www.teslamotors.com",
+      "Comments": null,
+      "PhonePrimaryContact": null,
+      "PhoneSecondaryContact": null,
+      "IsPrivateIndividual": false,
+      "AddressInfo": null,
+      "BookingURL": null,
+      "ContactEmail": null,
+      "FaultReportEmail": null,
+      "IsRestrictedEdit": false,
+      "ID": 23,
+      "Title": "Tesla (Tesla-only charging)"
+    },
+    "UsageType": {
+      "IsPayAtLocation": false,
+      "IsMembershipRequired": true,
+      "IsAccessKeyRequired": true,
+      "ID": 4,
+      "Title": "Public - Membership Required"
+    },
+    "StatusType": {
+      "IsOperational": true,
+      "IsUserSelectable": true,
+      "ID": 50,
+      "Title": "Operational"
+    },
+    "SubmissionStatus": {
+      "IsLive": true,
+      "ID": 200,
+      "Title": "Submission Published"
+    },
+    "UserComments": null,
+    "PercentageSimilarity": null,
+    "MediaItems": null,
+    "IsRecentlyVerified": false,
+    "DateLastVerified": "2018-10-11T12:45:00Z",
+    "ID": 108816,
+    "UUID": "84621FC9-0F4A-46F5-84EC-3A9452E29740",
+    "ParentChargePointID": null,
+    "DataProviderID": 1,
+    "DataProvidersReference": null,
+    "OperatorID": 23,
+    "OperatorsReference": "44747",
+    "UsageTypeID": 4,
+    "UsageCost": null,
+    "AddressInfo": {
+      "ID": 109162,
+      "Title": "Bicester Hotel Golf & Spa",
+      "AddressLine1": "Green Lane",
+      "AddressLine2": null,
+      "Town": "Bicester",
+      "StateOrProvince": null,
+      "Postcode": "OX26 2TE",
+      "CountryID": 1,
+      "Country": {
+        "ISOCode": "GB",
+        "ContinentCode": "EU",
+        "ID": 1,
+        "Title": "United Kingdom"
+      },
+      "Latitude": 51.886358,
+      "Longitude": -1.197036,
+      "ContactTelephone1": "+44 186 924 1204",
+      "ContactTelephone2": null,
+      "ContactEmail": null,
+      "AccessComments": null,
+      "RelatedURL": null,
+      "Distance": 0.9470607874859215,
+      "DistanceUnit": 1
+    },
+    "Connections": [
+      {
+        "ID": 153932,
+        "ConnectionTypeID": 30,
+        "ConnectionType": {
+          "FormalName": null,
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 30,
+          "Title": "Tesla (Model S/X)"
+        },
+        "Reference": null,
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": null,
+        "Voltage": null,
+        "PowerKW": 13,
+        "CurrentTypeID": 20,
+        "CurrentType": {
+          "Description": "Alternating Current - Three Phase",
+          "ID": 20,
+          "Title": "AC (Three-Phase)"
+        },
+        "Quantity": 2,
+        "Comments": null
+      }
+    ],
+    "NumberOfPoints": 2,
+    "GeneralComments": "2 Tesla Connectors, up to 13kW.Available for customers. Self park.",
+    "DatePlanned": null,
+    "DateLastConfirmed": null,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2018-10-11T12:45:00Z",
+    "MetadataValues": null,
+    "DataQualityLevel": 1,
+    "DateCreated": "2018-10-11T12:45:00Z",
+    "SubmissionStatusTypeID": 200,
+    "traffic_delay": 7.071865443425077
+  },
+  {
+    "DataProvider": {
+      "WebsiteURL": "http://openchargemap.org",
+      "Comments": null,
+      "DataProviderStatusType": {
+        "IsProviderEnabled": true,
+        "ID": 1,
+        "Title": "Manual Data Entry"
+      },
+      "IsRestrictedEdit": false,
+      "IsOpenDataLicensed": true,
+      "IsApprovedImport": true,
+      "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "DateLastImported": null,
+      "ID": 1,
+      "Title": "Open Charge Map Contributors"
+    },
+    "OperatorInfo": {
+      "WebsiteURL": "https://evbox.com",
+      "Comments": null,
+      "PhonePrimaryContact": null,
+      "PhoneSecondaryContact": null,
+      "IsPrivateIndividual": false,
+      "AddressInfo": null,
+      "BookingURL": null,
+      "ContactEmail": "info@evbox.com",
+      "FaultReportEmail": "info@evbox.com",
+      "IsRestrictedEdit": false,
+      "ID": 73,
+      "Title": "EVBox"
+    },
+    "UsageType": {
+      "IsPayAtLocation": true,
+      "IsMembershipRequired": false,
+      "IsAccessKeyRequired": false,
+      "ID": 5,
+      "Title": "Public - Pay At Location"
+    },
+    "StatusType": {
+      "IsOperational": true,
+      "IsUserSelectable": true,
+      "ID": 50,
+      "Title": "Operational"
+    },
+    "SubmissionStatus": {
+      "IsLive": true,
+      "ID": 200,
+      "Title": "Submission Published"
+    },
+    "UserComments": null,
+    "PercentageSimilarity": null,
+    "MediaItems": null,
+    "IsRecentlyVerified": false,
+    "DateLastVerified": "2020-10-13T22:39:00Z",
+    "ID": 169286,
+    "UUID": "1DA67331-C9D9-4FDB-8063-F55DF3399737",
+    "ParentChargePointID": null,
+    "DataProviderID": 1,
+    "DataProvidersReference": null,
+    "OperatorID": 73,
+    "OperatorsReference": null,
+    "UsageTypeID": 5,
+    "UsageCost": "\u20ac0.35/kWh",
+    "AddressInfo": {
+      "ID": 169645,
+      "Title": "Holiday Inn Express Bicester",
+      "AddressLine1": "Gateway Business Park",
+      "AddressLine2": "Wendlebury Rd",
+      "Town": "Bicester",
+      "StateOrProvince": "England",
+      "Postcode": "OX25 2BX",
+      "CountryID": 1,
+      "Country": {
+        "ISOCode": "GB",
+        "ContinentCode": "EU",
+        "ID": 1,
+        "Title": "United Kingdom"
+      },
+      "Latitude": 51.886296004799476,
+      "Longitude": -1.1681428393518445,
+      "ContactTelephone1": null,
+      "ContactTelephone2": null,
+      "ContactEmail": null,
+      "AccessComments": null,
+      "RelatedURL": "https://evbox.com/uk-en/",
+      "Distance": 2.7173641581475367,
+      "DistanceUnit": 1
+    },
+    "Connections": [
+      {
+        "ID": 257565,
+        "ConnectionTypeID": 25,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-2 Type 2",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
+        },
+        "Reference": null,
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": null,
+        "Voltage": null,
+        "PowerKW": 7,
+        "CurrentTypeID": 10,
+        "CurrentType": {
+          "Description": "Alternating Current - Single Phase",
+          "ID": 10,
+          "Title": "AC (Single-Phase)"
+        },
+        "Quantity": 1,
+        "Comments": null
+      }
+    ],
+    "NumberOfPoints": 1,
+    "GeneralComments": null,
+    "DatePlanned": null,
+    "DateLastConfirmed": null,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2020-10-13T22:39:00Z",
+    "MetadataValues": null,
+    "DataQualityLevel": 1,
+    "DateCreated": "2020-10-13T22:39:00Z",
+    "SubmissionStatusTypeID": 200,
+    "traffic_delay": 7.635082223962413
+  },
+  {
+    "DataProvider": {
+      "WebsiteURL": "http://openchargemap.org",
+      "Comments": null,
+      "DataProviderStatusType": {
+        "IsProviderEnabled": true,
+        "ID": 1,
+        "Title": "Manual Data Entry"
+      },
+      "IsRestrictedEdit": false,
+      "IsOpenDataLicensed": true,
+      "IsApprovedImport": true,
+      "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "DateLastImported": null,
+      "ID": 1,
+      "Title": "Open Charge Map Contributors"
+    },
+    "OperatorInfo": {
+      "WebsiteURL": "https://www.geniepoint.co.uk/",
+      "Comments": "also known as Revive, Engie EV Solutions regional branding",
+      "PhonePrimaryContact": "+44 800 999 4240",
+      "PhoneSecondaryContact": "+44 20 3598 4087",
+      "IsPrivateIndividual": false,
+      "AddressInfo": null,
+      "BookingURL": null,
+      "ContactEmail": "geniepointsupport@engie.com",
+      "FaultReportEmail": null,
+      "IsRestrictedEdit": false,
+      "ID": 150,
+      "Title": "The GeniePoint Network ( EQUANS EV Solutions )"
+    },
+    "UsageType": {
+      "IsPayAtLocation": true,
+      "IsMembershipRequired": false,
+      "IsAccessKeyRequired": false,
+      "ID": 5,
+      "Title": "Public - Pay At Location"
+    },
+    "StatusType": {
+      "IsOperational": false,
+      "IsUserSelectable": true,
+      "ID": 100,
+      "Title": "Not Operational"
+    },
+    "SubmissionStatus": {
+      "IsLive": true,
+      "ID": 100,
+      "Title": "Imported and Published"
+    },
+    "UserComments": null,
+    "PercentageSimilarity": null,
+    "MediaItems": null,
+    "IsRecentlyVerified": false,
+    "DateLastVerified": "2022-05-31T21:58:00Z",
+    "ID": 173653,
+    "UUID": "312000EF-A842-4D0E-B5BA-39296E219D89",
+    "ParentChargePointID": null,
+    "DataProviderID": 1,
+    "DataProvidersReference": null,
+    "OperatorID": 150,
+    "OperatorsReference": null,
+    "UsageTypeID": 5,
+    "UsageCost": null,
+    "AddressInfo": {
+      "ID": 174012,
+      "Title": "Bicester Gateway",
+      "AddressLine1": "Bicester Gateway",
+      "AddressLine2": null,
+      "Town": "Bicester",
+      "StateOrProvince": null,
+      "Postcode": "OX25 2BX",
+      "CountryID": 1,
+      "Country": {
+        "ISOCode": "GB",
+        "ContinentCode": "EU",
+        "ID": 1,
+        "Title": "United Kingdom"
+      },
+      "Latitude": 51.89125,
+      "Longitude": -1.164444,
+      "ContactTelephone1": null,
+      "ContactTelephone2": null,
+      "ContactEmail": null,
+      "AccessComments": "",
+      "RelatedURL": "",
+      "Distance": 2.8825126678664894,
+      "DistanceUnit": 1
+    },
+    "Connections": [
+      {
+        "ID": 266774,
+        "ConnectionTypeID": 25,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-2 Type 2",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
+        },
+        "Reference": "GP11658",
+        "StatusTypeID": 100,
+        "StatusType": {
+          "IsOperational": false,
+          "IsUserSelectable": true,
+          "ID": 100,
+          "Title": "Not Operational"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": 32,
+        "Voltage": 230,
+        "PowerKW": 7,
+        "CurrentTypeID": 10,
+        "CurrentType": {
+          "Description": "Alternating Current - Single Phase",
+          "ID": 10,
+          "Title": "AC (Single-Phase)"
+        },
+        "Quantity": 5,
+        "Comments": null
+      }
+    ],
+    "NumberOfPoints": 5,
+    "GeneralComments": null,
+    "DatePlanned": null,
+    "DateLastConfirmed": null,
+    "StatusTypeID": 100,
+    "DateLastStatusUpdate": "2022-05-31T21:58:00Z",
+    "MetadataValues": [
+      {
+        "ID": 8575,
+        "MetadataFieldID": 4,
+        "ItemValue": "Contains public sector information licensed under the Open Government Licence v2.0. http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/",
+        "MetadataFieldOption": null,
+        "MetadataFieldOptionID": null
+      }
+    ],
+    "DataQualityLevel": 3,
+    "DateCreated": "2021-03-03T11:25:00Z",
+    "SubmissionStatusTypeID": 100,
+    "traffic_delay": 8.56046065259117
+  }
+]

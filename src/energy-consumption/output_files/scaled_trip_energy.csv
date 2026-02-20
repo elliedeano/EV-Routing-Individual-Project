@@ -1,4 +1,4 @@
-Driver Number,Car Model,Energy Consumption Wh per km
+COND,Car Model,wh_per_km_raw
 7.0,JAC iEV7s,205.8633882191212
 8.0,JAC iEV7s,198.84717856459963
 7.0,Kia EV3,201.1035410926675
