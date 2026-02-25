@@ -18,7 +18,7 @@ def scale_to_other_cars(trip_df):
             scaled.append({
                 "COND": trip["COND"],
                 "Car Model": car["Car Model"],
-                "wh_per_km": trip["wh_per_km_raw"] * scale,
+                "wh_per_km_raw": trip["wh_per_km_raw"] * scale
             })
     scaled_df = pd.DataFrame(scaled)
     scaled_df = scaled_df.rename(columns={"wh_per_km": "wh_per_km_raw"})
@@ -32,14 +32,10 @@ def scale_to_other_cars(trip_df):
     return scaled_df
 
 if __name__ == "__main__":
-
-    import pandas as pd
-    from pathlib import Path
     output_dir = Path(__file__).parent / "output_files"
     trip_energy_path = output_dir / "trip_energy.csv"
     if trip_energy_path.exists():
         trip_df = pd.read_csv(trip_energy_path)
         scaled_df = scale_to_other_cars(trip_df)
-
     else:
-        print("trip_energy.csv not found.")
+        print("trip_energy.csv not found. Please run prediction and save output as trip_energy.csv first.")

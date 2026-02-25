@@ -35,6 +35,8 @@ def train_energy_model(df):
     model_path = output_dir / "lgbm_ev_energy_model.pkl"
     joblib.dump(model, model_path)
 
+    print(f"Model trained and saved to {model_path}")
+
     metadata = {
         "created_at": datetime.utcnow().isoformat() + "Z",
         "model_pickle": str(model_path),

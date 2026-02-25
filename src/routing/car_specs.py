@@ -1,5 +1,3 @@
-
-
 import pandas as pd
 from pathlib import Path
 
@@ -11,7 +9,7 @@ def get_car_specs(car_model):
     row = df[df["Car Model"] == car_model].iloc[0]
     print("Matched row:", row)
     specs = {
-        "battery_kwh": row.get("battery_kwh", 42.8),  # fallback to 42.8 if not present
+        "battery_kwh": row.get("battery_kwh", 42.8),  
         "wh_per_km": row["wh_per_km_raw"],
     }
     return specs

@@ -6,7 +6,15 @@ def parse_price(usage_cost):
     if not usage_cost:
         return float('inf')
     match = re.search(r"[\d.]+", usage_cost)
-    return float(match.group()) if match else float('inf')
+    if match:
+        value = match.group()
+        # Avoid cases where match is just '.' or empty
+        try:
+            if value and value != ".":
+                return float(value)
+        except ValueError:
+            pass
+    return float('inf')
 
 def extract_charger_features(charger):
     price = parse_price(charger.get('UsageCost'))
@@ -24,6 +32,9 @@ def extract_charger_features(charger):
         status = status_type.get('IsOperational', False)
     distance = charger.get('AddressInfo', {}).get('Distance', float('inf'))
     traffic_delay = charger.get('traffic_delay', 0) 
+    # Ensure 'meal_stop' and 'distance_stop' keys always exist
+    meal_stop = charger.get('meal_stop', False)
+    distance_stop = charger.get('distance_stop', False)
     return {
         'price': price,
         'max_power': max_power,
@@ -32,22 +43,25 @@ def extract_charger_features(charger):
         'status': status,
         'distance': distance,
         'traffic_delay': traffic_delay,
+        'meal_stop': meal_stop,
+        'distance_stop': distance_stop,
         'raw': charger
     }
 
 def normalize_feature(values, ascendingVsDescending=True):
-    min_v = min(values)
-    max_v = max(values)
+    clean_values = [v if v is not None else 0 for v in values]
+    min_v = min(clean_values)
+    max_v = max(clean_values)
     if max_v == min_v:
-        return [1.0 for _ in values]
+        return [1.0 for _ in clean_values]
     if ascendingVsDescending:
-        return [(v - min_v) / (max_v - min_v) for v in values]
+        return [(v - min_v) / (max_v - min_v) for v in clean_values]
     else:
-        return [(max_v - v) / (max_v - min_v) for v in values]
+        return [(max_v - v) / (max_v - min_v) for v in clean_values]
 
 def rank_and_filter_chargers(chargers, priorities):
     features = [extract_charger_features(c) for c in chargers]
-    features = [f for f in features if f['status']]
+    features = [f for f in features if f['status'] is not False]
     if not features:
         return []
 
@@ -57,7 +71,9 @@ def rank_and_filter_chargers(chargers, priorities):
         'is_fast': True,
         'num_points': True,
         'distance': False,
-        'traffic_delay': False
+        'traffic_delay': False,
+        'meal_stop': True,
+        'distance_stop': True
     }
 
    
@@ -83,7 +99,7 @@ def rank_and_filter_chargers(chargers, priorities):
         f['breakdown'] = breakdown
 
     features.sort(key=lambda f: f['score'], reverse=True)
-    return features
+    return features[:3]
 
 def get_user_priorities(input_str):
     valid = {'price', 'max_power', 'is_fast', 'num_points', 'distance', 'traffic_delay'}
@@ -117,9 +133,8 @@ if __name__ == "__main__":
         else:
             print("Invalid input. Please enter 3 numbers from the list above.")
     if not chargers:
-        print("No baseline chargers loaded. Please run routing-main.py to generate baseline_chargers.json.")
+        print("No baseline chargers loaded. Please run routing_main.py to generate baseline_chargers.json.")
     else:
-        # If traffic_delay is selected, fetch and update traffic delay for each charger
         if 'traffic_delay' in priorities:
             from traffic_filter_calcs import get_traffic_delay_percent
             start_lat = input("Enter your trip start latitude: ")
