@@ -2,906 +2,6 @@
   {
     "raw": {
       "DataProvider": {
-        "WebsiteURL": "http://chargepoints.dft.gov.uk",
-        "Comments": null,
-        "DataProviderStatusType": {
-          "IsProviderEnabled": true,
-          "ID": 20,
-          "Title": "Automated Import"
-        },
-        "IsRestrictedEdit": false,
-        "IsOpenDataLicensed": true,
-        "IsApprovedImport": true,
-        "License": "Contains public sector information licensed under the Open Government Licence v2.0.",
-        "DateLastImported": "2023-12-07T08:14:38.417Z",
-        "ID": 18,
-        "Title": "UK National Charge Point Registry"
-      },
-      "OperatorInfo": {
-        "WebsiteURL": "https://shellrecharge.com/en-gb/solutions",
-        "Comments": "Shell Recharge",
-        "PhonePrimaryContact": "08000294601",
-        "PhoneSecondaryContact": null,
-        "IsPrivateIndividual": false,
-        "AddressInfo": null,
-        "BookingURL": null,
-        "ContactEmail": null,
-        "FaultReportEmail": null,
-        "IsRestrictedEdit": false,
-        "ID": 3392,
-        "Title": "Shell Recharge Solutions (UK)"
-      },
-      "UsageType": {
-        "IsPayAtLocation": null,
-        "IsMembershipRequired": null,
-        "IsAccessKeyRequired": null,
-        "ID": 1,
-        "Title": "Public"
-      },
-      "StatusType": null,
-      "SubmissionStatus": {
-        "IsLive": true,
-        "ID": 100,
-        "Title": "Imported and Published"
-      },
-      "UserComments": null,
-      "PercentageSimilarity": null,
-      "MediaItems": null,
-      "IsRecentlyVerified": false,
-      "DateLastVerified": "2023-05-04T08:50:00Z",
-      "ID": 255048,
-      "UUID": "9D40F640-4140-436E-86DE-CF5B4C96321E",
-      "ParentChargePointID": null,
-      "DataProviderID": 18,
-      "DataProvidersReference": "8066cf5e3f0bf622b4a027bfa12361e7",
-      "OperatorID": 3392,
-      "OperatorsReference": null,
-      "UsageTypeID": 1,
-      "UsageCost": null,
-      "AddressInfo": {
-        "ID": 255432,
-        "Title": "British Motor Museum",
-        "AddressLine1": "Banbury Rd",
-        "AddressLine2": null,
-        "Town": "Stratford-on-Avon",
-        "StateOrProvince": null,
-        "Postcode": "CV35 0BJ",
-        "CountryID": 1,
-        "Country": {
-          "ISOCode": "GB",
-          "ContinentCode": "EU",
-          "ID": 1,
-          "Title": "United Kingdom"
-        },
-        "Latitude": 52.189736,
-        "Longitude": -1.479031,
-        "ContactTelephone1": null,
-        "ContactTelephone2": null,
-        "ContactEmail": null,
-        "AccessComments": "",
-        "RelatedURL": "https://shellrecharge.com/en",
-        "Distance": 1.9708083315538278,
-        "DistanceUnit": 1
-      },
-      "Connections": [
-        {
-          "ID": 423003,
-          "ConnectionTypeID": 25,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-2 Type 2",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 25,
-            "Title": "Type 2 (Socket Only)"
-          },
-          "Reference": "8101712",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 2,
-          "Level": {
-            "Comments": "Over 2 kW, usually non-domestic socket type",
-            "IsFastChargeCapable": false,
-            "ID": 2,
-            "Title": "Level 2 : Medium (Over 2kW)"
-          },
-          "Amps": 16,
-          "Voltage": 230,
-          "PowerKW": 3.7,
-          "CurrentTypeID": 10,
-          "CurrentType": {
-            "Description": "Alternating Current - Single Phase",
-            "ID": 10,
-            "Title": "AC (Single-Phase)"
-          },
-          "Quantity": null,
-          "Comments": null
-        },
-        {
-          "ID": 423004,
-          "ConnectionTypeID": 25,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-2 Type 2",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 25,
-            "Title": "Type 2 (Socket Only)"
-          },
-          "Reference": "08101718_1",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 2,
-          "Level": {
-            "Comments": "Over 2 kW, usually non-domestic socket type",
-            "IsFastChargeCapable": false,
-            "ID": 2,
-            "Title": "Level 2 : Medium (Over 2kW)"
-          },
-          "Amps": 16,
-          "Voltage": 400,
-          "PowerKW": 11,
-          "CurrentTypeID": 20,
-          "CurrentType": {
-            "Description": "Alternating Current - Three Phase",
-            "ID": 20,
-            "Title": "AC (Three-Phase)"
-          },
-          "Quantity": null,
-          "Comments": null
-        },
-        {
-          "ID": 423005,
-          "ConnectionTypeID": 25,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-2 Type 2",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 25,
-            "Title": "Type 2 (Socket Only)"
-          },
-          "Reference": "08101767_1",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 2,
-          "Level": {
-            "Comments": "Over 2 kW, usually non-domestic socket type",
-            "IsFastChargeCapable": false,
-            "ID": 2,
-            "Title": "Level 2 : Medium (Over 2kW)"
-          },
-          "Amps": 16,
-          "Voltage": 230,
-          "PowerKW": 3.7,
-          "CurrentTypeID": 10,
-          "CurrentType": {
-            "Description": "Alternating Current - Single Phase",
-            "ID": 10,
-            "Title": "AC (Single-Phase)"
-          },
-          "Quantity": null,
-          "Comments": null
-        },
-        {
-          "ID": 423006,
-          "ConnectionTypeID": 25,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-2 Type 2",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 25,
-            "Title": "Type 2 (Socket Only)"
-          },
-          "Reference": "09101211_1",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 2,
-          "Level": {
-            "Comments": "Over 2 kW, usually non-domestic socket type",
-            "IsFastChargeCapable": false,
-            "ID": 2,
-            "Title": "Level 2 : Medium (Over 2kW)"
-          },
-          "Amps": 16,
-          "Voltage": 400,
-          "PowerKW": 11,
-          "CurrentTypeID": 20,
-          "CurrentType": {
-            "Description": "Alternating Current - Three Phase",
-            "ID": 20,
-            "Title": "AC (Three-Phase)"
-          },
-          "Quantity": null,
-          "Comments": null
-        }
-      ],
-      "NumberOfPoints": null,
-      "GeneralComments": null,
-      "DatePlanned": null,
-      "DateLastConfirmed": null,
-      "StatusTypeID": null,
-      "DateLastStatusUpdate": "2023-05-04T08:50:00Z",
-      "MetadataValues": [
-        {
-          "ID": 27030,
-          "MetadataFieldID": 4,
-          "ItemValue": "Contains public sector information licensed under the Open Government Licence v2.0. http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/",
-          "MetadataFieldOption": null,
-          "MetadataFieldOptionID": null
-        }
-      ],
-      "DataQualityLevel": 3,
-      "DateCreated": "2023-03-07T08:02:00Z",
-      "SubmissionStatusTypeID": 100,
-      "traffic_delay": 4.593070104754231,
-      "meal_stop": true,
-      "distance_stop": false,
-      "route_km": 22.709960306872475,
-      "meal_window": "lunch",
-      "price": 0.1,
-      "max_power": 100.0,
-      "is_fast": true,
-      "num_points": 4,
-      "distance": 1.9708083315538278
-    },
-    "DataProvider": {
-      "WebsiteURL": "http://chargepoints.dft.gov.uk",
-      "Comments": null,
-      "DataProviderStatusType": {
-        "IsProviderEnabled": true,
-        "ID": 20,
-        "Title": "Automated Import"
-      },
-      "IsRestrictedEdit": false,
-      "IsOpenDataLicensed": true,
-      "IsApprovedImport": true,
-      "License": "Contains public sector information licensed under the Open Government Licence v2.0.",
-      "DateLastImported": "2023-12-07T08:14:38.417Z",
-      "ID": 18,
-      "Title": "UK National Charge Point Registry"
-    },
-    "OperatorInfo": {
-      "WebsiteURL": "https://shellrecharge.com/en-gb/solutions",
-      "Comments": "Shell Recharge",
-      "PhonePrimaryContact": "08000294601",
-      "PhoneSecondaryContact": null,
-      "IsPrivateIndividual": false,
-      "AddressInfo": null,
-      "BookingURL": null,
-      "ContactEmail": null,
-      "FaultReportEmail": null,
-      "IsRestrictedEdit": false,
-      "ID": 3392,
-      "Title": "Shell Recharge Solutions (UK)"
-    },
-    "UsageType": {
-      "IsPayAtLocation": null,
-      "IsMembershipRequired": null,
-      "IsAccessKeyRequired": null,
-      "ID": 1,
-      "Title": "Public"
-    },
-    "StatusType": null,
-    "SubmissionStatus": {
-      "IsLive": true,
-      "ID": 100,
-      "Title": "Imported and Published"
-    },
-    "UserComments": null,
-    "PercentageSimilarity": null,
-    "MediaItems": null,
-    "IsRecentlyVerified": false,
-    "DateLastVerified": "2023-05-04T08:50:00Z",
-    "ID": 255048,
-    "UUID": "9D40F640-4140-436E-86DE-CF5B4C96321E",
-    "ParentChargePointID": null,
-    "DataProviderID": 18,
-    "DataProvidersReference": "8066cf5e3f0bf622b4a027bfa12361e7",
-    "OperatorID": 3392,
-    "OperatorsReference": null,
-    "UsageTypeID": 1,
-    "UsageCost": null,
-    "AddressInfo": {
-      "ID": 255432,
-      "Title": "British Motor Museum",
-      "AddressLine1": "Banbury Rd",
-      "AddressLine2": null,
-      "Town": "Stratford-on-Avon",
-      "StateOrProvince": null,
-      "Postcode": "CV35 0BJ",
-      "CountryID": 1,
-      "Country": {
-        "ISOCode": "GB",
-        "ContinentCode": "EU",
-        "ID": 1,
-        "Title": "United Kingdom"
-      },
-      "Latitude": 52.189736,
-      "Longitude": -1.479031,
-      "ContactTelephone1": null,
-      "ContactTelephone2": null,
-      "ContactEmail": null,
-      "AccessComments": "",
-      "RelatedURL": "https://shellrecharge.com/en",
-      "Distance": 1.9708083315538278,
-      "DistanceUnit": 1
-    },
-    "Connections": [
-      {
-        "ID": 423003,
-        "ConnectionTypeID": 25,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-2 Type 2",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 25,
-          "Title": "Type 2 (Socket Only)"
-        },
-        "Reference": "8101712",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 2,
-        "Level": {
-          "Comments": "Over 2 kW, usually non-domestic socket type",
-          "IsFastChargeCapable": false,
-          "ID": 2,
-          "Title": "Level 2 : Medium (Over 2kW)"
-        },
-        "Amps": 16,
-        "Voltage": 230,
-        "PowerKW": 3.7,
-        "CurrentTypeID": 10,
-        "CurrentType": {
-          "Description": "Alternating Current - Single Phase",
-          "ID": 10,
-          "Title": "AC (Single-Phase)"
-        },
-        "Quantity": null,
-        "Comments": null
-      },
-      {
-        "ID": 423004,
-        "ConnectionTypeID": 25,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-2 Type 2",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 25,
-          "Title": "Type 2 (Socket Only)"
-        },
-        "Reference": "08101718_1",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 2,
-        "Level": {
-          "Comments": "Over 2 kW, usually non-domestic socket type",
-          "IsFastChargeCapable": false,
-          "ID": 2,
-          "Title": "Level 2 : Medium (Over 2kW)"
-        },
-        "Amps": 16,
-        "Voltage": 400,
-        "PowerKW": 11,
-        "CurrentTypeID": 20,
-        "CurrentType": {
-          "Description": "Alternating Current - Three Phase",
-          "ID": 20,
-          "Title": "AC (Three-Phase)"
-        },
-        "Quantity": null,
-        "Comments": null
-      },
-      {
-        "ID": 423005,
-        "ConnectionTypeID": 25,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-2 Type 2",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 25,
-          "Title": "Type 2 (Socket Only)"
-        },
-        "Reference": "08101767_1",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 2,
-        "Level": {
-          "Comments": "Over 2 kW, usually non-domestic socket type",
-          "IsFastChargeCapable": false,
-          "ID": 2,
-          "Title": "Level 2 : Medium (Over 2kW)"
-        },
-        "Amps": 16,
-        "Voltage": 230,
-        "PowerKW": 3.7,
-        "CurrentTypeID": 10,
-        "CurrentType": {
-          "Description": "Alternating Current - Single Phase",
-          "ID": 10,
-          "Title": "AC (Single-Phase)"
-        },
-        "Quantity": null,
-        "Comments": null
-      },
-      {
-        "ID": 423006,
-        "ConnectionTypeID": 25,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-2 Type 2",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 25,
-          "Title": "Type 2 (Socket Only)"
-        },
-        "Reference": "09101211_1",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 2,
-        "Level": {
-          "Comments": "Over 2 kW, usually non-domestic socket type",
-          "IsFastChargeCapable": false,
-          "ID": 2,
-          "Title": "Level 2 : Medium (Over 2kW)"
-        },
-        "Amps": 16,
-        "Voltage": 400,
-        "PowerKW": 11,
-        "CurrentTypeID": 20,
-        "CurrentType": {
-          "Description": "Alternating Current - Three Phase",
-          "ID": 20,
-          "Title": "AC (Three-Phase)"
-        },
-        "Quantity": null,
-        "Comments": null
-      }
-    ],
-    "NumberOfPoints": null,
-    "GeneralComments": null,
-    "DatePlanned": null,
-    "DateLastConfirmed": null,
-    "StatusTypeID": null,
-    "DateLastStatusUpdate": "2023-05-04T08:50:00Z",
-    "MetadataValues": [
-      {
-        "ID": 27030,
-        "MetadataFieldID": 4,
-        "ItemValue": "Contains public sector information licensed under the Open Government Licence v2.0. http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/",
-        "MetadataFieldOption": null,
-        "MetadataFieldOptionID": null
-      }
-    ],
-    "DataQualityLevel": 3,
-    "DateCreated": "2023-03-07T08:02:00Z",
-    "SubmissionStatusTypeID": 100,
-    "traffic_delay": 4.593070104754231,
-    "meal_stop": true,
-    "distance_stop": false,
-    "route_km": 22.709960306872475,
-    "meal_window": "lunch",
-    "price": 0.1,
-    "max_power": 100.0,
-    "is_fast": true,
-    "num_points": 4,
-    "distance": 1.9708083315538278
-  },
-  {
-    "raw": {
-      "DataProvider": {
-        "WebsiteURL": "http://chargepoints.dft.gov.uk",
-        "Comments": null,
-        "DataProviderStatusType": {
-          "IsProviderEnabled": true,
-          "ID": 20,
-          "Title": "Automated Import"
-        },
-        "IsRestrictedEdit": false,
-        "IsOpenDataLicensed": true,
-        "IsApprovedImport": true,
-        "License": "Contains public sector information licensed under the Open Government Licence v2.0.",
-        "DateLastImported": "2023-12-07T08:14:38.417Z",
-        "ID": 18,
-        "Title": "UK National Charge Point Registry"
-      },
-      "OperatorInfo": {
-        "WebsiteURL": "https://plug-n-go.com/",
-        "Comments": null,
-        "PhonePrimaryContact": null,
-        "PhoneSecondaryContact": null,
-        "IsPrivateIndividual": false,
-        "AddressInfo": null,
-        "BookingURL": null,
-        "ContactEmail": null,
-        "FaultReportEmail": null,
-        "IsRestrictedEdit": false,
-        "ID": 3613,
-        "Title": "Plug N Go Ltd"
-      },
-      "UsageType": {
-        "IsPayAtLocation": null,
-        "IsMembershipRequired": null,
-        "IsAccessKeyRequired": null,
-        "ID": 1,
-        "Title": "Public"
-      },
-      "StatusType": null,
-      "SubmissionStatus": {
-        "IsLive": true,
-        "ID": 100,
-        "Title": "Imported and Published"
-      },
-      "UserComments": null,
-      "PercentageSimilarity": null,
-      "MediaItems": null,
-      "IsRecentlyVerified": false,
-      "DateLastVerified": "2023-05-05T04:01:00Z",
-      "ID": 265001,
-      "UUID": "AE36B4DA-15B3-4B77-A9E3-7D6AF39DB2A9",
-      "ParentChargePointID": null,
-      "DataProviderID": 18,
-      "DataProvidersReference": "20f7fe70d7b7286a98b0df1d4e94bc4e",
-      "OperatorID": 3613,
-      "OperatorsReference": null,
-      "UsageTypeID": 1,
-      "UsageCost": null,
-      "AddressInfo": {
-        "ID": 265385,
-        "Title": "Temple Herdewyke",
-        "AddressLine1": "The Templars",
-        "AddressLine2": null,
-        "Town": "Southam",
-        "StateOrProvince": null,
-        "Postcode": "CV47 2UD",
-        "CountryID": 1,
-        "Country": {
-          "ISOCode": "GB",
-          "ContinentCode": "EU",
-          "ID": 1,
-          "Title": "United Kingdom"
-        },
-        "Latitude": 52.166531,
-        "Longitude": -1.443183,
-        "ContactTelephone1": null,
-        "ContactTelephone2": null,
-        "ContactEmail": null,
-        "AccessComments": "",
-        "RelatedURL": "http://www.plug-n-go.com/",
-        "Distance": 2.286778095118938,
-        "DistanceUnit": 1
-      },
-      "Connections": [
-        {
-          "ID": 449187,
-          "ConnectionTypeID": 25,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-2 Type 2",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 25,
-            "Title": "Type 2 (Socket Only)"
-          },
-          "Reference": "ECL86P39",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 2,
-          "Level": {
-            "Comments": "Over 2 kW, usually non-domestic socket type",
-            "IsFastChargeCapable": false,
-            "ID": 2,
-            "Title": "Level 2 : Medium (Over 2kW)"
-          },
-          "Amps": 32,
-          "Voltage": 230,
-          "PowerKW": 7,
-          "CurrentTypeID": 10,
-          "CurrentType": {
-            "Description": "Alternating Current - Single Phase",
-            "ID": 10,
-            "Title": "AC (Single-Phase)"
-          },
-          "Quantity": null,
-          "Comments": null
-        },
-        {
-          "ID": 449188,
-          "ConnectionTypeID": 25,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-2 Type 2",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 25,
-            "Title": "Type 2 (Socket Only)"
-          },
-          "Reference": "ECXBPPAC",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 2,
-          "Level": {
-            "Comments": "Over 2 kW, usually non-domestic socket type",
-            "IsFastChargeCapable": false,
-            "ID": 2,
-            "Title": "Level 2 : Medium (Over 2kW)"
-          },
-          "Amps": 32,
-          "Voltage": 230,
-          "PowerKW": 7,
-          "CurrentTypeID": 10,
-          "CurrentType": {
-            "Description": "Alternating Current - Single Phase",
-            "ID": 10,
-            "Title": "AC (Single-Phase)"
-          },
-          "Quantity": null,
-          "Comments": null
-        }
-      ],
-      "NumberOfPoints": null,
-      "GeneralComments": null,
-      "DatePlanned": null,
-      "DateLastConfirmed": null,
-      "StatusTypeID": null,
-      "DateLastStatusUpdate": "2023-05-05T04:01:00Z",
-      "MetadataValues": [
-        {
-          "ID": 28875,
-          "MetadataFieldID": 4,
-          "ItemValue": "Contains public sector information licensed under the Open Government Licence v2.0. http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/",
-          "MetadataFieldOption": null,
-          "MetadataFieldOptionID": null
-        }
-      ],
-      "DataQualityLevel": 3,
-      "DateCreated": "2023-05-04T09:50:00Z",
-      "SubmissionStatusTypeID": 100,
-      "traffic_delay": 5.465288035450517,
-      "meal_stop": true,
-      "distance_stop": false,
-      "route_km": 22.709960306872475,
-      "meal_window": "lunch",
-      "price": 0.1,
-      "max_power": 100.0,
-      "is_fast": true,
-      "num_points": 4,
-      "distance": 2.286778095118938
-    },
-    "DataProvider": {
-      "WebsiteURL": "http://chargepoints.dft.gov.uk",
-      "Comments": null,
-      "DataProviderStatusType": {
-        "IsProviderEnabled": true,
-        "ID": 20,
-        "Title": "Automated Import"
-      },
-      "IsRestrictedEdit": false,
-      "IsOpenDataLicensed": true,
-      "IsApprovedImport": true,
-      "License": "Contains public sector information licensed under the Open Government Licence v2.0.",
-      "DateLastImported": "2023-12-07T08:14:38.417Z",
-      "ID": 18,
-      "Title": "UK National Charge Point Registry"
-    },
-    "OperatorInfo": {
-      "WebsiteURL": "https://plug-n-go.com/",
-      "Comments": null,
-      "PhonePrimaryContact": null,
-      "PhoneSecondaryContact": null,
-      "IsPrivateIndividual": false,
-      "AddressInfo": null,
-      "BookingURL": null,
-      "ContactEmail": null,
-      "FaultReportEmail": null,
-      "IsRestrictedEdit": false,
-      "ID": 3613,
-      "Title": "Plug N Go Ltd"
-    },
-    "UsageType": {
-      "IsPayAtLocation": null,
-      "IsMembershipRequired": null,
-      "IsAccessKeyRequired": null,
-      "ID": 1,
-      "Title": "Public"
-    },
-    "StatusType": null,
-    "SubmissionStatus": {
-      "IsLive": true,
-      "ID": 100,
-      "Title": "Imported and Published"
-    },
-    "UserComments": null,
-    "PercentageSimilarity": null,
-    "MediaItems": null,
-    "IsRecentlyVerified": false,
-    "DateLastVerified": "2023-05-05T04:01:00Z",
-    "ID": 265001,
-    "UUID": "AE36B4DA-15B3-4B77-A9E3-7D6AF39DB2A9",
-    "ParentChargePointID": null,
-    "DataProviderID": 18,
-    "DataProvidersReference": "20f7fe70d7b7286a98b0df1d4e94bc4e",
-    "OperatorID": 3613,
-    "OperatorsReference": null,
-    "UsageTypeID": 1,
-    "UsageCost": null,
-    "AddressInfo": {
-      "ID": 265385,
-      "Title": "Temple Herdewyke",
-      "AddressLine1": "The Templars",
-      "AddressLine2": null,
-      "Town": "Southam",
-      "StateOrProvince": null,
-      "Postcode": "CV47 2UD",
-      "CountryID": 1,
-      "Country": {
-        "ISOCode": "GB",
-        "ContinentCode": "EU",
-        "ID": 1,
-        "Title": "United Kingdom"
-      },
-      "Latitude": 52.166531,
-      "Longitude": -1.443183,
-      "ContactTelephone1": null,
-      "ContactTelephone2": null,
-      "ContactEmail": null,
-      "AccessComments": "",
-      "RelatedURL": "http://www.plug-n-go.com/",
-      "Distance": 2.286778095118938,
-      "DistanceUnit": 1
-    },
-    "Connections": [
-      {
-        "ID": 449187,
-        "ConnectionTypeID": 25,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-2 Type 2",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 25,
-          "Title": "Type 2 (Socket Only)"
-        },
-        "Reference": "ECL86P39",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 2,
-        "Level": {
-          "Comments": "Over 2 kW, usually non-domestic socket type",
-          "IsFastChargeCapable": false,
-          "ID": 2,
-          "Title": "Level 2 : Medium (Over 2kW)"
-        },
-        "Amps": 32,
-        "Voltage": 230,
-        "PowerKW": 7,
-        "CurrentTypeID": 10,
-        "CurrentType": {
-          "Description": "Alternating Current - Single Phase",
-          "ID": 10,
-          "Title": "AC (Single-Phase)"
-        },
-        "Quantity": null,
-        "Comments": null
-      },
-      {
-        "ID": 449188,
-        "ConnectionTypeID": 25,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-2 Type 2",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 25,
-          "Title": "Type 2 (Socket Only)"
-        },
-        "Reference": "ECXBPPAC",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 2,
-        "Level": {
-          "Comments": "Over 2 kW, usually non-domestic socket type",
-          "IsFastChargeCapable": false,
-          "ID": 2,
-          "Title": "Level 2 : Medium (Over 2kW)"
-        },
-        "Amps": 32,
-        "Voltage": 230,
-        "PowerKW": 7,
-        "CurrentTypeID": 10,
-        "CurrentType": {
-          "Description": "Alternating Current - Single Phase",
-          "ID": 10,
-          "Title": "AC (Single-Phase)"
-        },
-        "Quantity": null,
-        "Comments": null
-      }
-    ],
-    "NumberOfPoints": null,
-    "GeneralComments": null,
-    "DatePlanned": null,
-    "DateLastConfirmed": null,
-    "StatusTypeID": null,
-    "DateLastStatusUpdate": "2023-05-05T04:01:00Z",
-    "MetadataValues": [
-      {
-        "ID": 28875,
-        "MetadataFieldID": 4,
-        "ItemValue": "Contains public sector information licensed under the Open Government Licence v2.0. http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/",
-        "MetadataFieldOption": null,
-        "MetadataFieldOptionID": null
-      }
-    ],
-    "DataQualityLevel": 3,
-    "DateCreated": "2023-05-04T09:50:00Z",
-    "SubmissionStatusTypeID": 100,
-    "traffic_delay": 5.465288035450517,
-    "meal_stop": true,
-    "distance_stop": false,
-    "route_km": 22.709960306872475,
-    "meal_window": "lunch",
-    "price": 0.1,
-    "max_power": 100.0,
-    "is_fast": true,
-    "num_points": 4,
-    "distance": 2.286778095118938
-  },
-  {
-    "raw": {
-      "DataProvider": {
         "WebsiteURL": "http://openchargemap.org",
         "Comments": null,
         "DataProviderStatusType": {
@@ -918,18 +18,18 @@
         "Title": "Open Charge Map Contributors"
       },
       "OperatorInfo": {
-        "WebsiteURL": "http://www.teslamotors.com",
-        "Comments": null,
-        "PhonePrimaryContact": null,
+        "WebsiteURL": "http://www.pod-point.com/",
+        "Comments": "Part of Groupe EDF",
+        "PhonePrimaryContact": "020 7247 4114",
         "PhoneSecondaryContact": null,
         "IsPrivateIndividual": false,
         "AddressInfo": null,
         "BookingURL": null,
-        "ContactEmail": null,
-        "FaultReportEmail": null,
+        "ContactEmail": "enquiries@pod-point.com",
+        "FaultReportEmail": "enquiries@pod-point.com",
         "IsRestrictedEdit": false,
-        "ID": 23,
-        "Title": "Tesla (Tesla-only charging)"
+        "ID": 3,
+        "Title": "POD Point (UK)"
       },
       "UsageType": {
         "IsPayAtLocation": false,
@@ -953,24 +53,24 @@
       "PercentageSimilarity": null,
       "MediaItems": null,
       "IsRecentlyVerified": false,
-      "DateLastVerified": "2019-03-22T18:14:00Z",
-      "ID": 90600,
-      "UUID": "91F05D98-91B4-4371-984F-7056C1F80641",
+      "DateLastVerified": "2023-04-18T05:22:00Z",
+      "ID": 155492,
+      "UUID": "CA92FA77-25CE-4006-B9EE-68B84096D83B",
       "ParentChargePointID": null,
       "DataProviderID": 1,
       "DataProvidersReference": null,
-      "OperatorID": 23,
-      "OperatorsReference": "26696",
+      "OperatorID": 3,
+      "OperatorsReference": "PG-70130,PG-84381",
       "UsageTypeID": 4,
-      "UsageCost": "\u00a30.24/kWh;other tariffs for older cars",
+      "UsageCost": "\u00a30.44/kWh",
       "AddressInfo": {
-        "ID": 90946,
-        "Title": "Warwick - Northbound Supercharger",
-        "AddressLine1": "M40 Junction 12/13",
+        "ID": 155846,
+        "Title": "Tesco Superstore-High Wycombe Loudwater",
+        "AddressLine1": "London Road",
         "AddressLine2": null,
-        "Town": "Ashorne",
-        "StateOrProvince": null,
-        "Postcode": "CV35 0AA",
+        "Town": "Loudwater",
+        "StateOrProvince": "High Wycombe",
+        "Postcode": "HP10 9RT",
         "CountryID": 1,
         "Country": {
           "ISOCode": "GB",
@@ -978,28 +78,28 @@
           "ID": 1,
           "Title": "United Kingdom"
         },
-        "Latitude": 52.216065,
-        "Longitude": -1.504796,
+        "Latitude": 51.60455,
+        "Longitude": -0.691898,
         "ContactTelephone1": null,
         "ContactTelephone2": null,
         "ContactEmail": null,
         "AccessComments": null,
         "RelatedURL": null,
-        "Distance": 4.9389832688853925,
+        "Distance": 0.1346382938342934,
         "DistanceUnit": 1
       },
       "Connections": [
         {
-          "ID": 128298,
-          "ConnectionTypeID": 27,
+          "ID": 218911,
+          "ConnectionTypeID": 25,
           "ConnectionType": {
-            "FormalName": "SAE J3400",
+            "FormalName": "IEC 62196-2 Type 2",
             "IsDiscontinued": false,
             "IsObsolete": false,
-            "ID": 27,
-            "Title": "NACS / Tesla Supercharger"
+            "ID": 25,
+            "Title": "Type 2 (Socket Only)"
           },
-          "Reference": null,
+          "Reference": "PG-84381",
           "StatusTypeID": 50,
           "StatusType": {
             "IsOperational": true,
@@ -1007,46 +107,88 @@
             "ID": 50,
             "Title": "Operational"
           },
-          "LevelID": 3,
+          "LevelID": 2,
           "Level": {
-            "Comments": "40KW and Higher",
-            "IsFastChargeCapable": true,
-            "ID": 3,
-            "Title": "Level 3:  High (Over 40kW)"
+            "Comments": "Over 2 kW, usually non-domestic socket type",
+            "IsFastChargeCapable": false,
+            "ID": 2,
+            "Title": "Level 2 : Medium (Over 2kW)"
           },
-          "Amps": null,
-          "Voltage": null,
-          "PowerKW": 120,
-          "CurrentTypeID": 30,
+          "Amps": 32,
+          "Voltage": 230,
+          "PowerKW": 7,
+          "CurrentTypeID": 10,
           "CurrentType": {
-            "Description": "Direct Current",
-            "ID": 30,
-            "Title": "DC"
+            "Description": "Alternating Current - Single Phase",
+            "ID": 10,
+            "Title": "AC (Single-Phase)"
           },
-          "Quantity": 8,
-          "Comments": null
+          "Quantity": 2,
+          "Comments": "Cory-Cleo"
+        },
+        {
+          "ID": 320321,
+          "ConnectionTypeID": 25,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-2 Type 2",
+            "IsDiscontinued": false,
+            "IsObsolete": false,
+            "ID": 25,
+            "Title": "Type 2 (Socket Only)"
+          },
+          "Reference": "PG-70130",
+          "StatusTypeID": 50,
+          "StatusType": {
+            "IsOperational": true,
+            "IsUserSelectable": true,
+            "ID": 50,
+            "Title": "Operational"
+          },
+          "LevelID": 2,
+          "Level": {
+            "Comments": "Over 2 kW, usually non-domestic socket type",
+            "IsFastChargeCapable": false,
+            "ID": 2,
+            "Title": "Level 2 : Medium (Over 2kW)"
+          },
+          "Amps": 32,
+          "Voltage": 230,
+          "PowerKW": 7,
+          "CurrentTypeID": 10,
+          "CurrentType": {
+            "Description": "Alternating Current - Single Phase",
+            "ID": 10,
+            "Title": "AC (Single-Phase)"
+          },
+          "Quantity": 2,
+          "Comments": "Jude-Drew"
         }
       ],
-      "NumberOfPoints": 8,
-      "GeneralComments": "Charging8 Superchargers, available 24/7",
+      "NumberOfPoints": 4,
+      "GeneralComments": "This is an open charge unit installed at the Tesco super store at London Road, Loudwater, High Wycombe",
       "DatePlanned": null,
       "DateLastConfirmed": null,
       "StatusTypeID": 50,
-      "DateLastStatusUpdate": "2019-03-22T18:14:00Z",
+      "DateLastStatusUpdate": "2023-04-18T05:22:00Z",
       "MetadataValues": null,
       "DataQualityLevel": 1,
-      "DateCreated": "2017-07-20T05:35:00Z",
+      "DateCreated": "2020-04-14T05:26:00Z",
       "SubmissionStatusTypeID": 200,
-      "traffic_delay": 5.209155485398579,
+      "traffic_delay": 5.664240218380346,
       "meal_stop": true,
       "distance_stop": false,
-      "route_km": 22.709960306872475,
-      "meal_window": "lunch",
+      "route_km": 116.76458955759722,
+      "meal_window": "dinner",
+      "nearby_places": [
+        "Tesco",
+        "Flutterby Cupcakes",
+        "Brewers Fayre Papermill"
+      ],
       "price": 0.1,
       "max_power": 100.0,
       "is_fast": true,
       "num_points": 4,
-      "distance": 4.9389832688853925
+      "distance": 0.1346382938342934
     },
     "DataProvider": {
       "WebsiteURL": "http://openchargemap.org",
@@ -1065,18 +207,18 @@
       "Title": "Open Charge Map Contributors"
     },
     "OperatorInfo": {
-      "WebsiteURL": "http://www.teslamotors.com",
-      "Comments": null,
-      "PhonePrimaryContact": null,
+      "WebsiteURL": "http://www.pod-point.com/",
+      "Comments": "Part of Groupe EDF",
+      "PhonePrimaryContact": "020 7247 4114",
       "PhoneSecondaryContact": null,
       "IsPrivateIndividual": false,
       "AddressInfo": null,
       "BookingURL": null,
-      "ContactEmail": null,
-      "FaultReportEmail": null,
+      "ContactEmail": "enquiries@pod-point.com",
+      "FaultReportEmail": "enquiries@pod-point.com",
       "IsRestrictedEdit": false,
-      "ID": 23,
-      "Title": "Tesla (Tesla-only charging)"
+      "ID": 3,
+      "Title": "POD Point (UK)"
     },
     "UsageType": {
       "IsPayAtLocation": false,
@@ -1100,24 +242,24 @@
     "PercentageSimilarity": null,
     "MediaItems": null,
     "IsRecentlyVerified": false,
-    "DateLastVerified": "2019-03-22T18:14:00Z",
-    "ID": 90600,
-    "UUID": "91F05D98-91B4-4371-984F-7056C1F80641",
+    "DateLastVerified": "2023-04-18T05:22:00Z",
+    "ID": 155492,
+    "UUID": "CA92FA77-25CE-4006-B9EE-68B84096D83B",
     "ParentChargePointID": null,
     "DataProviderID": 1,
     "DataProvidersReference": null,
-    "OperatorID": 23,
-    "OperatorsReference": "26696",
+    "OperatorID": 3,
+    "OperatorsReference": "PG-70130,PG-84381",
     "UsageTypeID": 4,
-    "UsageCost": "\u00a30.24/kWh;other tariffs for older cars",
+    "UsageCost": "\u00a30.44/kWh",
     "AddressInfo": {
-      "ID": 90946,
-      "Title": "Warwick - Northbound Supercharger",
-      "AddressLine1": "M40 Junction 12/13",
+      "ID": 155846,
+      "Title": "Tesco Superstore-High Wycombe Loudwater",
+      "AddressLine1": "London Road",
       "AddressLine2": null,
-      "Town": "Ashorne",
-      "StateOrProvince": null,
-      "Postcode": "CV35 0AA",
+      "Town": "Loudwater",
+      "StateOrProvince": "High Wycombe",
+      "Postcode": "HP10 9RT",
       "CountryID": 1,
       "Country": {
         "ISOCode": "GB",
@@ -1125,26 +267,1149 @@
         "ID": 1,
         "Title": "United Kingdom"
       },
-      "Latitude": 52.216065,
-      "Longitude": -1.504796,
+      "Latitude": 51.60455,
+      "Longitude": -0.691898,
       "ContactTelephone1": null,
       "ContactTelephone2": null,
       "ContactEmail": null,
       "AccessComments": null,
       "RelatedURL": null,
-      "Distance": 4.9389832688853925,
+      "Distance": 0.1346382938342934,
       "DistanceUnit": 1
     },
     "Connections": [
       {
-        "ID": 128298,
-        "ConnectionTypeID": 27,
+        "ID": 218911,
+        "ConnectionTypeID": 25,
         "ConnectionType": {
-          "FormalName": "SAE J3400",
+          "FormalName": "IEC 62196-2 Type 2",
           "IsDiscontinued": false,
           "IsObsolete": false,
-          "ID": 27,
-          "Title": "NACS / Tesla Supercharger"
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
+        },
+        "Reference": "PG-84381",
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": 32,
+        "Voltage": 230,
+        "PowerKW": 7,
+        "CurrentTypeID": 10,
+        "CurrentType": {
+          "Description": "Alternating Current - Single Phase",
+          "ID": 10,
+          "Title": "AC (Single-Phase)"
+        },
+        "Quantity": 2,
+        "Comments": "Cory-Cleo"
+      },
+      {
+        "ID": 320321,
+        "ConnectionTypeID": 25,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-2 Type 2",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
+        },
+        "Reference": "PG-70130",
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": 32,
+        "Voltage": 230,
+        "PowerKW": 7,
+        "CurrentTypeID": 10,
+        "CurrentType": {
+          "Description": "Alternating Current - Single Phase",
+          "ID": 10,
+          "Title": "AC (Single-Phase)"
+        },
+        "Quantity": 2,
+        "Comments": "Jude-Drew"
+      }
+    ],
+    "NumberOfPoints": 4,
+    "GeneralComments": "This is an open charge unit installed at the Tesco super store at London Road, Loudwater, High Wycombe",
+    "DatePlanned": null,
+    "DateLastConfirmed": null,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2023-04-18T05:22:00Z",
+    "MetadataValues": null,
+    "DataQualityLevel": 1,
+    "DateCreated": "2020-04-14T05:26:00Z",
+    "SubmissionStatusTypeID": 200,
+    "traffic_delay": 5.664240218380346,
+    "meal_stop": true,
+    "distance_stop": false,
+    "route_km": 116.76458955759722,
+    "meal_window": "dinner",
+    "nearby_places": [
+      "Tesco",
+      "Flutterby Cupcakes",
+      "Brewers Fayre Papermill"
+    ],
+    "price": 0.1,
+    "max_power": 100.0,
+    "is_fast": true,
+    "num_points": 4,
+    "distance": 0.1346382938342934
+  },
+  {
+    "raw": {
+      "DataProvider": {
+        "WebsiteURL": "http://openchargemap.org",
+        "Comments": null,
+        "DataProviderStatusType": {
+          "IsProviderEnabled": true,
+          "ID": 1,
+          "Title": "Manual Data Entry"
+        },
+        "IsRestrictedEdit": false,
+        "IsOpenDataLicensed": true,
+        "IsApprovedImport": true,
+        "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "DateLastImported": null,
+        "ID": 1,
+        "Title": "Open Charge Map Contributors"
+      },
+      "OperatorInfo": {
+        "WebsiteURL": "http://www.pod-point.com/",
+        "Comments": "Part of Groupe EDF",
+        "PhonePrimaryContact": "020 7247 4114",
+        "PhoneSecondaryContact": null,
+        "IsPrivateIndividual": false,
+        "AddressInfo": null,
+        "BookingURL": null,
+        "ContactEmail": "enquiries@pod-point.com",
+        "FaultReportEmail": "enquiries@pod-point.com",
+        "IsRestrictedEdit": false,
+        "ID": 3,
+        "Title": "POD Point (UK)"
+      },
+      "UsageType": {
+        "IsPayAtLocation": false,
+        "IsMembershipRequired": false,
+        "IsAccessKeyRequired": false,
+        "ID": 6,
+        "Title": "Private - For Staff, Visitors or Customers"
+      },
+      "StatusType": {
+        "IsOperational": null,
+        "IsUserSelectable": true,
+        "ID": 0,
+        "Title": "Unknown"
+      },
+      "SubmissionStatus": {
+        "IsLive": true,
+        "ID": 200,
+        "Title": "Submission Published"
+      },
+      "UserComments": null,
+      "PercentageSimilarity": null,
+      "MediaItems": null,
+      "IsRecentlyVerified": false,
+      "DateLastVerified": "2023-10-09T13:25:00Z",
+      "ID": 85288,
+      "UUID": "CC1A1B06-879E-4E5A-AF9B-55FB9C1C84F8",
+      "ParentChargePointID": null,
+      "DataProviderID": 1,
+      "DataProvidersReference": null,
+      "OperatorID": 3,
+      "OperatorsReference": "PG-91118",
+      "UsageTypeID": 6,
+      "UsageCost": "Free",
+      "AddressInfo": {
+        "ID": 85634,
+        "Title": "Platts Hyundai",
+        "AddressLine1": "White House Lane",
+        "AddressLine2": "Wooburn",
+        "Town": "Wycombe",
+        "StateOrProvince": "Buckinghamshire",
+        "Postcode": "HP10 0NJ",
+        "CountryID": 1,
+        "Country": {
+          "ISOCode": "GB",
+          "ContinentCode": "EU",
+          "ID": 1,
+          "Title": "United Kingdom"
+        },
+        "Latitude": 51.6019210350388,
+        "Longitude": -0.684759249073756,
+        "ContactTelephone1": null,
+        "ContactTelephone2": null,
+        "ContactEmail": null,
+        "AccessComments": "Not available outside of dealership opening hours.",
+        "RelatedURL": null,
+        "Distance": 0.5520780756934682,
+        "DistanceUnit": 1
+      },
+      "Connections": [
+        {
+          "ID": 121111,
+          "ConnectionTypeID": 25,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-2 Type 2",
+            "IsDiscontinued": false,
+            "IsObsolete": false,
+            "ID": 25,
+            "Title": "Type 2 (Socket Only)"
+          },
+          "Reference": null,
+          "StatusTypeID": 0,
+          "StatusType": {
+            "IsOperational": null,
+            "IsUserSelectable": true,
+            "ID": 0,
+            "Title": "Unknown"
+          },
+          "LevelID": 2,
+          "Level": {
+            "Comments": "Over 2 kW, usually non-domestic socket type",
+            "IsFastChargeCapable": false,
+            "ID": 2,
+            "Title": "Level 2 : Medium (Over 2kW)"
+          },
+          "Amps": 32,
+          "Voltage": 230,
+          "PowerKW": 7,
+          "CurrentTypeID": 10,
+          "CurrentType": {
+            "Description": "Alternating Current - Single Phase",
+            "ID": 10,
+            "Title": "AC (Single-Phase)"
+          },
+          "Quantity": 1,
+          "Comments": null
+        }
+      ],
+      "NumberOfPoints": 3,
+      "GeneralComments": null,
+      "DatePlanned": null,
+      "DateLastConfirmed": null,
+      "StatusTypeID": 0,
+      "DateLastStatusUpdate": "2023-10-09T13:25:00Z",
+      "MetadataValues": null,
+      "DataQualityLevel": 1,
+      "DateCreated": "2017-03-31T21:24:00Z",
+      "SubmissionStatusTypeID": 200,
+      "traffic_delay": 5.657352267521759,
+      "meal_stop": true,
+      "distance_stop": false,
+      "route_km": 116.76458955759722,
+      "meal_window": "dinner",
+      "nearby_places": [
+        "Tesco"
+      ],
+      "price": 0.1,
+      "max_power": 100.0,
+      "is_fast": true,
+      "num_points": 4,
+      "distance": 0.5520780756934682
+    },
+    "DataProvider": {
+      "WebsiteURL": "http://openchargemap.org",
+      "Comments": null,
+      "DataProviderStatusType": {
+        "IsProviderEnabled": true,
+        "ID": 1,
+        "Title": "Manual Data Entry"
+      },
+      "IsRestrictedEdit": false,
+      "IsOpenDataLicensed": true,
+      "IsApprovedImport": true,
+      "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "DateLastImported": null,
+      "ID": 1,
+      "Title": "Open Charge Map Contributors"
+    },
+    "OperatorInfo": {
+      "WebsiteURL": "http://www.pod-point.com/",
+      "Comments": "Part of Groupe EDF",
+      "PhonePrimaryContact": "020 7247 4114",
+      "PhoneSecondaryContact": null,
+      "IsPrivateIndividual": false,
+      "AddressInfo": null,
+      "BookingURL": null,
+      "ContactEmail": "enquiries@pod-point.com",
+      "FaultReportEmail": "enquiries@pod-point.com",
+      "IsRestrictedEdit": false,
+      "ID": 3,
+      "Title": "POD Point (UK)"
+    },
+    "UsageType": {
+      "IsPayAtLocation": false,
+      "IsMembershipRequired": false,
+      "IsAccessKeyRequired": false,
+      "ID": 6,
+      "Title": "Private - For Staff, Visitors or Customers"
+    },
+    "StatusType": {
+      "IsOperational": null,
+      "IsUserSelectable": true,
+      "ID": 0,
+      "Title": "Unknown"
+    },
+    "SubmissionStatus": {
+      "IsLive": true,
+      "ID": 200,
+      "Title": "Submission Published"
+    },
+    "UserComments": null,
+    "PercentageSimilarity": null,
+    "MediaItems": null,
+    "IsRecentlyVerified": false,
+    "DateLastVerified": "2023-10-09T13:25:00Z",
+    "ID": 85288,
+    "UUID": "CC1A1B06-879E-4E5A-AF9B-55FB9C1C84F8",
+    "ParentChargePointID": null,
+    "DataProviderID": 1,
+    "DataProvidersReference": null,
+    "OperatorID": 3,
+    "OperatorsReference": "PG-91118",
+    "UsageTypeID": 6,
+    "UsageCost": "Free",
+    "AddressInfo": {
+      "ID": 85634,
+      "Title": "Platts Hyundai",
+      "AddressLine1": "White House Lane",
+      "AddressLine2": "Wooburn",
+      "Town": "Wycombe",
+      "StateOrProvince": "Buckinghamshire",
+      "Postcode": "HP10 0NJ",
+      "CountryID": 1,
+      "Country": {
+        "ISOCode": "GB",
+        "ContinentCode": "EU",
+        "ID": 1,
+        "Title": "United Kingdom"
+      },
+      "Latitude": 51.6019210350388,
+      "Longitude": -0.684759249073756,
+      "ContactTelephone1": null,
+      "ContactTelephone2": null,
+      "ContactEmail": null,
+      "AccessComments": "Not available outside of dealership opening hours.",
+      "RelatedURL": null,
+      "Distance": 0.5520780756934682,
+      "DistanceUnit": 1
+    },
+    "Connections": [
+      {
+        "ID": 121111,
+        "ConnectionTypeID": 25,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-2 Type 2",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
+        },
+        "Reference": null,
+        "StatusTypeID": 0,
+        "StatusType": {
+          "IsOperational": null,
+          "IsUserSelectable": true,
+          "ID": 0,
+          "Title": "Unknown"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": 32,
+        "Voltage": 230,
+        "PowerKW": 7,
+        "CurrentTypeID": 10,
+        "CurrentType": {
+          "Description": "Alternating Current - Single Phase",
+          "ID": 10,
+          "Title": "AC (Single-Phase)"
+        },
+        "Quantity": 1,
+        "Comments": null
+      }
+    ],
+    "NumberOfPoints": 3,
+    "GeneralComments": null,
+    "DatePlanned": null,
+    "DateLastConfirmed": null,
+    "StatusTypeID": 0,
+    "DateLastStatusUpdate": "2023-10-09T13:25:00Z",
+    "MetadataValues": null,
+    "DataQualityLevel": 1,
+    "DateCreated": "2017-03-31T21:24:00Z",
+    "SubmissionStatusTypeID": 200,
+    "traffic_delay": 5.657352267521759,
+    "meal_stop": true,
+    "distance_stop": false,
+    "route_km": 116.76458955759722,
+    "meal_window": "dinner",
+    "nearby_places": [
+      "Tesco"
+    ],
+    "price": 0.1,
+    "max_power": 100.0,
+    "is_fast": true,
+    "num_points": 4,
+    "distance": 0.5520780756934682
+  },
+  {
+    "raw": {
+      "DataProvider": {
+        "WebsiteURL": "http://openchargemap.org",
+        "Comments": null,
+        "DataProviderStatusType": {
+          "IsProviderEnabled": true,
+          "ID": 1,
+          "Title": "Manual Data Entry"
+        },
+        "IsRestrictedEdit": false,
+        "IsOpenDataLicensed": true,
+        "IsApprovedImport": true,
+        "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "DateLastImported": null,
+        "ID": 1,
+        "Title": "Open Charge Map Contributors"
+      },
+      "OperatorInfo": {
+        "WebsiteURL": "http://www.pod-point.com/",
+        "Comments": "Part of Groupe EDF",
+        "PhonePrimaryContact": "020 7247 4114",
+        "PhoneSecondaryContact": null,
+        "IsPrivateIndividual": false,
+        "AddressInfo": null,
+        "BookingURL": null,
+        "ContactEmail": "enquiries@pod-point.com",
+        "FaultReportEmail": "enquiries@pod-point.com",
+        "IsRestrictedEdit": false,
+        "ID": 3,
+        "Title": "POD Point (UK)"
+      },
+      "UsageType": {
+        "IsPayAtLocation": false,
+        "IsMembershipRequired": false,
+        "IsAccessKeyRequired": false,
+        "ID": 6,
+        "Title": "Private - For Staff, Visitors or Customers"
+      },
+      "StatusType": {
+        "IsOperational": null,
+        "IsUserSelectable": true,
+        "ID": 0,
+        "Title": "Unknown"
+      },
+      "SubmissionStatus": {
+        "IsLive": true,
+        "ID": 200,
+        "Title": "Submission Published"
+      },
+      "UserComments": null,
+      "PercentageSimilarity": null,
+      "MediaItems": null,
+      "IsRecentlyVerified": false,
+      "DateLastVerified": "2023-10-09T13:26:00Z",
+      "ID": 90099,
+      "UUID": "7C87F250-5BB5-4690-A963-824A81D5F5E1",
+      "ParentChargePointID": null,
+      "DataProviderID": 1,
+      "DataProvidersReference": null,
+      "OperatorID": 3,
+      "OperatorsReference": "PG-91438",
+      "UsageTypeID": 6,
+      "UsageCost": "Free",
+      "AddressInfo": {
+        "ID": 90445,
+        "Title": "Greentech Distribution PLC",
+        "AddressLine1": "Unit 4-7 Treadaway Business Centre",
+        "AddressLine2": null,
+        "Town": "Treadaway Hill",
+        "StateOrProvince": "Buckinghamshire",
+        "Postcode": "HP10 9RS",
+        "CountryID": 1,
+        "Country": {
+          "ISOCode": "GB",
+          "ContinentCode": "EU",
+          "ID": 1,
+          "Title": "United Kingdom"
+        },
+        "Latitude": 51.604886,
+        "Longitude": -0.700877,
+        "ContactTelephone1": null,
+        "ContactTelephone2": null,
+        "ContactEmail": null,
+        "AccessComments": null,
+        "RelatedURL": null,
+        "Distance": 0.6089195101424586,
+        "DistanceUnit": 1
+      },
+      "Connections": [
+        {
+          "ID": 127725,
+          "ConnectionTypeID": 25,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-2 Type 2",
+            "IsDiscontinued": false,
+            "IsObsolete": false,
+            "ID": 25,
+            "Title": "Type 2 (Socket Only)"
+          },
+          "Reference": null,
+          "StatusTypeID": 0,
+          "StatusType": {
+            "IsOperational": null,
+            "IsUserSelectable": true,
+            "ID": 0,
+            "Title": "Unknown"
+          },
+          "LevelID": 2,
+          "Level": {
+            "Comments": "Over 2 kW, usually non-domestic socket type",
+            "IsFastChargeCapable": false,
+            "ID": 2,
+            "Title": "Level 2 : Medium (Over 2kW)"
+          },
+          "Amps": 32,
+          "Voltage": 400,
+          "PowerKW": 22,
+          "CurrentTypeID": 20,
+          "CurrentType": {
+            "Description": "Alternating Current - Three Phase",
+            "ID": 20,
+            "Title": "AC (Three-Phase)"
+          },
+          "Quantity": 1,
+          "Comments": null
+        }
+      ],
+      "NumberOfPoints": 2,
+      "GeneralComments": "This is an open charge unit installed at the GreenTech Distribution Plc site in Treadaway Business Centre, Treadaway Hill, Loudwater, High Wycombe",
+      "DatePlanned": null,
+      "DateLastConfirmed": null,
+      "StatusTypeID": 0,
+      "DateLastStatusUpdate": "2023-10-09T13:26:00Z",
+      "MetadataValues": null,
+      "DataQualityLevel": 1,
+      "DateCreated": "2017-07-09T05:33:00Z",
+      "SubmissionStatusTypeID": 200,
+      "traffic_delay": 6.9180934752429435,
+      "meal_stop": true,
+      "distance_stop": false,
+      "route_km": 116.76458955759722,
+      "meal_window": "dinner",
+      "nearby_places": [
+        "Flutterby Cupcakes",
+        "Brewers Fayre Papermill",
+        "Rounds Sandwiches"
+      ],
+      "price": 0.1,
+      "max_power": 100.0,
+      "is_fast": true,
+      "num_points": 4,
+      "distance": 0.6089195101424586
+    },
+    "DataProvider": {
+      "WebsiteURL": "http://openchargemap.org",
+      "Comments": null,
+      "DataProviderStatusType": {
+        "IsProviderEnabled": true,
+        "ID": 1,
+        "Title": "Manual Data Entry"
+      },
+      "IsRestrictedEdit": false,
+      "IsOpenDataLicensed": true,
+      "IsApprovedImport": true,
+      "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "DateLastImported": null,
+      "ID": 1,
+      "Title": "Open Charge Map Contributors"
+    },
+    "OperatorInfo": {
+      "WebsiteURL": "http://www.pod-point.com/",
+      "Comments": "Part of Groupe EDF",
+      "PhonePrimaryContact": "020 7247 4114",
+      "PhoneSecondaryContact": null,
+      "IsPrivateIndividual": false,
+      "AddressInfo": null,
+      "BookingURL": null,
+      "ContactEmail": "enquiries@pod-point.com",
+      "FaultReportEmail": "enquiries@pod-point.com",
+      "IsRestrictedEdit": false,
+      "ID": 3,
+      "Title": "POD Point (UK)"
+    },
+    "UsageType": {
+      "IsPayAtLocation": false,
+      "IsMembershipRequired": false,
+      "IsAccessKeyRequired": false,
+      "ID": 6,
+      "Title": "Private - For Staff, Visitors or Customers"
+    },
+    "StatusType": {
+      "IsOperational": null,
+      "IsUserSelectable": true,
+      "ID": 0,
+      "Title": "Unknown"
+    },
+    "SubmissionStatus": {
+      "IsLive": true,
+      "ID": 200,
+      "Title": "Submission Published"
+    },
+    "UserComments": null,
+    "PercentageSimilarity": null,
+    "MediaItems": null,
+    "IsRecentlyVerified": false,
+    "DateLastVerified": "2023-10-09T13:26:00Z",
+    "ID": 90099,
+    "UUID": "7C87F250-5BB5-4690-A963-824A81D5F5E1",
+    "ParentChargePointID": null,
+    "DataProviderID": 1,
+    "DataProvidersReference": null,
+    "OperatorID": 3,
+    "OperatorsReference": "PG-91438",
+    "UsageTypeID": 6,
+    "UsageCost": "Free",
+    "AddressInfo": {
+      "ID": 90445,
+      "Title": "Greentech Distribution PLC",
+      "AddressLine1": "Unit 4-7 Treadaway Business Centre",
+      "AddressLine2": null,
+      "Town": "Treadaway Hill",
+      "StateOrProvince": "Buckinghamshire",
+      "Postcode": "HP10 9RS",
+      "CountryID": 1,
+      "Country": {
+        "ISOCode": "GB",
+        "ContinentCode": "EU",
+        "ID": 1,
+        "Title": "United Kingdom"
+      },
+      "Latitude": 51.604886,
+      "Longitude": -0.700877,
+      "ContactTelephone1": null,
+      "ContactTelephone2": null,
+      "ContactEmail": null,
+      "AccessComments": null,
+      "RelatedURL": null,
+      "Distance": 0.6089195101424586,
+      "DistanceUnit": 1
+    },
+    "Connections": [
+      {
+        "ID": 127725,
+        "ConnectionTypeID": 25,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-2 Type 2",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
+        },
+        "Reference": null,
+        "StatusTypeID": 0,
+        "StatusType": {
+          "IsOperational": null,
+          "IsUserSelectable": true,
+          "ID": 0,
+          "Title": "Unknown"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": 32,
+        "Voltage": 400,
+        "PowerKW": 22,
+        "CurrentTypeID": 20,
+        "CurrentType": {
+          "Description": "Alternating Current - Three Phase",
+          "ID": 20,
+          "Title": "AC (Three-Phase)"
+        },
+        "Quantity": 1,
+        "Comments": null
+      }
+    ],
+    "NumberOfPoints": 2,
+    "GeneralComments": "This is an open charge unit installed at the GreenTech Distribution Plc site in Treadaway Business Centre, Treadaway Hill, Loudwater, High Wycombe",
+    "DatePlanned": null,
+    "DateLastConfirmed": null,
+    "StatusTypeID": 0,
+    "DateLastStatusUpdate": "2023-10-09T13:26:00Z",
+    "MetadataValues": null,
+    "DataQualityLevel": 1,
+    "DateCreated": "2017-07-09T05:33:00Z",
+    "SubmissionStatusTypeID": 200,
+    "traffic_delay": 6.9180934752429435,
+    "meal_stop": true,
+    "distance_stop": false,
+    "route_km": 116.76458955759722,
+    "meal_window": "dinner",
+    "nearby_places": [
+      "Flutterby Cupcakes",
+      "Brewers Fayre Papermill",
+      "Rounds Sandwiches"
+    ],
+    "price": 0.1,
+    "max_power": 100.0,
+    "is_fast": true,
+    "num_points": 4,
+    "distance": 0.6089195101424586
+  },
+  {
+    "raw": {
+      "DataProvider": {
+        "WebsiteURL": "http://openchargemap.org",
+        "Comments": null,
+        "DataProviderStatusType": {
+          "IsProviderEnabled": true,
+          "ID": 1,
+          "Title": "Manual Data Entry"
+        },
+        "IsRestrictedEdit": false,
+        "IsOpenDataLicensed": true,
+        "IsApprovedImport": true,
+        "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "DateLastImported": null,
+        "ID": 1,
+        "Title": "Open Charge Map Contributors"
+      },
+      "OperatorInfo": {
+        "WebsiteURL": "https://www.bppulse.co.uk/",
+        "Comments": "Formerly known as Polar Network, or BP Chargemaster",
+        "PhonePrimaryContact": "01582 400331",
+        "PhoneSecondaryContact": null,
+        "IsPrivateIndividual": false,
+        "AddressInfo": null,
+        "BookingURL": null,
+        "ContactEmail": null,
+        "FaultReportEmail": null,
+        "IsRestrictedEdit": false,
+        "ID": 32,
+        "Title": "BP Pulse (UK)"
+      },
+      "UsageType": {
+        "IsPayAtLocation": true,
+        "IsMembershipRequired": false,
+        "IsAccessKeyRequired": false,
+        "ID": 5,
+        "Title": "Public - Pay At Location"
+      },
+      "StatusType": {
+        "IsOperational": true,
+        "IsUserSelectable": true,
+        "ID": 50,
+        "Title": "Operational"
+      },
+      "SubmissionStatus": {
+        "IsLive": true,
+        "ID": 200,
+        "Title": "Submission Published"
+      },
+      "UserComments": [
+        {
+          "ID": 25634,
+          "ChargePointID": 148960,
+          "CommentTypeID": 10,
+          "CommentType": {
+            "ID": 10,
+            "Title": "General Comment"
+          },
+          "UserName": "Paul C",
+          "Comment": "",
+          "Rating": null,
+          "RelatedURL": null,
+          "DateCreated": "2022-04-09T09:51:19.69Z",
+          "User": {
+            "ID": 37587,
+            "IdentityProvider": null,
+            "Identifier": null,
+            "CurrentSessionToken": null,
+            "Username": "Paul C",
+            "Profile": null,
+            "Location": null,
+            "WebsiteURL": null,
+            "ReputationPoints": 1,
+            "Permissions": null,
+            "PermissionsRequested": null,
+            "DateCreated": null,
+            "DateLastLogin": null,
+            "IsProfilePublic": null,
+            "IsEmergencyChargingProvider": null,
+            "IsPublicChargingProvider": null,
+            "Latitude": null,
+            "Longitude": null,
+            "EmailAddress": null,
+            "EmailHash": null,
+            "ProfileImageURL": "https://www.gravatar.com/avatar/f137691628ee3ca0c4be031a4f5f6d41?s=80&d=robohash",
+            "IsCurrentSessionTokenValid": null,
+            "APIKey": null,
+            "SyncedSettings": null
+          },
+          "CheckinStatusTypeID": 10,
+          "CheckinStatusType": {
+            "IsPositive": true,
+            "IsAutomatedCheckin": false,
+            "ID": 10,
+            "Title": "Charged Successfully"
+          },
+          "IsActionedByEditor": false
+        }
+      ],
+      "PercentageSimilarity": null,
+      "MediaItems": null,
+      "IsRecentlyVerified": false,
+      "DateLastVerified": "2023-08-23T10:31:00Z",
+      "ID": 148960,
+      "UUID": "21053046-20EE-4117-A56A-6A890BF09222",
+      "ParentChargePointID": null,
+      "DataProviderID": 1,
+      "DataProvidersReference": null,
+      "OperatorID": 32,
+      "OperatorsReference": "",
+      "UsageTypeID": 5,
+      "UsageCost": "\u00a30.79/kWh; other tariffs available",
+      "AddressInfo": {
+        "ID": 149313,
+        "Title": "Miller & Carter Beaconsfield",
+        "AddressLine1": "Holtspur Top Lane",
+        "AddressLine2": null,
+        "Town": "Beaconsfield",
+        "StateOrProvince": null,
+        "Postcode": "HP9 1UD",
+        "CountryID": 1,
+        "Country": {
+          "ISOCode": "GB",
+          "ContinentCode": "EU",
+          "ID": 1,
+          "Title": "United Kingdom"
+        },
+        "Latitude": 51.5998995502663,
+        "Longitude": -0.670458679094963,
+        "ContactTelephone1": null,
+        "ContactTelephone2": null,
+        "ContactEmail": null,
+        "AccessComments": null,
+        "RelatedURL": null,
+        "Distance": 1.5640363111659923,
+        "DistanceUnit": 1
+      },
+      "Connections": [
+        {
+          "ID": 206854,
+          "ConnectionTypeID": 33,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-3 Configuration FF",
+            "IsDiscontinued": false,
+            "IsObsolete": false,
+            "ID": 33,
+            "Title": "CCS (Type 2)"
+          },
+          "Reference": null,
+          "StatusTypeID": 50,
+          "StatusType": {
+            "IsOperational": true,
+            "IsUserSelectable": true,
+            "ID": 50,
+            "Title": "Operational"
+          },
+          "LevelID": 3,
+          "Level": {
+            "Comments": "40KW and Higher",
+            "IsFastChargeCapable": true,
+            "ID": 3,
+            "Title": "Level 3:  High (Over 40kW)"
+          },
+          "Amps": null,
+          "Voltage": null,
+          "PowerKW": 50,
+          "CurrentTypeID": 30,
+          "CurrentType": {
+            "Description": "Direct Current",
+            "ID": 30,
+            "Title": "DC"
+          },
+          "Quantity": 1,
+          "Comments": null
+        },
+        {
+          "ID": 206855,
+          "ConnectionTypeID": 2,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-3 Configuration AA",
+            "IsDiscontinued": null,
+            "IsObsolete": null,
+            "ID": 2,
+            "Title": "CHAdeMO"
+          },
+          "Reference": null,
+          "StatusTypeID": 50,
+          "StatusType": {
+            "IsOperational": true,
+            "IsUserSelectable": true,
+            "ID": 50,
+            "Title": "Operational"
+          },
+          "LevelID": 3,
+          "Level": {
+            "Comments": "40KW and Higher",
+            "IsFastChargeCapable": true,
+            "ID": 3,
+            "Title": "Level 3:  High (Over 40kW)"
+          },
+          "Amps": null,
+          "Voltage": null,
+          "PowerKW": 50,
+          "CurrentTypeID": 30,
+          "CurrentType": {
+            "Description": "Direct Current",
+            "ID": 30,
+            "Title": "DC"
+          },
+          "Quantity": 1,
+          "Comments": null
+        },
+        {
+          "ID": 206856,
+          "ConnectionTypeID": 1036,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-2",
+            "IsDiscontinued": false,
+            "IsObsolete": false,
+            "ID": 1036,
+            "Title": "Type 2 (Tethered Connector) "
+          },
+          "Reference": null,
+          "StatusTypeID": 50,
+          "StatusType": {
+            "IsOperational": true,
+            "IsUserSelectable": true,
+            "ID": 50,
+            "Title": "Operational"
+          },
+          "LevelID": 3,
+          "Level": {
+            "Comments": "40KW and Higher",
+            "IsFastChargeCapable": true,
+            "ID": 3,
+            "Title": "Level 3:  High (Over 40kW)"
+          },
+          "Amps": null,
+          "Voltage": null,
+          "PowerKW": 43,
+          "CurrentTypeID": 20,
+          "CurrentType": {
+            "Description": "Alternating Current - Three Phase",
+            "ID": 20,
+            "Title": "AC (Three-Phase)"
+          },
+          "Quantity": 1,
+          "Comments": null
+        }
+      ],
+      "NumberOfPoints": 1,
+      "GeneralComments": null,
+      "DatePlanned": null,
+      "DateLastConfirmed": null,
+      "StatusTypeID": 50,
+      "DateLastStatusUpdate": "2023-08-23T10:31:00Z",
+      "MetadataValues": null,
+      "DataQualityLevel": 1,
+      "DateCreated": "2020-02-14T09:44:00Z",
+      "SubmissionStatusTypeID": 200,
+      "traffic_delay": 5.899705014749262,
+      "meal_stop": true,
+      "distance_stop": false,
+      "route_km": 116.76458955759722,
+      "meal_window": "dinner",
+      "nearby_places": [
+        "Laithwaites Wines & Spirits",
+        "Mayflower Newsagents",
+        "H A Price & Sons"
+      ],
+      "price": 0.1,
+      "max_power": 100.0,
+      "is_fast": true,
+      "num_points": 4,
+      "distance": 1.5640363111659923
+    },
+    "DataProvider": {
+      "WebsiteURL": "http://openchargemap.org",
+      "Comments": null,
+      "DataProviderStatusType": {
+        "IsProviderEnabled": true,
+        "ID": 1,
+        "Title": "Manual Data Entry"
+      },
+      "IsRestrictedEdit": false,
+      "IsOpenDataLicensed": true,
+      "IsApprovedImport": true,
+      "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "DateLastImported": null,
+      "ID": 1,
+      "Title": "Open Charge Map Contributors"
+    },
+    "OperatorInfo": {
+      "WebsiteURL": "https://www.bppulse.co.uk/",
+      "Comments": "Formerly known as Polar Network, or BP Chargemaster",
+      "PhonePrimaryContact": "01582 400331",
+      "PhoneSecondaryContact": null,
+      "IsPrivateIndividual": false,
+      "AddressInfo": null,
+      "BookingURL": null,
+      "ContactEmail": null,
+      "FaultReportEmail": null,
+      "IsRestrictedEdit": false,
+      "ID": 32,
+      "Title": "BP Pulse (UK)"
+    },
+    "UsageType": {
+      "IsPayAtLocation": true,
+      "IsMembershipRequired": false,
+      "IsAccessKeyRequired": false,
+      "ID": 5,
+      "Title": "Public - Pay At Location"
+    },
+    "StatusType": {
+      "IsOperational": true,
+      "IsUserSelectable": true,
+      "ID": 50,
+      "Title": "Operational"
+    },
+    "SubmissionStatus": {
+      "IsLive": true,
+      "ID": 200,
+      "Title": "Submission Published"
+    },
+    "UserComments": [
+      {
+        "ID": 25634,
+        "ChargePointID": 148960,
+        "CommentTypeID": 10,
+        "CommentType": {
+          "ID": 10,
+          "Title": "General Comment"
+        },
+        "UserName": "Paul C",
+        "Comment": "",
+        "Rating": null,
+        "RelatedURL": null,
+        "DateCreated": "2022-04-09T09:51:19.69Z",
+        "User": {
+          "ID": 37587,
+          "IdentityProvider": null,
+          "Identifier": null,
+          "CurrentSessionToken": null,
+          "Username": "Paul C",
+          "Profile": null,
+          "Location": null,
+          "WebsiteURL": null,
+          "ReputationPoints": 1,
+          "Permissions": null,
+          "PermissionsRequested": null,
+          "DateCreated": null,
+          "DateLastLogin": null,
+          "IsProfilePublic": null,
+          "IsEmergencyChargingProvider": null,
+          "IsPublicChargingProvider": null,
+          "Latitude": null,
+          "Longitude": null,
+          "EmailAddress": null,
+          "EmailHash": null,
+          "ProfileImageURL": "https://www.gravatar.com/avatar/f137691628ee3ca0c4be031a4f5f6d41?s=80&d=robohash",
+          "IsCurrentSessionTokenValid": null,
+          "APIKey": null,
+          "SyncedSettings": null
+        },
+        "CheckinStatusTypeID": 10,
+        "CheckinStatusType": {
+          "IsPositive": true,
+          "IsAutomatedCheckin": false,
+          "ID": 10,
+          "Title": "Charged Successfully"
+        },
+        "IsActionedByEditor": false
+      }
+    ],
+    "PercentageSimilarity": null,
+    "MediaItems": null,
+    "IsRecentlyVerified": false,
+    "DateLastVerified": "2023-08-23T10:31:00Z",
+    "ID": 148960,
+    "UUID": "21053046-20EE-4117-A56A-6A890BF09222",
+    "ParentChargePointID": null,
+    "DataProviderID": 1,
+    "DataProvidersReference": null,
+    "OperatorID": 32,
+    "OperatorsReference": "",
+    "UsageTypeID": 5,
+    "UsageCost": "\u00a30.79/kWh; other tariffs available",
+    "AddressInfo": {
+      "ID": 149313,
+      "Title": "Miller & Carter Beaconsfield",
+      "AddressLine1": "Holtspur Top Lane",
+      "AddressLine2": null,
+      "Town": "Beaconsfield",
+      "StateOrProvince": null,
+      "Postcode": "HP9 1UD",
+      "CountryID": 1,
+      "Country": {
+        "ISOCode": "GB",
+        "ContinentCode": "EU",
+        "ID": 1,
+        "Title": "United Kingdom"
+      },
+      "Latitude": 51.5998995502663,
+      "Longitude": -0.670458679094963,
+      "ContactTelephone1": null,
+      "ContactTelephone2": null,
+      "ContactEmail": null,
+      "AccessComments": null,
+      "RelatedURL": null,
+      "Distance": 1.5640363111659923,
+      "DistanceUnit": 1
+    },
+    "Connections": [
+      {
+        "ID": 206854,
+        "ConnectionTypeID": 33,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-3 Configuration FF",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 33,
+          "Title": "CCS (Type 2)"
         },
         "Reference": null,
         "StatusTypeID": 50,
@@ -1163,37 +1428,728 @@
         },
         "Amps": null,
         "Voltage": null,
-        "PowerKW": 120,
+        "PowerKW": 50,
         "CurrentTypeID": 30,
         "CurrentType": {
           "Description": "Direct Current",
           "ID": 30,
           "Title": "DC"
         },
-        "Quantity": 8,
+        "Quantity": 1,
+        "Comments": null
+      },
+      {
+        "ID": 206855,
+        "ConnectionTypeID": 2,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-3 Configuration AA",
+          "IsDiscontinued": null,
+          "IsObsolete": null,
+          "ID": 2,
+          "Title": "CHAdeMO"
+        },
+        "Reference": null,
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 3,
+        "Level": {
+          "Comments": "40KW and Higher",
+          "IsFastChargeCapable": true,
+          "ID": 3,
+          "Title": "Level 3:  High (Over 40kW)"
+        },
+        "Amps": null,
+        "Voltage": null,
+        "PowerKW": 50,
+        "CurrentTypeID": 30,
+        "CurrentType": {
+          "Description": "Direct Current",
+          "ID": 30,
+          "Title": "DC"
+        },
+        "Quantity": 1,
+        "Comments": null
+      },
+      {
+        "ID": 206856,
+        "ConnectionTypeID": 1036,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-2",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 1036,
+          "Title": "Type 2 (Tethered Connector) "
+        },
+        "Reference": null,
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 3,
+        "Level": {
+          "Comments": "40KW and Higher",
+          "IsFastChargeCapable": true,
+          "ID": 3,
+          "Title": "Level 3:  High (Over 40kW)"
+        },
+        "Amps": null,
+        "Voltage": null,
+        "PowerKW": 43,
+        "CurrentTypeID": 20,
+        "CurrentType": {
+          "Description": "Alternating Current - Three Phase",
+          "ID": 20,
+          "Title": "AC (Three-Phase)"
+        },
+        "Quantity": 1,
         "Comments": null
       }
     ],
-    "NumberOfPoints": 8,
-    "GeneralComments": "Charging8 Superchargers, available 24/7",
+    "NumberOfPoints": 1,
+    "GeneralComments": null,
     "DatePlanned": null,
     "DateLastConfirmed": null,
     "StatusTypeID": 50,
-    "DateLastStatusUpdate": "2019-03-22T18:14:00Z",
+    "DateLastStatusUpdate": "2023-08-23T10:31:00Z",
     "MetadataValues": null,
     "DataQualityLevel": 1,
-    "DateCreated": "2017-07-20T05:35:00Z",
+    "DateCreated": "2020-02-14T09:44:00Z",
     "SubmissionStatusTypeID": 200,
-    "traffic_delay": 5.209155485398579,
+    "traffic_delay": 5.899705014749262,
     "meal_stop": true,
     "distance_stop": false,
-    "route_km": 22.709960306872475,
-    "meal_window": "lunch",
+    "route_km": 116.76458955759722,
+    "meal_window": "dinner",
+    "nearby_places": [
+      "Laithwaites Wines & Spirits",
+      "Mayflower Newsagents",
+      "H A Price & Sons"
+    ],
     "price": 0.1,
     "max_power": 100.0,
     "is_fast": true,
     "num_points": 4,
-    "distance": 4.9389832688853925
+    "distance": 1.5640363111659923
+  },
+  {
+    "raw": {
+      "DataProvider": {
+        "WebsiteURL": "http://openchargemap.org",
+        "Comments": null,
+        "DataProviderStatusType": {
+          "IsProviderEnabled": true,
+          "ID": 1,
+          "Title": "Manual Data Entry"
+        },
+        "IsRestrictedEdit": false,
+        "IsOpenDataLicensed": true,
+        "IsApprovedImport": true,
+        "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "DateLastImported": null,
+        "ID": 1,
+        "Title": "Open Charge Map Contributors"
+      },
+      "OperatorInfo": {
+        "WebsiteURL": "http://www.pod-point.com/",
+        "Comments": "Part of Groupe EDF",
+        "PhonePrimaryContact": "020 7247 4114",
+        "PhoneSecondaryContact": null,
+        "IsPrivateIndividual": false,
+        "AddressInfo": null,
+        "BookingURL": null,
+        "ContactEmail": "enquiries@pod-point.com",
+        "FaultReportEmail": "enquiries@pod-point.com",
+        "IsRestrictedEdit": false,
+        "ID": 3,
+        "Title": "POD Point (UK)"
+      },
+      "UsageType": {
+        "IsPayAtLocation": false,
+        "IsMembershipRequired": false,
+        "IsAccessKeyRequired": false,
+        "ID": 6,
+        "Title": "Private - For Staff, Visitors or Customers"
+      },
+      "StatusType": {
+        "IsOperational": true,
+        "IsUserSelectable": true,
+        "ID": 50,
+        "Title": "Operational"
+      },
+      "SubmissionStatus": {
+        "IsLive": true,
+        "ID": 200,
+        "Title": "Submission Published"
+      },
+      "UserComments": null,
+      "PercentageSimilarity": null,
+      "MediaItems": null,
+      "IsRecentlyVerified": false,
+      "DateLastVerified": "2018-04-07T05:33:00Z",
+      "ID": 71846,
+      "UUID": "B759AA14-CE2D-4CFF-89EB-43ECD2627380",
+      "ParentChargePointID": null,
+      "DataProviderID": 1,
+      "DataProvidersReference": null,
+      "OperatorID": 3,
+      "OperatorsReference": "PG-80542",
+      "UsageTypeID": 6,
+      "UsageCost": "Free",
+      "AddressInfo": {
+        "ID": 72192,
+        "Title": "Hyundai Motor UK Ltd",
+        "AddressLine1": "728 London Road",
+        "AddressLine2": null,
+        "Town": "Wycombe",
+        "StateOrProvince": "Buckinghamshire",
+        "Postcode": "HP11 1HE",
+        "CountryID": 1,
+        "Country": {
+          "ISOCode": "GB",
+          "ContinentCode": "EU",
+          "ID": 1,
+          "Title": "United Kingdom"
+        },
+        "Latitude": 51.615297,
+        "Longitude": -0.710514,
+        "ContactTelephone1": null,
+        "ContactTelephone2": null,
+        "ContactEmail": null,
+        "AccessComments": null,
+        "RelatedURL": null,
+        "Distance": 1.8222348927311522,
+        "DistanceUnit": 1
+      },
+      "Connections": [
+        {
+          "ID": 102942,
+          "ConnectionTypeID": 25,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-2 Type 2",
+            "IsDiscontinued": false,
+            "IsObsolete": false,
+            "ID": 25,
+            "Title": "Type 2 (Socket Only)"
+          },
+          "Reference": null,
+          "StatusTypeID": 50,
+          "StatusType": {
+            "IsOperational": true,
+            "IsUserSelectable": true,
+            "ID": 50,
+            "Title": "Operational"
+          },
+          "LevelID": 2,
+          "Level": {
+            "Comments": "Over 2 kW, usually non-domestic socket type",
+            "IsFastChargeCapable": false,
+            "ID": 2,
+            "Title": "Level 2 : Medium (Over 2kW)"
+          },
+          "Amps": 32,
+          "Voltage": 230,
+          "PowerKW": 7,
+          "CurrentTypeID": 10,
+          "CurrentType": {
+            "Description": "Alternating Current - Single Phase",
+            "ID": 10,
+            "Title": "AC (Single-Phase)"
+          },
+          "Quantity": 2,
+          "Comments": null
+        }
+      ],
+      "NumberOfPoints": 6,
+      "GeneralComments": null,
+      "DatePlanned": null,
+      "DateLastConfirmed": null,
+      "StatusTypeID": 50,
+      "DateLastStatusUpdate": "2018-04-07T05:33:00Z",
+      "MetadataValues": null,
+      "DataQualityLevel": 1,
+      "DateCreated": "2016-09-15T18:23:00Z",
+      "SubmissionStatusTypeID": 200,
+      "traffic_delay": 7.5372279495990835,
+      "meal_stop": true,
+      "distance_stop": false,
+      "route_km": 116.76458955759722,
+      "meal_window": "dinner",
+      "nearby_places": [
+        "Mr India",
+        "Tummy Fillers Fish and Chip shop",
+        "Sundarbans"
+      ],
+      "price": 0.1,
+      "max_power": 100.0,
+      "is_fast": true,
+      "num_points": 4,
+      "distance": 1.8222348927311522
+    },
+    "DataProvider": {
+      "WebsiteURL": "http://openchargemap.org",
+      "Comments": null,
+      "DataProviderStatusType": {
+        "IsProviderEnabled": true,
+        "ID": 1,
+        "Title": "Manual Data Entry"
+      },
+      "IsRestrictedEdit": false,
+      "IsOpenDataLicensed": true,
+      "IsApprovedImport": true,
+      "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "DateLastImported": null,
+      "ID": 1,
+      "Title": "Open Charge Map Contributors"
+    },
+    "OperatorInfo": {
+      "WebsiteURL": "http://www.pod-point.com/",
+      "Comments": "Part of Groupe EDF",
+      "PhonePrimaryContact": "020 7247 4114",
+      "PhoneSecondaryContact": null,
+      "IsPrivateIndividual": false,
+      "AddressInfo": null,
+      "BookingURL": null,
+      "ContactEmail": "enquiries@pod-point.com",
+      "FaultReportEmail": "enquiries@pod-point.com",
+      "IsRestrictedEdit": false,
+      "ID": 3,
+      "Title": "POD Point (UK)"
+    },
+    "UsageType": {
+      "IsPayAtLocation": false,
+      "IsMembershipRequired": false,
+      "IsAccessKeyRequired": false,
+      "ID": 6,
+      "Title": "Private - For Staff, Visitors or Customers"
+    },
+    "StatusType": {
+      "IsOperational": true,
+      "IsUserSelectable": true,
+      "ID": 50,
+      "Title": "Operational"
+    },
+    "SubmissionStatus": {
+      "IsLive": true,
+      "ID": 200,
+      "Title": "Submission Published"
+    },
+    "UserComments": null,
+    "PercentageSimilarity": null,
+    "MediaItems": null,
+    "IsRecentlyVerified": false,
+    "DateLastVerified": "2018-04-07T05:33:00Z",
+    "ID": 71846,
+    "UUID": "B759AA14-CE2D-4CFF-89EB-43ECD2627380",
+    "ParentChargePointID": null,
+    "DataProviderID": 1,
+    "DataProvidersReference": null,
+    "OperatorID": 3,
+    "OperatorsReference": "PG-80542",
+    "UsageTypeID": 6,
+    "UsageCost": "Free",
+    "AddressInfo": {
+      "ID": 72192,
+      "Title": "Hyundai Motor UK Ltd",
+      "AddressLine1": "728 London Road",
+      "AddressLine2": null,
+      "Town": "Wycombe",
+      "StateOrProvince": "Buckinghamshire",
+      "Postcode": "HP11 1HE",
+      "CountryID": 1,
+      "Country": {
+        "ISOCode": "GB",
+        "ContinentCode": "EU",
+        "ID": 1,
+        "Title": "United Kingdom"
+      },
+      "Latitude": 51.615297,
+      "Longitude": -0.710514,
+      "ContactTelephone1": null,
+      "ContactTelephone2": null,
+      "ContactEmail": null,
+      "AccessComments": null,
+      "RelatedURL": null,
+      "Distance": 1.8222348927311522,
+      "DistanceUnit": 1
+    },
+    "Connections": [
+      {
+        "ID": 102942,
+        "ConnectionTypeID": 25,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-2 Type 2",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
+        },
+        "Reference": null,
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": 32,
+        "Voltage": 230,
+        "PowerKW": 7,
+        "CurrentTypeID": 10,
+        "CurrentType": {
+          "Description": "Alternating Current - Single Phase",
+          "ID": 10,
+          "Title": "AC (Single-Phase)"
+        },
+        "Quantity": 2,
+        "Comments": null
+      }
+    ],
+    "NumberOfPoints": 6,
+    "GeneralComments": null,
+    "DatePlanned": null,
+    "DateLastConfirmed": null,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2018-04-07T05:33:00Z",
+    "MetadataValues": null,
+    "DataQualityLevel": 1,
+    "DateCreated": "2016-09-15T18:23:00Z",
+    "SubmissionStatusTypeID": 200,
+    "traffic_delay": 7.5372279495990835,
+    "meal_stop": true,
+    "distance_stop": false,
+    "route_km": 116.76458955759722,
+    "meal_window": "dinner",
+    "nearby_places": [
+      "Mr India",
+      "Tummy Fillers Fish and Chip shop",
+      "Sundarbans"
+    ],
+    "price": 0.1,
+    "max_power": 100.0,
+    "is_fast": true,
+    "num_points": 4,
+    "distance": 1.8222348927311522
+  },
+  {
+    "raw": {
+      "DataProvider": {
+        "WebsiteURL": "http://openchargemap.org",
+        "Comments": null,
+        "DataProviderStatusType": {
+          "IsProviderEnabled": true,
+          "ID": 1,
+          "Title": "Manual Data Entry"
+        },
+        "IsRestrictedEdit": false,
+        "IsOpenDataLicensed": true,
+        "IsApprovedImport": true,
+        "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "DateLastImported": null,
+        "ID": 1,
+        "Title": "Open Charge Map Contributors"
+      },
+      "OperatorInfo": {
+        "WebsiteURL": "http://www.pod-point.com/",
+        "Comments": "Part of Groupe EDF",
+        "PhonePrimaryContact": "020 7247 4114",
+        "PhoneSecondaryContact": null,
+        "IsPrivateIndividual": false,
+        "AddressInfo": null,
+        "BookingURL": null,
+        "ContactEmail": "enquiries@pod-point.com",
+        "FaultReportEmail": "enquiries@pod-point.com",
+        "IsRestrictedEdit": false,
+        "ID": 3,
+        "Title": "POD Point (UK)"
+      },
+      "UsageType": {
+        "IsPayAtLocation": false,
+        "IsMembershipRequired": false,
+        "IsAccessKeyRequired": false,
+        "ID": 6,
+        "Title": "Private - For Staff, Visitors or Customers"
+      },
+      "StatusType": {
+        "IsOperational": null,
+        "IsUserSelectable": true,
+        "ID": 0,
+        "Title": "Unknown"
+      },
+      "SubmissionStatus": {
+        "IsLive": true,
+        "ID": 200,
+        "Title": "Submission Published"
+      },
+      "UserComments": null,
+      "PercentageSimilarity": null,
+      "MediaItems": null,
+      "IsRecentlyVerified": false,
+      "DateLastVerified": "2025-02-02T06:34:00Z",
+      "ID": 85765,
+      "UUID": "D2CE1C77-6CAD-4723-A4D7-DE782F8539CD",
+      "ParentChargePointID": null,
+      "DataProviderID": 1,
+      "DataProvidersReference": null,
+      "OperatorID": 3,
+      "OperatorsReference": "PG-91064",
+      "UsageTypeID": 6,
+      "UsageCost": "1",
+      "AddressInfo": {
+        "ID": 86111,
+        "Title": "Motofix High Wycombe",
+        "AddressLine1": "722 London Road",
+        "AddressLine2": null,
+        "Town": "Buckinghamshire",
+        "StateOrProvince": null,
+        "Postcode": "HP11 1HE",
+        "CountryID": 1,
+        "Country": {
+          "ISOCode": "GB",
+          "ContinentCode": "EU",
+          "ID": 1,
+          "Title": "United Kingdom"
+        },
+        "Latitude": 51.615616,
+        "Longitude": -0.71073,
+        "ContactTelephone1": null,
+        "ContactTelephone2": null,
+        "ContactEmail": null,
+        "AccessComments": null,
+        "RelatedURL": null,
+        "Distance": 1.8583138862401767,
+        "DistanceUnit": 1
+      },
+      "Connections": [
+        {
+          "ID": 121918,
+          "ConnectionTypeID": 25,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-2 Type 2",
+            "IsDiscontinued": false,
+            "IsObsolete": false,
+            "ID": 25,
+            "Title": "Type 2 (Socket Only)"
+          },
+          "Reference": "PG-91064",
+          "StatusTypeID": 50,
+          "StatusType": {
+            "IsOperational": true,
+            "IsUserSelectable": true,
+            "ID": 50,
+            "Title": "Operational"
+          },
+          "LevelID": 2,
+          "Level": {
+            "Comments": "Over 2 kW, usually non-domestic socket type",
+            "IsFastChargeCapable": false,
+            "ID": 2,
+            "Title": "Level 2 : Medium (Over 2kW)"
+          },
+          "Amps": 32,
+          "Voltage": 230,
+          "PowerKW": 7,
+          "CurrentTypeID": 10,
+          "CurrentType": {
+            "Description": "Alternating Current - Single Phase",
+            "ID": 10,
+            "Title": "AC (Single-Phase)"
+          },
+          "Quantity": 1,
+          "Comments": null
+        }
+      ],
+      "NumberOfPoints": 1,
+      "GeneralComments": "This is an open charge unit installed at the Motofix High Wycombe site in London Road, High Wycombe, Buckinghamshire",
+      "DatePlanned": null,
+      "DateLastConfirmed": null,
+      "StatusTypeID": 0,
+      "DateLastStatusUpdate": "2025-02-02T06:34:00Z",
+      "MetadataValues": null,
+      "DataQualityLevel": 1,
+      "DateCreated": "2017-04-15T07:59:00Z",
+      "SubmissionStatusTypeID": 200,
+      "traffic_delay": 7.484076433121019,
+      "meal_stop": true,
+      "distance_stop": false,
+      "route_km": 116.76458955759722,
+      "meal_window": "dinner",
+      "nearby_places": [
+        "Mr India",
+        "Tummy Fillers Fish and Chip shop",
+        "Costcutter"
+      ],
+      "price": 0.1,
+      "max_power": 100.0,
+      "is_fast": true,
+      "num_points": 4,
+      "distance": 1.8583138862401767
+    },
+    "DataProvider": {
+      "WebsiteURL": "http://openchargemap.org",
+      "Comments": null,
+      "DataProviderStatusType": {
+        "IsProviderEnabled": true,
+        "ID": 1,
+        "Title": "Manual Data Entry"
+      },
+      "IsRestrictedEdit": false,
+      "IsOpenDataLicensed": true,
+      "IsApprovedImport": true,
+      "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "DateLastImported": null,
+      "ID": 1,
+      "Title": "Open Charge Map Contributors"
+    },
+    "OperatorInfo": {
+      "WebsiteURL": "http://www.pod-point.com/",
+      "Comments": "Part of Groupe EDF",
+      "PhonePrimaryContact": "020 7247 4114",
+      "PhoneSecondaryContact": null,
+      "IsPrivateIndividual": false,
+      "AddressInfo": null,
+      "BookingURL": null,
+      "ContactEmail": "enquiries@pod-point.com",
+      "FaultReportEmail": "enquiries@pod-point.com",
+      "IsRestrictedEdit": false,
+      "ID": 3,
+      "Title": "POD Point (UK)"
+    },
+    "UsageType": {
+      "IsPayAtLocation": false,
+      "IsMembershipRequired": false,
+      "IsAccessKeyRequired": false,
+      "ID": 6,
+      "Title": "Private - For Staff, Visitors or Customers"
+    },
+    "StatusType": {
+      "IsOperational": null,
+      "IsUserSelectable": true,
+      "ID": 0,
+      "Title": "Unknown"
+    },
+    "SubmissionStatus": {
+      "IsLive": true,
+      "ID": 200,
+      "Title": "Submission Published"
+    },
+    "UserComments": null,
+    "PercentageSimilarity": null,
+    "MediaItems": null,
+    "IsRecentlyVerified": false,
+    "DateLastVerified": "2025-02-02T06:34:00Z",
+    "ID": 85765,
+    "UUID": "D2CE1C77-6CAD-4723-A4D7-DE782F8539CD",
+    "ParentChargePointID": null,
+    "DataProviderID": 1,
+    "DataProvidersReference": null,
+    "OperatorID": 3,
+    "OperatorsReference": "PG-91064",
+    "UsageTypeID": 6,
+    "UsageCost": "1",
+    "AddressInfo": {
+      "ID": 86111,
+      "Title": "Motofix High Wycombe",
+      "AddressLine1": "722 London Road",
+      "AddressLine2": null,
+      "Town": "Buckinghamshire",
+      "StateOrProvince": null,
+      "Postcode": "HP11 1HE",
+      "CountryID": 1,
+      "Country": {
+        "ISOCode": "GB",
+        "ContinentCode": "EU",
+        "ID": 1,
+        "Title": "United Kingdom"
+      },
+      "Latitude": 51.615616,
+      "Longitude": -0.71073,
+      "ContactTelephone1": null,
+      "ContactTelephone2": null,
+      "ContactEmail": null,
+      "AccessComments": null,
+      "RelatedURL": null,
+      "Distance": 1.8583138862401767,
+      "DistanceUnit": 1
+    },
+    "Connections": [
+      {
+        "ID": 121918,
+        "ConnectionTypeID": 25,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-2 Type 2",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
+        },
+        "Reference": "PG-91064",
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": 32,
+        "Voltage": 230,
+        "PowerKW": 7,
+        "CurrentTypeID": 10,
+        "CurrentType": {
+          "Description": "Alternating Current - Single Phase",
+          "ID": 10,
+          "Title": "AC (Single-Phase)"
+        },
+        "Quantity": 1,
+        "Comments": null
+      }
+    ],
+    "NumberOfPoints": 1,
+    "GeneralComments": "This is an open charge unit installed at the Motofix High Wycombe site in London Road, High Wycombe, Buckinghamshire",
+    "DatePlanned": null,
+    "DateLastConfirmed": null,
+    "StatusTypeID": 0,
+    "DateLastStatusUpdate": "2025-02-02T06:34:00Z",
+    "MetadataValues": null,
+    "DataQualityLevel": 1,
+    "DateCreated": "2017-04-15T07:59:00Z",
+    "SubmissionStatusTypeID": 200,
+    "traffic_delay": 7.484076433121019,
+    "meal_stop": true,
+    "distance_stop": false,
+    "route_km": 116.76458955759722,
+    "meal_window": "dinner",
+    "nearby_places": [
+      "Mr India",
+      "Tummy Fillers Fish and Chip shop",
+      "Costcutter"
+    ],
+    "price": 0.1,
+    "max_power": 100.0,
+    "is_fast": true,
+    "num_points": 4,
+    "distance": 1.8583138862401767
   },
   {
     "raw": {
@@ -1249,24 +2205,24 @@
       "PercentageSimilarity": null,
       "MediaItems": null,
       "IsRecentlyVerified": false,
-      "DateLastVerified": "2023-10-29T10:59:00Z",
-      "ID": 255044,
-      "UUID": "B15F2101-961C-4D4C-81B8-B868FFD70DC8",
+      "DateLastVerified": "2022-08-16T19:02:00Z",
+      "ID": 126201,
+      "UUID": "4964DDB6-432D-487F-83EC-F135E5E6C542",
       "ParentChargePointID": null,
       "DataProviderID": 1,
       "DataProvidersReference": null,
       "OperatorID": 3,
-      "OperatorsReference": null,
+      "OperatorsReference": "PG-82803,PG-82810,PG-82816",
       "UsageTypeID": 4,
-      "UsageCost": "\u00a30.45/kWh",
+      "UsageCost": "\u00a30.14/kWh",
       "AddressInfo": {
-        "ID": 255428,
-        "Title": "Gilks' Garage Caf\u00e9",
-        "AddressLine1": "Banbury Road",
+        "ID": 126547,
+        "Title": "Wycombe Retail Park",
+        "AddressLine1": "London Road",
         "AddressLine2": null,
-        "Town": "Warwick",
+        "Town": "High Wycombe",
         "StateOrProvince": null,
-        "Postcode": "CV35 0JZ",
+        "Postcode": "HP11 1LP",
         "CountryID": 1,
         "Country": {
           "ISOCode": "GB",
@@ -1274,19 +2230,19 @@
           "ID": 1,
           "Title": "United Kingdom"
         },
-        "Latitude": 52.154969,
-        "Longitude": -1.501723,
+        "Latitude": 51.619281,
+        "Longitude": -0.720376,
         "ContactTelephone1": null,
         "ContactTelephone2": null,
         "ContactEmail": null,
         "AccessComments": null,
-        "RelatedURL": "http://pod-point.com",
-        "Distance": 4.952539451336412,
+        "RelatedURL": null,
+        "Distance": 2.6187744757972986,
         "DistanceUnit": 1
       },
       "Connections": [
         {
-          "ID": 484793,
+          "ID": 176879,
           "ConnectionTypeID": 25,
           "ConnectionType": {
             "FormalName": "IEC 62196-2 Type 2",
@@ -1295,7 +2251,7 @@
             "ID": 25,
             "Title": "Type 2 (Socket Only)"
           },
-          "Reference": "PG-83548",
+          "Reference": "PG-82810",
           "StatusTypeID": 50,
           "StatusType": {
             "IsOperational": true,
@@ -1320,37 +2276,108 @@
             "Title": "AC (Single-Phase)"
           },
           "Quantity": 2,
-          "Comments": "Jean-Lena"
+          "Comments": "Dion-Shia"
+        },
+        {
+          "ID": 324277,
+          "ConnectionTypeID": 25,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-2 Type 2",
+            "IsDiscontinued": false,
+            "IsObsolete": false,
+            "ID": 25,
+            "Title": "Type 2 (Socket Only)"
+          },
+          "Reference": "PG-82803",
+          "StatusTypeID": 50,
+          "StatusType": {
+            "IsOperational": true,
+            "IsUserSelectable": true,
+            "ID": 50,
+            "Title": "Operational"
+          },
+          "LevelID": 2,
+          "Level": {
+            "Comments": "Over 2 kW, usually non-domestic socket type",
+            "IsFastChargeCapable": false,
+            "ID": 2,
+            "Title": "Level 2 : Medium (Over 2kW)"
+          },
+          "Amps": 32,
+          "Voltage": 230,
+          "PowerKW": 7,
+          "CurrentTypeID": 10,
+          "CurrentType": {
+            "Description": "Alternating Current - Single Phase",
+            "ID": 10,
+            "Title": "AC (Single-Phase)"
+          },
+          "Quantity": 2,
+          "Comments": "Cole-Earl"
+        },
+        {
+          "ID": 324907,
+          "ConnectionTypeID": 25,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-2 Type 2",
+            "IsDiscontinued": false,
+            "IsObsolete": false,
+            "ID": 25,
+            "Title": "Type 2 (Socket Only)"
+          },
+          "Reference": "PG-82816",
+          "StatusTypeID": 50,
+          "StatusType": {
+            "IsOperational": true,
+            "IsUserSelectable": true,
+            "ID": 50,
+            "Title": "Operational"
+          },
+          "LevelID": 2,
+          "Level": {
+            "Comments": "Over 2 kW, usually non-domestic socket type",
+            "IsFastChargeCapable": false,
+            "ID": 2,
+            "Title": "Level 2 : Medium (Over 2kW)"
+          },
+          "Amps": 32,
+          "Voltage": 230,
+          "PowerKW": 7,
+          "CurrentTypeID": 10,
+          "CurrentType": {
+            "Description": "Alternating Current - Single Phase",
+            "ID": 10,
+            "Title": "AC (Single-Phase)"
+          },
+          "Quantity": 2,
+          "Comments": "Chad-Kyle"
         }
       ],
-      "NumberOfPoints": 2,
-      "GeneralComments": null,
+      "NumberOfPoints": 6,
+      "GeneralComments": "This is an open charge unit installed at the High Wycombe Retail Park site at London Road, High Wycombe",
       "DatePlanned": null,
       "DateLastConfirmed": null,
       "StatusTypeID": 50,
-      "DateLastStatusUpdate": "2023-10-29T10:59:00Z",
-      "MetadataValues": [
-        {
-          "ID": 27026,
-          "MetadataFieldID": 4,
-          "ItemValue": "Contains public sector information licensed under the Open Government Licence v2.0. http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/",
-          "MetadataFieldOption": null,
-          "MetadataFieldOptionID": null
-        }
-      ],
+      "DateLastStatusUpdate": "2022-08-16T19:02:00Z",
+      "MetadataValues": null,
       "DataQualityLevel": 1,
-      "DateCreated": "2023-03-07T08:02:00Z",
+      "DateCreated": "2019-05-13T14:47:00Z",
       "SubmissionStatusTypeID": 200,
-      "traffic_delay": 8.647450110864744,
+      "traffic_delay": 9.403508771929825,
       "meal_stop": true,
       "distance_stop": false,
-      "route_km": 22.709960306872475,
-      "meal_window": "lunch",
+      "route_km": 116.76458955759722,
+      "meal_window": "dinner",
+      "nearby_places": [
+        "Tummy Fillers Fish and Chip shop",
+        "Costcutter",
+        "Marks and Spencer"
+      ],
       "price": 0.1,
       "max_power": 100.0,
       "is_fast": true,
       "num_points": 4,
-      "distance": 4.952539451336412
+      "distance": 2.6187744757972986
     },
     "DataProvider": {
       "WebsiteURL": "http://openchargemap.org",
@@ -1404,24 +2431,24 @@
     "PercentageSimilarity": null,
     "MediaItems": null,
     "IsRecentlyVerified": false,
-    "DateLastVerified": "2023-10-29T10:59:00Z",
-    "ID": 255044,
-    "UUID": "B15F2101-961C-4D4C-81B8-B868FFD70DC8",
+    "DateLastVerified": "2022-08-16T19:02:00Z",
+    "ID": 126201,
+    "UUID": "4964DDB6-432D-487F-83EC-F135E5E6C542",
     "ParentChargePointID": null,
     "DataProviderID": 1,
     "DataProvidersReference": null,
     "OperatorID": 3,
-    "OperatorsReference": null,
+    "OperatorsReference": "PG-82803,PG-82810,PG-82816",
     "UsageTypeID": 4,
-    "UsageCost": "\u00a30.45/kWh",
+    "UsageCost": "\u00a30.14/kWh",
     "AddressInfo": {
-      "ID": 255428,
-      "Title": "Gilks' Garage Caf\u00e9",
-      "AddressLine1": "Banbury Road",
+      "ID": 126547,
+      "Title": "Wycombe Retail Park",
+      "AddressLine1": "London Road",
       "AddressLine2": null,
-      "Town": "Warwick",
+      "Town": "High Wycombe",
       "StateOrProvince": null,
-      "Postcode": "CV35 0JZ",
+      "Postcode": "HP11 1LP",
       "CountryID": 1,
       "Country": {
         "ISOCode": "GB",
@@ -1429,19 +2456,19 @@
         "ID": 1,
         "Title": "United Kingdom"
       },
-      "Latitude": 52.154969,
-      "Longitude": -1.501723,
+      "Latitude": 51.619281,
+      "Longitude": -0.720376,
       "ContactTelephone1": null,
       "ContactTelephone2": null,
       "ContactEmail": null,
       "AccessComments": null,
-      "RelatedURL": "http://pod-point.com",
-      "Distance": 4.952539451336412,
+      "RelatedURL": null,
+      "Distance": 2.6187744757972986,
       "DistanceUnit": 1
     },
     "Connections": [
       {
-        "ID": 484793,
+        "ID": 176879,
         "ConnectionTypeID": 25,
         "ConnectionType": {
           "FormalName": "IEC 62196-2 Type 2",
@@ -1450,7 +2477,7 @@
           "ID": 25,
           "Title": "Type 2 (Socket Only)"
         },
-        "Reference": "PG-83548",
+        "Reference": "PG-82810",
         "StatusTypeID": 50,
         "StatusType": {
           "IsOperational": true,
@@ -1475,629 +2502,404 @@
           "Title": "AC (Single-Phase)"
         },
         "Quantity": 2,
-        "Comments": "Jean-Lena"
+        "Comments": "Dion-Shia"
+      },
+      {
+        "ID": 324277,
+        "ConnectionTypeID": 25,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-2 Type 2",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
+        },
+        "Reference": "PG-82803",
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": 32,
+        "Voltage": 230,
+        "PowerKW": 7,
+        "CurrentTypeID": 10,
+        "CurrentType": {
+          "Description": "Alternating Current - Single Phase",
+          "ID": 10,
+          "Title": "AC (Single-Phase)"
+        },
+        "Quantity": 2,
+        "Comments": "Cole-Earl"
+      },
+      {
+        "ID": 324907,
+        "ConnectionTypeID": 25,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-2 Type 2",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
+        },
+        "Reference": "PG-82816",
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": 32,
+        "Voltage": 230,
+        "PowerKW": 7,
+        "CurrentTypeID": 10,
+        "CurrentType": {
+          "Description": "Alternating Current - Single Phase",
+          "ID": 10,
+          "Title": "AC (Single-Phase)"
+        },
+        "Quantity": 2,
+        "Comments": "Chad-Kyle"
       }
     ],
-    "NumberOfPoints": 2,
+    "NumberOfPoints": 6,
+    "GeneralComments": "This is an open charge unit installed at the High Wycombe Retail Park site at London Road, High Wycombe",
+    "DatePlanned": null,
+    "DateLastConfirmed": null,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2022-08-16T19:02:00Z",
+    "MetadataValues": null,
+    "DataQualityLevel": 1,
+    "DateCreated": "2019-05-13T14:47:00Z",
+    "SubmissionStatusTypeID": 200,
+    "traffic_delay": 9.403508771929825,
+    "meal_stop": true,
+    "distance_stop": false,
+    "route_km": 116.76458955759722,
+    "meal_window": "dinner",
+    "nearby_places": [
+      "Tummy Fillers Fish and Chip shop",
+      "Costcutter",
+      "Marks and Spencer"
+    ],
+    "price": 0.1,
+    "max_power": 100.0,
+    "is_fast": true,
+    "num_points": 4,
+    "distance": 2.6187744757972986
+  },
+  {
+    "raw": {
+      "DataProvider": {
+        "WebsiteURL": "http://openchargemap.org",
+        "Comments": null,
+        "DataProviderStatusType": {
+          "IsProviderEnabled": true,
+          "ID": 1,
+          "Title": "Manual Data Entry"
+        },
+        "IsRestrictedEdit": false,
+        "IsOpenDataLicensed": true,
+        "IsApprovedImport": true,
+        "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+        "DateLastImported": null,
+        "ID": 1,
+        "Title": "Open Charge Map Contributors"
+      },
+      "OperatorInfo": null,
+      "UsageType": {
+        "IsPayAtLocation": true,
+        "IsMembershipRequired": false,
+        "IsAccessKeyRequired": false,
+        "ID": 5,
+        "Title": "Public - Pay At Location"
+      },
+      "StatusType": {
+        "IsOperational": true,
+        "IsUserSelectable": true,
+        "ID": 50,
+        "Title": "Operational"
+      },
+      "SubmissionStatus": {
+        "IsLive": true,
+        "ID": 100,
+        "Title": "Imported and Published"
+      },
+      "UserComments": null,
+      "PercentageSimilarity": null,
+      "MediaItems": null,
+      "IsRecentlyVerified": false,
+      "DateLastVerified": "2019-07-10T21:47:00Z",
+      "ID": 129011,
+      "UUID": "090C7A62-32DA-418F-8261-DE43C49B407B",
+      "ParentChargePointID": null,
+      "DataProviderID": 1,
+      "DataProvidersReference": null,
+      "OperatorID": null,
+      "OperatorsReference": null,
+      "UsageTypeID": 5,
+      "UsageCost": "\u00a30.33/kWh; other tariffs available",
+      "AddressInfo": {
+        "ID": 129357,
+        "Title": "Olympic Way",
+        "AddressLine1": "Olympic Way",
+        "AddressLine2": null,
+        "Town": "High Wycombe",
+        "StateOrProvince": "Buckinghamshire",
+        "Postcode": "HP13 7PR",
+        "CountryID": 1,
+        "Country": {
+          "ISOCode": "GB",
+          "ContinentCode": "EU",
+          "ID": 1,
+          "Title": "United Kingdom"
+        },
+        "Latitude": 51.625053,
+        "Longitude": -0.71165,
+        "ContactTelephone1": null,
+        "ContactTelephone2": null,
+        "ContactEmail": null,
+        "AccessComments": null,
+        "RelatedURL": "https://char.gy",
+        "Distance": 2.752162091661245,
+        "DistanceUnit": 1
+      },
+      "Connections": [
+        {
+          "ID": 180594,
+          "ConnectionTypeID": 25,
+          "ConnectionType": {
+            "FormalName": "IEC 62196-2 Type 2",
+            "IsDiscontinued": false,
+            "IsObsolete": false,
+            "ID": 25,
+            "Title": "Type 2 (Socket Only)"
+          },
+          "Reference": "char.gy/00095",
+          "StatusTypeID": 50,
+          "StatusType": {
+            "IsOperational": true,
+            "IsUserSelectable": true,
+            "ID": 50,
+            "Title": "Operational"
+          },
+          "LevelID": 2,
+          "Level": {
+            "Comments": "Over 2 kW, usually non-domestic socket type",
+            "IsFastChargeCapable": false,
+            "ID": 2,
+            "Title": "Level 2 : Medium (Over 2kW)"
+          },
+          "Amps": 16,
+          "Voltage": 230,
+          "PowerKW": 3.7,
+          "CurrentTypeID": 10,
+          "CurrentType": {
+            "Description": "Alternating Current - Single Phase",
+            "ID": 10,
+            "Title": "AC (Single-Phase)"
+          },
+          "Quantity": 1,
+          "Comments": null
+        }
+      ],
+      "NumberOfPoints": 1,
+      "GeneralComments": null,
+      "DatePlanned": null,
+      "DateLastConfirmed": null,
+      "StatusTypeID": 50,
+      "DateLastStatusUpdate": "2019-07-10T21:47:00Z",
+      "MetadataValues": [
+        {
+          "ID": 4757,
+          "MetadataFieldID": 4,
+          "ItemValue": "Contains public sector information licensed under the Open Government Licence v2.0. http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/",
+          "MetadataFieldOption": null,
+          "MetadataFieldOptionID": null
+        }
+      ],
+      "DataQualityLevel": 3,
+      "DateCreated": "2019-07-10T14:20:00Z",
+      "SubmissionStatusTypeID": 100,
+      "traffic_delay": 9.678920428106096,
+      "meal_stop": true,
+      "distance_stop": false,
+      "route_km": 116.76458955759722,
+      "meal_window": "dinner",
+      "nearby_places": [
+        "Tummy Fillers Fish and Chip shop",
+        "Costcutter",
+        "Sundarbans"
+      ],
+      "price": 0.1,
+      "max_power": 100.0,
+      "is_fast": true,
+      "num_points": 4,
+      "distance": 2.752162091661245
+    },
+    "DataProvider": {
+      "WebsiteURL": "http://openchargemap.org",
+      "Comments": null,
+      "DataProviderStatusType": {
+        "IsProviderEnabled": true,
+        "ID": 1,
+        "Title": "Manual Data Entry"
+      },
+      "IsRestrictedEdit": false,
+      "IsOpenDataLicensed": true,
+      "IsApprovedImport": true,
+      "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "DateLastImported": null,
+      "ID": 1,
+      "Title": "Open Charge Map Contributors"
+    },
+    "OperatorInfo": null,
+    "UsageType": {
+      "IsPayAtLocation": true,
+      "IsMembershipRequired": false,
+      "IsAccessKeyRequired": false,
+      "ID": 5,
+      "Title": "Public - Pay At Location"
+    },
+    "StatusType": {
+      "IsOperational": true,
+      "IsUserSelectable": true,
+      "ID": 50,
+      "Title": "Operational"
+    },
+    "SubmissionStatus": {
+      "IsLive": true,
+      "ID": 100,
+      "Title": "Imported and Published"
+    },
+    "UserComments": null,
+    "PercentageSimilarity": null,
+    "MediaItems": null,
+    "IsRecentlyVerified": false,
+    "DateLastVerified": "2019-07-10T21:47:00Z",
+    "ID": 129011,
+    "UUID": "090C7A62-32DA-418F-8261-DE43C49B407B",
+    "ParentChargePointID": null,
+    "DataProviderID": 1,
+    "DataProvidersReference": null,
+    "OperatorID": null,
+    "OperatorsReference": null,
+    "UsageTypeID": 5,
+    "UsageCost": "\u00a30.33/kWh; other tariffs available",
+    "AddressInfo": {
+      "ID": 129357,
+      "Title": "Olympic Way",
+      "AddressLine1": "Olympic Way",
+      "AddressLine2": null,
+      "Town": "High Wycombe",
+      "StateOrProvince": "Buckinghamshire",
+      "Postcode": "HP13 7PR",
+      "CountryID": 1,
+      "Country": {
+        "ISOCode": "GB",
+        "ContinentCode": "EU",
+        "ID": 1,
+        "Title": "United Kingdom"
+      },
+      "Latitude": 51.625053,
+      "Longitude": -0.71165,
+      "ContactTelephone1": null,
+      "ContactTelephone2": null,
+      "ContactEmail": null,
+      "AccessComments": null,
+      "RelatedURL": "https://char.gy",
+      "Distance": 2.752162091661245,
+      "DistanceUnit": 1
+    },
+    "Connections": [
+      {
+        "ID": 180594,
+        "ConnectionTypeID": 25,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-2 Type 2",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
+        },
+        "Reference": "char.gy/00095",
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": 16,
+        "Voltage": 230,
+        "PowerKW": 3.7,
+        "CurrentTypeID": 10,
+        "CurrentType": {
+          "Description": "Alternating Current - Single Phase",
+          "ID": 10,
+          "Title": "AC (Single-Phase)"
+        },
+        "Quantity": 1,
+        "Comments": null
+      }
+    ],
+    "NumberOfPoints": 1,
     "GeneralComments": null,
     "DatePlanned": null,
     "DateLastConfirmed": null,
     "StatusTypeID": 50,
-    "DateLastStatusUpdate": "2023-10-29T10:59:00Z",
+    "DateLastStatusUpdate": "2019-07-10T21:47:00Z",
     "MetadataValues": [
       {
-        "ID": 27026,
+        "ID": 4757,
         "MetadataFieldID": 4,
         "ItemValue": "Contains public sector information licensed under the Open Government Licence v2.0. http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/",
         "MetadataFieldOption": null,
         "MetadataFieldOptionID": null
       }
     ],
-    "DataQualityLevel": 1,
-    "DateCreated": "2023-03-07T08:02:00Z",
-    "SubmissionStatusTypeID": 200,
-    "traffic_delay": 8.647450110864744,
+    "DataQualityLevel": 3,
+    "DateCreated": "2019-07-10T14:20:00Z",
+    "SubmissionStatusTypeID": 100,
+    "traffic_delay": 9.678920428106096,
     "meal_stop": true,
     "distance_stop": false,
-    "route_km": 22.709960306872475,
-    "meal_window": "lunch",
-    "price": 0.1,
-    "max_power": 100.0,
-    "is_fast": true,
-    "num_points": 4,
-    "distance": 4.952539451336412
-  },
-  {
-    "raw": {
-      "DataProvider": {
-        "WebsiteURL": "http://openchargemap.org",
-        "Comments": null,
-        "DataProviderStatusType": {
-          "IsProviderEnabled": true,
-          "ID": 1,
-          "Title": "Manual Data Entry"
-        },
-        "IsRestrictedEdit": false,
-        "IsOpenDataLicensed": true,
-        "IsApprovedImport": true,
-        "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
-        "DateLastImported": null,
-        "ID": 1,
-        "Title": "Open Charge Map Contributors"
-      },
-      "OperatorInfo": {
-        "WebsiteURL": "https://www.gridserve.com/",
-        "Comments": null,
-        "PhonePrimaryContact": null,
-        "PhoneSecondaryContact": null,
-        "IsPrivateIndividual": false,
-        "AddressInfo": null,
-        "BookingURL": null,
-        "ContactEmail": null,
-        "FaultReportEmail": null,
-        "IsRestrictedEdit": false,
-        "ID": 3430,
-        "Title": "GridServe"
-      },
-      "UsageType": {
-        "IsPayAtLocation": true,
-        "IsMembershipRequired": false,
-        "IsAccessKeyRequired": false,
-        "ID": 5,
-        "Title": "Public - Pay At Location"
-      },
-      "StatusType": {
-        "IsOperational": true,
-        "IsUserSelectable": true,
-        "ID": 50,
-        "Title": "Operational"
-      },
-      "SubmissionStatus": {
-        "IsLive": true,
-        "ID": 200,
-        "Title": "Submission Published"
-      },
-      "UserComments": null,
-      "PercentageSimilarity": null,
-      "MediaItems": null,
-      "IsRecentlyVerified": false,
-      "DateLastVerified": "2025-04-29T10:42:00Z",
-      "ID": 258801,
-      "UUID": "ED3BC438-D049-4FD4-AE25-938E76C0E7BF",
-      "ParentChargePointID": null,
-      "DataProviderID": 1,
-      "DataProvidersReference": null,
-      "OperatorID": 3430,
-      "OperatorsReference": "GB*GRD*EGS10386*1,GB*GRD*EGS10386*2,GB*GRD*EGS10386*3,GB*GRD*EGS10387*1,GB*GRD*EGS10387*2",
-      "UsageTypeID": 5,
-      "UsageCost": "DC (contactless): \u00a30.85/kWh, DC (GRIDSERVE app): \u00a30.79/kWh, AC: \u00a30.49/kWh",
-      "AddressInfo": {
-        "ID": 259185,
-        "Title": "Welcome Break Warwick Northbound Services",
-        "AddressLine1": "M40",
-        "AddressLine2": "Banbury Road",
-        "Town": "Warwick",
-        "StateOrProvince": "Warwickshire",
-        "Postcode": "CV35 0AA",
-        "CountryID": 1,
-        "Country": {
-          "ISOCode": "GB",
-          "ContinentCode": "EU",
-          "ID": 1,
-          "Title": "United Kingdom"
-        },
-        "Latitude": 52.216453921147234,
-        "Longitude": -1.5052927416228385,
-        "ContactTelephone1": "+44 800 240 4242",
-        "ContactTelephone2": null,
-        "ContactEmail": null,
-        "AccessComments": null,
-        "RelatedURL": "https://gridserve.com",
-        "Distance": 4.993003856659797,
-        "DistanceUnit": 1
-      },
-      "Connections": [
-        {
-          "ID": 433253,
-          "ConnectionTypeID": 33,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-3 Configuration FF",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 33,
-            "Title": "CCS (Type 2)"
-          },
-          "Reference": "GB*GRD*EGS10386*1",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 3,
-          "Level": {
-            "Comments": "40KW and Higher",
-            "IsFastChargeCapable": true,
-            "ID": 3,
-            "Title": "Level 3:  High (Over 40kW)"
-          },
-          "Amps": 150,
-          "Voltage": 900,
-          "PowerKW": 50,
-          "CurrentTypeID": 30,
-          "CurrentType": {
-            "Description": "Direct Current",
-            "ID": 30,
-            "Title": "DC"
-          },
-          "Quantity": 1,
-          "Comments": null
-        },
-        {
-          "ID": 433254,
-          "ConnectionTypeID": 2,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-3 Configuration AA",
-            "IsDiscontinued": null,
-            "IsObsolete": null,
-            "ID": 2,
-            "Title": "CHAdeMO"
-          },
-          "Reference": "GB*GRD*EGS10386*2",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 3,
-          "Level": {
-            "Comments": "40KW and Higher",
-            "IsFastChargeCapable": true,
-            "ID": 3,
-            "Title": "Level 3:  High (Over 40kW)"
-          },
-          "Amps": 150,
-          "Voltage": 500,
-          "PowerKW": 50,
-          "CurrentTypeID": 30,
-          "CurrentType": {
-            "Description": "Direct Current",
-            "ID": 30,
-            "Title": "DC"
-          },
-          "Quantity": 1,
-          "Comments": null
-        },
-        {
-          "ID": 433255,
-          "ConnectionTypeID": 33,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-3 Configuration FF",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 33,
-            "Title": "CCS (Type 2)"
-          },
-          "Reference": "GB*GRD*EGS10387*1",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 3,
-          "Level": {
-            "Comments": "40KW and Higher",
-            "IsFastChargeCapable": true,
-            "ID": 3,
-            "Title": "Level 3:  High (Over 40kW)"
-          },
-          "Amps": 150,
-          "Voltage": 900,
-          "PowerKW": 50,
-          "CurrentTypeID": 30,
-          "CurrentType": {
-            "Description": "Direct Current",
-            "ID": 30,
-            "Title": "DC"
-          },
-          "Quantity": 1,
-          "Comments": null
-        },
-        {
-          "ID": 433256,
-          "ConnectionTypeID": 33,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-3 Configuration FF",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 33,
-            "Title": "CCS (Type 2)"
-          },
-          "Reference": "GB*GRD*EGS10387*2",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 3,
-          "Level": {
-            "Comments": "40KW and Higher",
-            "IsFastChargeCapable": true,
-            "ID": 3,
-            "Title": "Level 3:  High (Over 40kW)"
-          },
-          "Amps": 150,
-          "Voltage": 900,
-          "PowerKW": 50,
-          "CurrentTypeID": 30,
-          "CurrentType": {
-            "Description": "Direct Current",
-            "ID": 30,
-            "Title": "DC"
-          },
-          "Quantity": 1,
-          "Comments": null
-        },
-        {
-          "ID": 434733,
-          "ConnectionTypeID": 25,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-2 Type 2",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 25,
-            "Title": "Type 2 (Socket Only)"
-          },
-          "Reference": "GB*GRD*EGS10386*3",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 2,
-          "Level": {
-            "Comments": "Over 2 kW, usually non-domestic socket type",
-            "IsFastChargeCapable": false,
-            "ID": 2,
-            "Title": "Level 2 : Medium (Over 2kW)"
-          },
-          "Amps": 32,
-          "Voltage": 230,
-          "PowerKW": 22,
-          "CurrentTypeID": 20,
-          "CurrentType": {
-            "Description": "Alternating Current - Three Phase",
-            "ID": 20,
-            "Title": "AC (Three-Phase)"
-          },
-          "Quantity": 1,
-          "Comments": null
-        }
-      ],
-      "NumberOfPoints": 4,
-      "GeneralComments": "The GRIDSERVE charging station at Warwick Northbound servicdes provides rapid charging located on the M40. Welcome Break Warwick is perfect for fast, reliable and convenient EV charging near Warwick.",
-      "DatePlanned": null,
-      "DateLastConfirmed": null,
-      "StatusTypeID": 50,
-      "DateLastStatusUpdate": "2025-04-29T10:42:00Z",
-      "MetadataValues": null,
-      "DataQualityLevel": 1,
-      "DateCreated": "2023-03-26T14:49:00Z",
-      "SubmissionStatusTypeID": 200,
-      "traffic_delay": 4.786150712830957,
-      "meal_stop": true,
-      "distance_stop": false,
-      "route_km": 22.709960306872475,
-      "meal_window": "lunch",
-      "price": 0.1,
-      "max_power": 100.0,
-      "is_fast": true,
-      "num_points": 4,
-      "distance": 4.993003856659797
-    },
-    "DataProvider": {
-      "WebsiteURL": "http://openchargemap.org",
-      "Comments": null,
-      "DataProviderStatusType": {
-        "IsProviderEnabled": true,
-        "ID": 1,
-        "Title": "Manual Data Entry"
-      },
-      "IsRestrictedEdit": false,
-      "IsOpenDataLicensed": true,
-      "IsApprovedImport": true,
-      "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
-      "DateLastImported": null,
-      "ID": 1,
-      "Title": "Open Charge Map Contributors"
-    },
-    "OperatorInfo": {
-      "WebsiteURL": "https://www.gridserve.com/",
-      "Comments": null,
-      "PhonePrimaryContact": null,
-      "PhoneSecondaryContact": null,
-      "IsPrivateIndividual": false,
-      "AddressInfo": null,
-      "BookingURL": null,
-      "ContactEmail": null,
-      "FaultReportEmail": null,
-      "IsRestrictedEdit": false,
-      "ID": 3430,
-      "Title": "GridServe"
-    },
-    "UsageType": {
-      "IsPayAtLocation": true,
-      "IsMembershipRequired": false,
-      "IsAccessKeyRequired": false,
-      "ID": 5,
-      "Title": "Public - Pay At Location"
-    },
-    "StatusType": {
-      "IsOperational": true,
-      "IsUserSelectable": true,
-      "ID": 50,
-      "Title": "Operational"
-    },
-    "SubmissionStatus": {
-      "IsLive": true,
-      "ID": 200,
-      "Title": "Submission Published"
-    },
-    "UserComments": null,
-    "PercentageSimilarity": null,
-    "MediaItems": null,
-    "IsRecentlyVerified": false,
-    "DateLastVerified": "2025-04-29T10:42:00Z",
-    "ID": 258801,
-    "UUID": "ED3BC438-D049-4FD4-AE25-938E76C0E7BF",
-    "ParentChargePointID": null,
-    "DataProviderID": 1,
-    "DataProvidersReference": null,
-    "OperatorID": 3430,
-    "OperatorsReference": "GB*GRD*EGS10386*1,GB*GRD*EGS10386*2,GB*GRD*EGS10386*3,GB*GRD*EGS10387*1,GB*GRD*EGS10387*2",
-    "UsageTypeID": 5,
-    "UsageCost": "DC (contactless): \u00a30.85/kWh, DC (GRIDSERVE app): \u00a30.79/kWh, AC: \u00a30.49/kWh",
-    "AddressInfo": {
-      "ID": 259185,
-      "Title": "Welcome Break Warwick Northbound Services",
-      "AddressLine1": "M40",
-      "AddressLine2": "Banbury Road",
-      "Town": "Warwick",
-      "StateOrProvince": "Warwickshire",
-      "Postcode": "CV35 0AA",
-      "CountryID": 1,
-      "Country": {
-        "ISOCode": "GB",
-        "ContinentCode": "EU",
-        "ID": 1,
-        "Title": "United Kingdom"
-      },
-      "Latitude": 52.216453921147234,
-      "Longitude": -1.5052927416228385,
-      "ContactTelephone1": "+44 800 240 4242",
-      "ContactTelephone2": null,
-      "ContactEmail": null,
-      "AccessComments": null,
-      "RelatedURL": "https://gridserve.com",
-      "Distance": 4.993003856659797,
-      "DistanceUnit": 1
-    },
-    "Connections": [
-      {
-        "ID": 433253,
-        "ConnectionTypeID": 33,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-3 Configuration FF",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 33,
-          "Title": "CCS (Type 2)"
-        },
-        "Reference": "GB*GRD*EGS10386*1",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 3,
-        "Level": {
-          "Comments": "40KW and Higher",
-          "IsFastChargeCapable": true,
-          "ID": 3,
-          "Title": "Level 3:  High (Over 40kW)"
-        },
-        "Amps": 150,
-        "Voltage": 900,
-        "PowerKW": 50,
-        "CurrentTypeID": 30,
-        "CurrentType": {
-          "Description": "Direct Current",
-          "ID": 30,
-          "Title": "DC"
-        },
-        "Quantity": 1,
-        "Comments": null
-      },
-      {
-        "ID": 433254,
-        "ConnectionTypeID": 2,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-3 Configuration AA",
-          "IsDiscontinued": null,
-          "IsObsolete": null,
-          "ID": 2,
-          "Title": "CHAdeMO"
-        },
-        "Reference": "GB*GRD*EGS10386*2",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 3,
-        "Level": {
-          "Comments": "40KW and Higher",
-          "IsFastChargeCapable": true,
-          "ID": 3,
-          "Title": "Level 3:  High (Over 40kW)"
-        },
-        "Amps": 150,
-        "Voltage": 500,
-        "PowerKW": 50,
-        "CurrentTypeID": 30,
-        "CurrentType": {
-          "Description": "Direct Current",
-          "ID": 30,
-          "Title": "DC"
-        },
-        "Quantity": 1,
-        "Comments": null
-      },
-      {
-        "ID": 433255,
-        "ConnectionTypeID": 33,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-3 Configuration FF",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 33,
-          "Title": "CCS (Type 2)"
-        },
-        "Reference": "GB*GRD*EGS10387*1",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 3,
-        "Level": {
-          "Comments": "40KW and Higher",
-          "IsFastChargeCapable": true,
-          "ID": 3,
-          "Title": "Level 3:  High (Over 40kW)"
-        },
-        "Amps": 150,
-        "Voltage": 900,
-        "PowerKW": 50,
-        "CurrentTypeID": 30,
-        "CurrentType": {
-          "Description": "Direct Current",
-          "ID": 30,
-          "Title": "DC"
-        },
-        "Quantity": 1,
-        "Comments": null
-      },
-      {
-        "ID": 433256,
-        "ConnectionTypeID": 33,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-3 Configuration FF",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 33,
-          "Title": "CCS (Type 2)"
-        },
-        "Reference": "GB*GRD*EGS10387*2",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 3,
-        "Level": {
-          "Comments": "40KW and Higher",
-          "IsFastChargeCapable": true,
-          "ID": 3,
-          "Title": "Level 3:  High (Over 40kW)"
-        },
-        "Amps": 150,
-        "Voltage": 900,
-        "PowerKW": 50,
-        "CurrentTypeID": 30,
-        "CurrentType": {
-          "Description": "Direct Current",
-          "ID": 30,
-          "Title": "DC"
-        },
-        "Quantity": 1,
-        "Comments": null
-      },
-      {
-        "ID": 434733,
-        "ConnectionTypeID": 25,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-2 Type 2",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 25,
-          "Title": "Type 2 (Socket Only)"
-        },
-        "Reference": "GB*GRD*EGS10386*3",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 2,
-        "Level": {
-          "Comments": "Over 2 kW, usually non-domestic socket type",
-          "IsFastChargeCapable": false,
-          "ID": 2,
-          "Title": "Level 2 : Medium (Over 2kW)"
-        },
-        "Amps": 32,
-        "Voltage": 230,
-        "PowerKW": 22,
-        "CurrentTypeID": 20,
-        "CurrentType": {
-          "Description": "Alternating Current - Three Phase",
-          "ID": 20,
-          "Title": "AC (Three-Phase)"
-        },
-        "Quantity": 1,
-        "Comments": null
-      }
+    "route_km": 116.76458955759722,
+    "meal_window": "dinner",
+    "nearby_places": [
+      "Tummy Fillers Fish and Chip shop",
+      "Costcutter",
+      "Sundarbans"
     ],
-    "NumberOfPoints": 4,
-    "GeneralComments": "The GRIDSERVE charging station at Warwick Northbound servicdes provides rapid charging located on the M40. Welcome Break Warwick is perfect for fast, reliable and convenient EV charging near Warwick.",
-    "DatePlanned": null,
-    "DateLastConfirmed": null,
-    "StatusTypeID": 50,
-    "DateLastStatusUpdate": "2025-04-29T10:42:00Z",
-    "MetadataValues": null,
-    "DataQualityLevel": 1,
-    "DateCreated": "2023-03-26T14:49:00Z",
-    "SubmissionStatusTypeID": 200,
-    "traffic_delay": 4.786150712830957,
-    "meal_stop": true,
-    "distance_stop": false,
-    "route_km": 22.709960306872475,
-    "meal_window": "lunch",
     "price": 0.1,
     "max_power": 100.0,
     "is_fast": true,
     "num_points": 4,
-    "distance": 4.993003856659797
+    "distance": 2.752162091661245
   },
   {
     "raw": {
@@ -2118,9 +2920,9 @@
         "Title": "Open Charge Map Contributors"
       },
       "OperatorInfo": {
-        "WebsiteURL": "http://www.teslamotors.com",
-        "Comments": null,
-        "PhonePrimaryContact": null,
+        "WebsiteURL": "https://char.gy",
+        "Comments": "different organisation to similarly named organisation in Luxembourg",
+        "PhonePrimaryContact": "0800 086 9606",
         "PhoneSecondaryContact": null,
         "IsPrivateIndividual": false,
         "AddressInfo": null,
@@ -2128,21 +2930,21 @@
         "ContactEmail": null,
         "FaultReportEmail": null,
         "IsRestrictedEdit": false,
-        "ID": 23,
-        "Title": "Tesla (Tesla-only charging)"
+        "ID": 3345,
+        "Title": "Char.gy"
       },
       "UsageType": {
-        "IsPayAtLocation": false,
-        "IsMembershipRequired": true,
-        "IsAccessKeyRequired": true,
-        "ID": 4,
-        "Title": "Public - Membership Required"
+        "IsPayAtLocation": null,
+        "IsMembershipRequired": null,
+        "IsAccessKeyRequired": null,
+        "ID": 1,
+        "Title": "Public"
       },
       "StatusType": {
-        "IsOperational": true,
+        "IsOperational": null,
         "IsUserSelectable": true,
-        "ID": 50,
-        "Title": "Operational"
+        "ID": 0,
+        "Title": "Unknown"
       },
       "SubmissionStatus": {
         "IsLive": true,
@@ -2153,24 +2955,24 @@
       "PercentageSimilarity": null,
       "MediaItems": null,
       "IsRecentlyVerified": false,
-      "DateLastVerified": "2019-03-22T18:30:00Z",
-      "ID": 90643,
-      "UUID": "7316DE57-C320-4090-8491-D461DC86EC7C",
+      "DateLastVerified": "2023-05-02T11:52:00Z",
+      "ID": 264397,
+      "UUID": "79EBB4C9-6578-4E48-A697-CB2689D3B4BD",
       "ParentChargePointID": null,
       "DataProviderID": 1,
       "DataProvidersReference": null,
-      "OperatorID": 23,
-      "OperatorsReference": "30318",
-      "UsageTypeID": 4,
-      "UsageCost": "\u00a30.24/kWh;other tariffs for older cars",
+      "OperatorID": 3345,
+      "OperatorsReference": "GB*CGY*E*00095",
+      "UsageTypeID": 1,
+      "UsageCost": "Day (07:00-00:00): \u00a30.65/kWh Night (00:00-0700): \u00a30.29/kWh ",
       "AddressInfo": {
-        "ID": 90989,
-        "Title": "Warwick - Southbound Supercharger",
-        "AddressLine1": "M40 Junction 13/12",
+        "ID": 264781,
+        "Title": "Goodwin Place",
+        "AddressLine1": "Goodwin Place",
         "AddressLine2": null,
-        "Town": "Ashorne",
-        "StateOrProvince": null,
-        "Postcode": "CV35 0AA",
+        "Town": "Olympic Way",
+        "StateOrProvince": "High Wycombe",
+        "Postcode": "HP13 7PR",
         "CountryID": 1,
         "Country": {
           "ISOCode": "GB",
@@ -2178,75 +2980,80 @@
           "ID": 1,
           "Title": "United Kingdom"
         },
-        "Latitude": 52.21917,
-        "Longitude": -1.501274,
+        "Latitude": 51.6250532,
+        "Longitude": -0.7116504,
         "ContactTelephone1": null,
         "ContactTelephone2": null,
         "ContactEmail": null,
-        "AccessComments": null,
-        "RelatedURL": null,
-        "Distance": 5.005896454138863,
+        "AccessComments": "",
+        "RelatedURL": "https://char.gy/00095",
+        "Distance": 2.7521949022460426,
         "DistanceUnit": 1
       },
       "Connections": [
         {
-          "ID": 128346,
-          "ConnectionTypeID": 27,
+          "ID": 448286,
+          "ConnectionTypeID": 25,
           "ConnectionType": {
-            "FormalName": "SAE J3400",
+            "FormalName": "IEC 62196-2 Type 2",
             "IsDiscontinued": false,
             "IsObsolete": false,
-            "ID": 27,
-            "Title": "NACS / Tesla Supercharger"
+            "ID": 25,
+            "Title": "Type 2 (Socket Only)"
           },
-          "Reference": null,
-          "StatusTypeID": 50,
+          "Reference": "GB*CGY*E*00095",
+          "StatusTypeID": 0,
           "StatusType": {
-            "IsOperational": true,
+            "IsOperational": null,
             "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
+            "ID": 0,
+            "Title": "Unknown"
           },
-          "LevelID": 3,
+          "LevelID": 2,
           "Level": {
-            "Comments": "40KW and Higher",
-            "IsFastChargeCapable": true,
-            "ID": 3,
-            "Title": "Level 3:  High (Over 40kW)"
+            "Comments": "Over 2 kW, usually non-domestic socket type",
+            "IsFastChargeCapable": false,
+            "ID": 2,
+            "Title": "Level 2 : Medium (Over 2kW)"
           },
-          "Amps": null,
-          "Voltage": null,
-          "PowerKW": 120,
-          "CurrentTypeID": 30,
+          "Amps": 22,
+          "Voltage": 230,
+          "PowerKW": 5.1,
+          "CurrentTypeID": 10,
           "CurrentType": {
-            "Description": "Direct Current",
-            "ID": 30,
-            "Title": "DC"
+            "Description": "Alternating Current - Single Phase",
+            "ID": 10,
+            "Title": "AC (Single-Phase)"
           },
-          "Quantity": 8,
+          "Quantity": 1,
           "Comments": null
         }
       ],
-      "NumberOfPoints": 8,
-      "GeneralComments": "Charging8 Superchargers, available 24/7",
+      "NumberOfPoints": 1,
+      "GeneralComments": "Can also be paid with the Octopus Electroverse app, Zap-Pay, Bonnet app, Paua App, or Shell Recharge app. Charge point not fitted with RFID reader or payment terminal.",
       "DatePlanned": null,
       "DateLastConfirmed": null,
-      "StatusTypeID": 50,
-      "DateLastStatusUpdate": "2019-03-22T18:30:00Z",
+      "StatusTypeID": 0,
+      "DateLastStatusUpdate": "2023-05-02T11:52:00Z",
       "MetadataValues": null,
       "DataQualityLevel": 1,
-      "DateCreated": "2017-07-20T13:14:00Z",
+      "DateCreated": "2023-05-02T10:02:00Z",
       "SubmissionStatusTypeID": 200,
-      "traffic_delay": 6.414300736067298,
+      "traffic_delay": 9.678920428106096,
       "meal_stop": true,
       "distance_stop": false,
-      "route_km": 22.709960306872475,
-      "meal_window": "lunch",
+      "route_km": 116.76458955759722,
+      "meal_window": "dinner",
+      "nearby_places": [
+        "Tummy Fillers Fish and Chip shop",
+        "Costcutter",
+        "Sundarbans"
+      ],
       "price": 0.1,
       "max_power": 100.0,
       "is_fast": true,
       "num_points": 4,
-      "distance": 5.005896454138863
+      "distance": 2.7521949022460426
     },
     "DataProvider": {
       "WebsiteURL": "http://openchargemap.org",
@@ -2265,9 +3072,9 @@
       "Title": "Open Charge Map Contributors"
     },
     "OperatorInfo": {
-      "WebsiteURL": "http://www.teslamotors.com",
-      "Comments": null,
-      "PhonePrimaryContact": null,
+      "WebsiteURL": "https://char.gy",
+      "Comments": "different organisation to similarly named organisation in Luxembourg",
+      "PhonePrimaryContact": "0800 086 9606",
       "PhoneSecondaryContact": null,
       "IsPrivateIndividual": false,
       "AddressInfo": null,
@@ -2275,21 +3082,21 @@
       "ContactEmail": null,
       "FaultReportEmail": null,
       "IsRestrictedEdit": false,
-      "ID": 23,
-      "Title": "Tesla (Tesla-only charging)"
+      "ID": 3345,
+      "Title": "Char.gy"
     },
     "UsageType": {
-      "IsPayAtLocation": false,
-      "IsMembershipRequired": true,
-      "IsAccessKeyRequired": true,
-      "ID": 4,
-      "Title": "Public - Membership Required"
+      "IsPayAtLocation": null,
+      "IsMembershipRequired": null,
+      "IsAccessKeyRequired": null,
+      "ID": 1,
+      "Title": "Public"
     },
     "StatusType": {
-      "IsOperational": true,
+      "IsOperational": null,
       "IsUserSelectable": true,
-      "ID": 50,
-      "Title": "Operational"
+      "ID": 0,
+      "Title": "Unknown"
     },
     "SubmissionStatus": {
       "IsLive": true,
@@ -2300,24 +3107,24 @@
     "PercentageSimilarity": null,
     "MediaItems": null,
     "IsRecentlyVerified": false,
-    "DateLastVerified": "2019-03-22T18:30:00Z",
-    "ID": 90643,
-    "UUID": "7316DE57-C320-4090-8491-D461DC86EC7C",
+    "DateLastVerified": "2023-05-02T11:52:00Z",
+    "ID": 264397,
+    "UUID": "79EBB4C9-6578-4E48-A697-CB2689D3B4BD",
     "ParentChargePointID": null,
     "DataProviderID": 1,
     "DataProvidersReference": null,
-    "OperatorID": 23,
-    "OperatorsReference": "30318",
-    "UsageTypeID": 4,
-    "UsageCost": "\u00a30.24/kWh;other tariffs for older cars",
+    "OperatorID": 3345,
+    "OperatorsReference": "GB*CGY*E*00095",
+    "UsageTypeID": 1,
+    "UsageCost": "Day (07:00-00:00): \u00a30.65/kWh Night (00:00-0700): \u00a30.29/kWh ",
     "AddressInfo": {
-      "ID": 90989,
-      "Title": "Warwick - Southbound Supercharger",
-      "AddressLine1": "M40 Junction 13/12",
+      "ID": 264781,
+      "Title": "Goodwin Place",
+      "AddressLine1": "Goodwin Place",
       "AddressLine2": null,
-      "Town": "Ashorne",
-      "StateOrProvince": null,
-      "Postcode": "CV35 0AA",
+      "Town": "Olympic Way",
+      "StateOrProvince": "High Wycombe",
+      "Postcode": "HP13 7PR",
       "CountryID": 1,
       "Country": {
         "ISOCode": "GB",
@@ -2325,75 +3132,80 @@
         "ID": 1,
         "Title": "United Kingdom"
       },
-      "Latitude": 52.21917,
-      "Longitude": -1.501274,
+      "Latitude": 51.6250532,
+      "Longitude": -0.7116504,
       "ContactTelephone1": null,
       "ContactTelephone2": null,
       "ContactEmail": null,
-      "AccessComments": null,
-      "RelatedURL": null,
-      "Distance": 5.005896454138863,
+      "AccessComments": "",
+      "RelatedURL": "https://char.gy/00095",
+      "Distance": 2.7521949022460426,
       "DistanceUnit": 1
     },
     "Connections": [
       {
-        "ID": 128346,
-        "ConnectionTypeID": 27,
+        "ID": 448286,
+        "ConnectionTypeID": 25,
         "ConnectionType": {
-          "FormalName": "SAE J3400",
+          "FormalName": "IEC 62196-2 Type 2",
           "IsDiscontinued": false,
           "IsObsolete": false,
-          "ID": 27,
-          "Title": "NACS / Tesla Supercharger"
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
         },
-        "Reference": null,
-        "StatusTypeID": 50,
+        "Reference": "GB*CGY*E*00095",
+        "StatusTypeID": 0,
         "StatusType": {
-          "IsOperational": true,
+          "IsOperational": null,
           "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
+          "ID": 0,
+          "Title": "Unknown"
         },
-        "LevelID": 3,
+        "LevelID": 2,
         "Level": {
-          "Comments": "40KW and Higher",
-          "IsFastChargeCapable": true,
-          "ID": 3,
-          "Title": "Level 3:  High (Over 40kW)"
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
         },
-        "Amps": null,
-        "Voltage": null,
-        "PowerKW": 120,
-        "CurrentTypeID": 30,
+        "Amps": 22,
+        "Voltage": 230,
+        "PowerKW": 5.1,
+        "CurrentTypeID": 10,
         "CurrentType": {
-          "Description": "Direct Current",
-          "ID": 30,
-          "Title": "DC"
+          "Description": "Alternating Current - Single Phase",
+          "ID": 10,
+          "Title": "AC (Single-Phase)"
         },
-        "Quantity": 8,
+        "Quantity": 1,
         "Comments": null
       }
     ],
-    "NumberOfPoints": 8,
-    "GeneralComments": "Charging8 Superchargers, available 24/7",
+    "NumberOfPoints": 1,
+    "GeneralComments": "Can also be paid with the Octopus Electroverse app, Zap-Pay, Bonnet app, Paua App, or Shell Recharge app. Charge point not fitted with RFID reader or payment terminal.",
     "DatePlanned": null,
     "DateLastConfirmed": null,
-    "StatusTypeID": 50,
-    "DateLastStatusUpdate": "2019-03-22T18:30:00Z",
+    "StatusTypeID": 0,
+    "DateLastStatusUpdate": "2023-05-02T11:52:00Z",
     "MetadataValues": null,
     "DataQualityLevel": 1,
-    "DateCreated": "2017-07-20T13:14:00Z",
+    "DateCreated": "2023-05-02T10:02:00Z",
     "SubmissionStatusTypeID": 200,
-    "traffic_delay": 6.414300736067298,
+    "traffic_delay": 9.678920428106096,
     "meal_stop": true,
     "distance_stop": false,
-    "route_km": 22.709960306872475,
-    "meal_window": "lunch",
+    "route_km": 116.76458955759722,
+    "meal_window": "dinner",
+    "nearby_places": [
+      "Tummy Fillers Fish and Chip shop",
+      "Costcutter",
+      "Sundarbans"
+    ],
     "price": 0.1,
     "max_power": 100.0,
     "is_fast": true,
     "num_points": 4,
-    "distance": 5.005896454138863
+    "distance": 2.7521949022460426
   },
   {
     "raw": {
@@ -2414,9 +3226,9 @@
         "Title": "Open Charge Map Contributors"
       },
       "OperatorInfo": {
-        "WebsiteURL": "https://www.gridserve.com/",
-        "Comments": null,
-        "PhonePrimaryContact": null,
+        "WebsiteURL": "https://char.gy",
+        "Comments": "different organisation to similarly named organisation in Luxembourg",
+        "PhonePrimaryContact": "0800 086 9606",
         "PhoneSecondaryContact": null,
         "IsPrivateIndividual": false,
         "AddressInfo": null,
@@ -2424,21 +3236,21 @@
         "ContactEmail": null,
         "FaultReportEmail": null,
         "IsRestrictedEdit": false,
-        "ID": 3430,
-        "Title": "GridServe"
+        "ID": 3345,
+        "Title": "Char.gy"
       },
       "UsageType": {
-        "IsPayAtLocation": true,
-        "IsMembershipRequired": false,
-        "IsAccessKeyRequired": false,
-        "ID": 5,
-        "Title": "Public - Pay At Location"
+        "IsPayAtLocation": null,
+        "IsMembershipRequired": null,
+        "IsAccessKeyRequired": null,
+        "ID": 1,
+        "Title": "Public"
       },
       "StatusType": {
-        "IsOperational": true,
+        "IsOperational": null,
         "IsUserSelectable": true,
-        "ID": 50,
-        "Title": "Operational"
+        "ID": 0,
+        "Title": "Unknown"
       },
       "SubmissionStatus": {
         "IsLive": true,
@@ -2449,24 +3261,24 @@
       "PercentageSimilarity": null,
       "MediaItems": null,
       "IsRecentlyVerified": false,
-      "DateLastVerified": "2025-05-06T09:41:00Z",
-      "ID": 258830,
-      "UUID": "FB9287C3-64F2-4EB8-B00C-DE079BD3E910",
+      "DateLastVerified": "2023-05-02T11:52:00Z",
+      "ID": 264398,
+      "UUID": "EA133E09-C1DE-4F14-9E13-B389439064D9",
       "ParentChargePointID": null,
       "DataProviderID": 1,
       "DataProvidersReference": null,
-      "OperatorID": 3430,
-      "OperatorsReference": "",
-      "UsageTypeID": 5,
-      "UsageCost": "Contactless: \u00a30.85/kWh, GRIDSERVE app: \u00a30.79/kWh",
+      "OperatorID": 3345,
+      "OperatorsReference": "GB*CGY*E*00103",
+      "UsageTypeID": 1,
+      "UsageCost": "Day (07:00-00:00): \u00a30.65/kWh Night (00:00-0700): \u00a30.29/kWh ",
       "AddressInfo": {
-        "ID": 259214,
-        "Title": "Welcome Break Warwick Southbound Services",
-        "AddressLine1": "M40 Motorway Southbound",
-        "AddressLine2": "Jct 12/13, Ashorne, Banbury Road 13",
-        "Town": "Warwick",
-        "StateOrProvince": "Warwickshire",
-        "Postcode": "CV35 0AA",
+        "ID": 264782,
+        "Title": "Grainger Court",
+        "AddressLine1": "Grainger Court",
+        "AddressLine2": null,
+        "Town": "Olympic Way",
+        "StateOrProvince": "High Wycombe",
+        "Postcode": "HP13 7PR",
         "CountryID": 1,
         "Country": {
           "ISOCode": "GB",
@@ -2474,167 +3286,19 @@
           "ID": 1,
           "Title": "United Kingdom"
         },
-        "Latitude": 52.219129,
-        "Longitude": -1.502991,
-        "ContactTelephone1": "+44 800 240 4242",
+        "Latitude": 51.625251,
+        "Longitude": -0.7116805,
+        "ContactTelephone1": null,
         "ContactTelephone2": null,
         "ContactEmail": null,
-        "AccessComments": null,
-        "RelatedURL": "https://gridserve.com",
-        "Distance": 5.08410790401368,
+        "AccessComments": "",
+        "RelatedURL": "https://char.gy/00103",
+        "Distance": 2.7724704893877763,
         "DistanceUnit": 1
       },
       "Connections": [
         {
-          "ID": 433372,
-          "ConnectionTypeID": 33,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-3 Configuration FF",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 33,
-            "Title": "CCS (Type 2)"
-          },
-          "Reference": "GB*GRD*EGS10388*1",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 3,
-          "Level": {
-            "Comments": "40KW and Higher",
-            "IsFastChargeCapable": true,
-            "ID": 3,
-            "Title": "Level 3:  High (Over 40kW)"
-          },
-          "Amps": 150,
-          "Voltage": 900,
-          "PowerKW": 45,
-          "CurrentTypeID": 30,
-          "CurrentType": {
-            "Description": "Direct Current",
-            "ID": 30,
-            "Title": "DC"
-          },
-          "Quantity": 1,
-          "Comments": null
-        },
-        {
-          "ID": 433373,
-          "ConnectionTypeID": 2,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-3 Configuration AA",
-            "IsDiscontinued": null,
-            "IsObsolete": null,
-            "ID": 2,
-            "Title": "CHAdeMO"
-          },
-          "Reference": "GB*GRD*EGS10388*2",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 3,
-          "Level": {
-            "Comments": "40KW and Higher",
-            "IsFastChargeCapable": true,
-            "ID": 3,
-            "Title": "Level 3:  High (Over 40kW)"
-          },
-          "Amps": 150,
-          "Voltage": 500,
-          "PowerKW": 50,
-          "CurrentTypeID": 30,
-          "CurrentType": {
-            "Description": "Direct Current",
-            "ID": 30,
-            "Title": "DC"
-          },
-          "Quantity": 1,
-          "Comments": null
-        },
-        {
-          "ID": 433374,
-          "ConnectionTypeID": 33,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-3 Configuration FF",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 33,
-            "Title": "CCS (Type 2)"
-          },
-          "Reference": "GB*GRD*EGS10389*1",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 3,
-          "Level": {
-            "Comments": "40KW and Higher",
-            "IsFastChargeCapable": true,
-            "ID": 3,
-            "Title": "Level 3:  High (Over 40kW)"
-          },
-          "Amps": 150,
-          "Voltage": 900,
-          "PowerKW": 45,
-          "CurrentTypeID": 30,
-          "CurrentType": {
-            "Description": "Direct Current",
-            "ID": 30,
-            "Title": "DC"
-          },
-          "Quantity": 1,
-          "Comments": null
-        },
-        {
-          "ID": 433375,
-          "ConnectionTypeID": 2,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-3 Configuration AA",
-            "IsDiscontinued": null,
-            "IsObsolete": null,
-            "ID": 2,
-            "Title": "CHAdeMO"
-          },
-          "Reference": "GB*GRD*EGS10389*2",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 3,
-          "Level": {
-            "Comments": "40KW and Higher",
-            "IsFastChargeCapable": true,
-            "ID": 3,
-            "Title": "Level 3:  High (Over 40kW)"
-          },
-          "Amps": 150,
-          "Voltage": 500,
-          "PowerKW": 50,
-          "CurrentTypeID": 30,
-          "CurrentType": {
-            "Description": "Direct Current",
-            "ID": 30,
-            "Title": "DC"
-          },
-          "Quantity": 1,
-          "Comments": null
-        },
-        {
-          "ID": 434625,
+          "ID": 448287,
           "ConnectionTypeID": 25,
           "ConnectionType": {
             "FormalName": "IEC 62196-2 Type 2",
@@ -2643,13 +3307,13 @@
             "ID": 25,
             "Title": "Type 2 (Socket Only)"
           },
-          "Reference": "GB*GRD*EGS10389*3",
-          "StatusTypeID": 50,
+          "Reference": "GB*CGY*E*00103",
+          "StatusTypeID": 0,
           "StatusType": {
-            "IsOperational": true,
+            "IsOperational": null,
             "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
+            "ID": 0,
+            "Title": "Unknown"
           },
           "LevelID": 2,
           "Level": {
@@ -2658,76 +3322,44 @@
             "ID": 2,
             "Title": "Level 2 : Medium (Over 2kW)"
           },
-          "Amps": 32,
+          "Amps": 22,
           "Voltage": 230,
-          "PowerKW": 22,
-          "CurrentTypeID": 20,
+          "PowerKW": 5.1,
+          "CurrentTypeID": 10,
           "CurrentType": {
-            "Description": "Alternating Current - Three Phase",
-            "ID": 20,
-            "Title": "AC (Three-Phase)"
-          },
-          "Quantity": 1,
-          "Comments": null
-        },
-        {
-          "ID": 434626,
-          "ConnectionTypeID": 25,
-          "ConnectionType": {
-            "FormalName": "IEC 62196-2 Type 2",
-            "IsDiscontinued": false,
-            "IsObsolete": false,
-            "ID": 25,
-            "Title": "Type 2 (Socket Only)"
-          },
-          "Reference": "GB*GRD*EGS10388*3",
-          "StatusTypeID": 50,
-          "StatusType": {
-            "IsOperational": true,
-            "IsUserSelectable": true,
-            "ID": 50,
-            "Title": "Operational"
-          },
-          "LevelID": 2,
-          "Level": {
-            "Comments": "Over 2 kW, usually non-domestic socket type",
-            "IsFastChargeCapable": false,
-            "ID": 2,
-            "Title": "Level 2 : Medium (Over 2kW)"
-          },
-          "Amps": 32,
-          "Voltage": 230,
-          "PowerKW": 22,
-          "CurrentTypeID": 20,
-          "CurrentType": {
-            "Description": "Alternating Current - Three Phase",
-            "ID": 20,
-            "Title": "AC (Three-Phase)"
+            "Description": "Alternating Current - Single Phase",
+            "ID": 10,
+            "Title": "AC (Single-Phase)"
           },
           "Quantity": 1,
           "Comments": null
         }
       ],
-      "NumberOfPoints": 4,
-      "GeneralComments": "The GRIDSERVE charging station at Warwick Southbound servicdes provides rapid charging located on the M40. Welcome Break Warwick is perfect for fast, reliable and convenient EV charging near Warwick.",
+      "NumberOfPoints": 1,
+      "GeneralComments": "Can also be paid with the Octopus Electroverse app, Zap-Pay, Bonnet app, Paua App, or Shell Recharge app. Charge point not fitted with RFID reader or payment terminal.",
       "DatePlanned": null,
       "DateLastConfirmed": null,
-      "StatusTypeID": 50,
-      "DateLastStatusUpdate": "2025-05-06T09:41:00Z",
+      "StatusTypeID": 0,
+      "DateLastStatusUpdate": "2023-05-02T11:52:00Z",
       "MetadataValues": null,
       "DataQualityLevel": 1,
-      "DateCreated": "2023-03-26T14:50:00Z",
+      "DateCreated": "2023-05-02T10:02:00Z",
       "SubmissionStatusTypeID": 200,
-      "traffic_delay": 6.517094017094018,
+      "traffic_delay": 9.686411149825783,
       "meal_stop": true,
       "distance_stop": false,
-      "route_km": 22.709960306872475,
-      "meal_window": "lunch",
+      "route_km": 116.76458955759722,
+      "meal_window": "dinner",
+      "nearby_places": [
+        "Tummy Fillers Fish and Chip shop",
+        "Costcutter",
+        "Sundarbans"
+      ],
       "price": 0.1,
       "max_power": 100.0,
       "is_fast": true,
       "num_points": 4,
-      "distance": 5.08410790401368
+      "distance": 2.7724704893877763
     },
     "DataProvider": {
       "WebsiteURL": "http://openchargemap.org",
@@ -2746,9 +3378,9 @@
       "Title": "Open Charge Map Contributors"
     },
     "OperatorInfo": {
-      "WebsiteURL": "https://www.gridserve.com/",
-      "Comments": null,
-      "PhonePrimaryContact": null,
+      "WebsiteURL": "https://char.gy",
+      "Comments": "different organisation to similarly named organisation in Luxembourg",
+      "PhonePrimaryContact": "0800 086 9606",
       "PhoneSecondaryContact": null,
       "IsPrivateIndividual": false,
       "AddressInfo": null,
@@ -2756,21 +3388,21 @@
       "ContactEmail": null,
       "FaultReportEmail": null,
       "IsRestrictedEdit": false,
-      "ID": 3430,
-      "Title": "GridServe"
+      "ID": 3345,
+      "Title": "Char.gy"
     },
     "UsageType": {
-      "IsPayAtLocation": true,
-      "IsMembershipRequired": false,
-      "IsAccessKeyRequired": false,
-      "ID": 5,
-      "Title": "Public - Pay At Location"
+      "IsPayAtLocation": null,
+      "IsMembershipRequired": null,
+      "IsAccessKeyRequired": null,
+      "ID": 1,
+      "Title": "Public"
     },
     "StatusType": {
-      "IsOperational": true,
+      "IsOperational": null,
       "IsUserSelectable": true,
-      "ID": 50,
-      "Title": "Operational"
+      "ID": 0,
+      "Title": "Unknown"
     },
     "SubmissionStatus": {
       "IsLive": true,
@@ -2781,24 +3413,24 @@
     "PercentageSimilarity": null,
     "MediaItems": null,
     "IsRecentlyVerified": false,
-    "DateLastVerified": "2025-05-06T09:41:00Z",
-    "ID": 258830,
-    "UUID": "FB9287C3-64F2-4EB8-B00C-DE079BD3E910",
+    "DateLastVerified": "2023-05-02T11:52:00Z",
+    "ID": 264398,
+    "UUID": "EA133E09-C1DE-4F14-9E13-B389439064D9",
     "ParentChargePointID": null,
     "DataProviderID": 1,
     "DataProvidersReference": null,
-    "OperatorID": 3430,
-    "OperatorsReference": "",
-    "UsageTypeID": 5,
-    "UsageCost": "Contactless: \u00a30.85/kWh, GRIDSERVE app: \u00a30.79/kWh",
+    "OperatorID": 3345,
+    "OperatorsReference": "GB*CGY*E*00103",
+    "UsageTypeID": 1,
+    "UsageCost": "Day (07:00-00:00): \u00a30.65/kWh Night (00:00-0700): \u00a30.29/kWh ",
     "AddressInfo": {
-      "ID": 259214,
-      "Title": "Welcome Break Warwick Southbound Services",
-      "AddressLine1": "M40 Motorway Southbound",
-      "AddressLine2": "Jct 12/13, Ashorne, Banbury Road 13",
-      "Town": "Warwick",
-      "StateOrProvince": "Warwickshire",
-      "Postcode": "CV35 0AA",
+      "ID": 264782,
+      "Title": "Grainger Court",
+      "AddressLine1": "Grainger Court",
+      "AddressLine2": null,
+      "Town": "Olympic Way",
+      "StateOrProvince": "High Wycombe",
+      "Postcode": "HP13 7PR",
       "CountryID": 1,
       "Country": {
         "ISOCode": "GB",
@@ -2806,167 +3438,19 @@
         "ID": 1,
         "Title": "United Kingdom"
       },
-      "Latitude": 52.219129,
-      "Longitude": -1.502991,
-      "ContactTelephone1": "+44 800 240 4242",
+      "Latitude": 51.625251,
+      "Longitude": -0.7116805,
+      "ContactTelephone1": null,
       "ContactTelephone2": null,
       "ContactEmail": null,
-      "AccessComments": null,
-      "RelatedURL": "https://gridserve.com",
-      "Distance": 5.08410790401368,
+      "AccessComments": "",
+      "RelatedURL": "https://char.gy/00103",
+      "Distance": 2.7724704893877763,
       "DistanceUnit": 1
     },
     "Connections": [
       {
-        "ID": 433372,
-        "ConnectionTypeID": 33,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-3 Configuration FF",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 33,
-          "Title": "CCS (Type 2)"
-        },
-        "Reference": "GB*GRD*EGS10388*1",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 3,
-        "Level": {
-          "Comments": "40KW and Higher",
-          "IsFastChargeCapable": true,
-          "ID": 3,
-          "Title": "Level 3:  High (Over 40kW)"
-        },
-        "Amps": 150,
-        "Voltage": 900,
-        "PowerKW": 45,
-        "CurrentTypeID": 30,
-        "CurrentType": {
-          "Description": "Direct Current",
-          "ID": 30,
-          "Title": "DC"
-        },
-        "Quantity": 1,
-        "Comments": null
-      },
-      {
-        "ID": 433373,
-        "ConnectionTypeID": 2,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-3 Configuration AA",
-          "IsDiscontinued": null,
-          "IsObsolete": null,
-          "ID": 2,
-          "Title": "CHAdeMO"
-        },
-        "Reference": "GB*GRD*EGS10388*2",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 3,
-        "Level": {
-          "Comments": "40KW and Higher",
-          "IsFastChargeCapable": true,
-          "ID": 3,
-          "Title": "Level 3:  High (Over 40kW)"
-        },
-        "Amps": 150,
-        "Voltage": 500,
-        "PowerKW": 50,
-        "CurrentTypeID": 30,
-        "CurrentType": {
-          "Description": "Direct Current",
-          "ID": 30,
-          "Title": "DC"
-        },
-        "Quantity": 1,
-        "Comments": null
-      },
-      {
-        "ID": 433374,
-        "ConnectionTypeID": 33,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-3 Configuration FF",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 33,
-          "Title": "CCS (Type 2)"
-        },
-        "Reference": "GB*GRD*EGS10389*1",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 3,
-        "Level": {
-          "Comments": "40KW and Higher",
-          "IsFastChargeCapable": true,
-          "ID": 3,
-          "Title": "Level 3:  High (Over 40kW)"
-        },
-        "Amps": 150,
-        "Voltage": 900,
-        "PowerKW": 45,
-        "CurrentTypeID": 30,
-        "CurrentType": {
-          "Description": "Direct Current",
-          "ID": 30,
-          "Title": "DC"
-        },
-        "Quantity": 1,
-        "Comments": null
-      },
-      {
-        "ID": 433375,
-        "ConnectionTypeID": 2,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-3 Configuration AA",
-          "IsDiscontinued": null,
-          "IsObsolete": null,
-          "ID": 2,
-          "Title": "CHAdeMO"
-        },
-        "Reference": "GB*GRD*EGS10389*2",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 3,
-        "Level": {
-          "Comments": "40KW and Higher",
-          "IsFastChargeCapable": true,
-          "ID": 3,
-          "Title": "Level 3:  High (Over 40kW)"
-        },
-        "Amps": 150,
-        "Voltage": 500,
-        "PowerKW": 50,
-        "CurrentTypeID": 30,
-        "CurrentType": {
-          "Description": "Direct Current",
-          "ID": 30,
-          "Title": "DC"
-        },
-        "Quantity": 1,
-        "Comments": null
-      },
-      {
-        "ID": 434625,
+        "ID": 448287,
         "ConnectionTypeID": 25,
         "ConnectionType": {
           "FormalName": "IEC 62196-2 Type 2",
@@ -2975,13 +3459,13 @@
           "ID": 25,
           "Title": "Type 2 (Socket Only)"
         },
-        "Reference": "GB*GRD*EGS10389*3",
-        "StatusTypeID": 50,
+        "Reference": "GB*CGY*E*00103",
+        "StatusTypeID": 0,
         "StatusType": {
-          "IsOperational": true,
+          "IsOperational": null,
           "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
+          "ID": 0,
+          "Title": "Unknown"
         },
         "LevelID": 2,
         "Level": {
@@ -2990,75 +3474,43 @@
           "ID": 2,
           "Title": "Level 2 : Medium (Over 2kW)"
         },
-        "Amps": 32,
+        "Amps": 22,
         "Voltage": 230,
-        "PowerKW": 22,
-        "CurrentTypeID": 20,
+        "PowerKW": 5.1,
+        "CurrentTypeID": 10,
         "CurrentType": {
-          "Description": "Alternating Current - Three Phase",
-          "ID": 20,
-          "Title": "AC (Three-Phase)"
-        },
-        "Quantity": 1,
-        "Comments": null
-      },
-      {
-        "ID": 434626,
-        "ConnectionTypeID": 25,
-        "ConnectionType": {
-          "FormalName": "IEC 62196-2 Type 2",
-          "IsDiscontinued": false,
-          "IsObsolete": false,
-          "ID": 25,
-          "Title": "Type 2 (Socket Only)"
-        },
-        "Reference": "GB*GRD*EGS10388*3",
-        "StatusTypeID": 50,
-        "StatusType": {
-          "IsOperational": true,
-          "IsUserSelectable": true,
-          "ID": 50,
-          "Title": "Operational"
-        },
-        "LevelID": 2,
-        "Level": {
-          "Comments": "Over 2 kW, usually non-domestic socket type",
-          "IsFastChargeCapable": false,
-          "ID": 2,
-          "Title": "Level 2 : Medium (Over 2kW)"
-        },
-        "Amps": 32,
-        "Voltage": 230,
-        "PowerKW": 22,
-        "CurrentTypeID": 20,
-        "CurrentType": {
-          "Description": "Alternating Current - Three Phase",
-          "ID": 20,
-          "Title": "AC (Three-Phase)"
+          "Description": "Alternating Current - Single Phase",
+          "ID": 10,
+          "Title": "AC (Single-Phase)"
         },
         "Quantity": 1,
         "Comments": null
       }
     ],
-    "NumberOfPoints": 4,
-    "GeneralComments": "The GRIDSERVE charging station at Warwick Southbound servicdes provides rapid charging located on the M40. Welcome Break Warwick is perfect for fast, reliable and convenient EV charging near Warwick.",
+    "NumberOfPoints": 1,
+    "GeneralComments": "Can also be paid with the Octopus Electroverse app, Zap-Pay, Bonnet app, Paua App, or Shell Recharge app. Charge point not fitted with RFID reader or payment terminal.",
     "DatePlanned": null,
     "DateLastConfirmed": null,
-    "StatusTypeID": 50,
-    "DateLastStatusUpdate": "2025-05-06T09:41:00Z",
+    "StatusTypeID": 0,
+    "DateLastStatusUpdate": "2023-05-02T11:52:00Z",
     "MetadataValues": null,
     "DataQualityLevel": 1,
-    "DateCreated": "2023-03-26T14:50:00Z",
+    "DateCreated": "2023-05-02T10:02:00Z",
     "SubmissionStatusTypeID": 200,
-    "traffic_delay": 6.517094017094018,
+    "traffic_delay": 9.686411149825783,
     "meal_stop": true,
     "distance_stop": false,
-    "route_km": 22.709960306872475,
-    "meal_window": "lunch",
+    "route_km": 116.76458955759722,
+    "meal_window": "dinner",
+    "nearby_places": [
+      "Tummy Fillers Fish and Chip shop",
+      "Costcutter",
+      "Sundarbans"
+    ],
     "price": 0.1,
     "max_power": 100.0,
     "is_fast": true,
     "num_points": 4,
-    "distance": 5.08410790401368
+    "distance": 2.7724704893877763
   }
 ]

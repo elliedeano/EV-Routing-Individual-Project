@@ -1,6 +1,7 @@
 
 import json
 import re
+import math
 
 def parse_price(usage_cost):
     if not usage_cost:
@@ -31,7 +32,15 @@ def extract_charger_features(charger):
     else:
         status = status_type.get('IsOperational', False)
     distance = charger.get('AddressInfo', {}).get('Distance', float('inf'))
-    traffic_delay = charger.get('traffic_delay', 0) 
+    raw_traffic_delay = charger.get('traffic_delay', 0)
+    try:
+        traffic_delay = float(raw_traffic_delay)
+    except (TypeError, ValueError):
+        traffic_delay = 0.0
+    if not math.isfinite(traffic_delay):
+        traffic_delay = 0.0
+    if traffic_delay < 0:
+        traffic_delay = 0.0
     # Ensure 'meal_stop' and 'distance_stop' keys always exist
     meal_stop = charger.get('meal_stop', False)
     distance_stop = charger.get('distance_stop', False)
@@ -136,7 +145,7 @@ if __name__ == "__main__":
         print("No baseline chargers loaded. Please run routing_main.py to generate baseline_chargers.json.")
     else:
         if 'traffic_delay' in priorities:
-            from traffic_filter_calcs import get_traffic_delay_percent
+            from src.routing.traffic import get_traffic_delay_percent
             start_lat = input("Enter your trip start latitude: ")
             start_lon = input("Enter your trip start longitude: ")
             start_coords = (float(start_lat), float(start_lon))

@@ -11,8 +11,7 @@ if project_root not in sys.path:
 from meal_time_routing import filter_meal_time_chargers
 from load_and_estimate_range import load_and_estimate_range
 sys.path.append(str(Path(__file__).resolve().parents[1]))
-from charger_ranking.traffic_filter_calcs import get_traffic_delay_percent
-from charger_ranking.traffic_filter_calcs import get_traffic_delay_percent
+from traffic import get_traffic_delay_percent
 ORS_API_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImJjMWY3ZTRiMGQ0ZTQ1NTRiMjlmNjQ4Y2NlM2I0ZTdlIiwiaCI6Im11cm11cjY0In0="
 OCM_API_KEY = "bc0fb54f-d673-4829-9bbb-f2abac2c11f8"
 
@@ -302,7 +301,6 @@ def main():
     # Traffic analysis output
     # analyze_traffic(start_coords, dest_coords, total_km)  # No longer needed; traffic handled per charger
 
-    from traffic import get_traffic_delay_percent
     all_chargers = []
     # Always show meal-based charger recommendations if selected, but add fallback if battery is too low to reach meal window
     if umbrella_choice == "meal":
@@ -311,7 +309,7 @@ def main():
         route_points = route
         from datetime import timedelta
         # Scan route for which windows are covered
-        window_types = ["coffee", "lunch", "dinner"]
+        window_types = ["breakfast", "coffee", "lunch", "dinner"]
         covered_windows = set()
         route_times = []
         for idx, pt in enumerate(route_points):
@@ -371,7 +369,7 @@ def main():
                             charger_coords = (addr.get('Latitude'), addr.get('Longitude'))
                             if charger_coords[0] is not None and charger_coords[1] is not None:
                                 charger_km = route_segment_distance(route[0][0], route[0][1], charger_coords[0], charger_coords[1])
-                                delay_pct = get_traffic_delay_percent(start_coords, charger_coords)
+                                delay_pct = get_traffic_delay_percent(start_coords, charger_coords, depart_at=journey_start)
                             else:
                                 charger_km = None
                                 delay_pct = 0.0
@@ -394,15 +392,7 @@ def main():
             # Skip meal charger search entirely
         else:
             # ...existing meal window logic...
-            selected_windows = []
-            if "lunch" in covered_windows and "dinner" in covered_windows:
-                selected_windows = ["lunch", "dinner"]
-            elif "lunch" in covered_windows:
-                selected_windows = ["lunch"]
-            elif "coffee" in covered_windows:
-                selected_windows = ["coffee"]
-            elif "dinner" in covered_windows:
-                selected_windows = ["dinner"]
+            selected_windows = [w for w in window_types if w in covered_windows]
             # Precompute cumulative kms along the route
             route_kms = []
             kms = 0.0
@@ -445,7 +435,7 @@ def main():
                                 charger_coords = (addr.get('Latitude'), addr.get('Longitude'))
                                 if charger_coords[0] is not None and charger_coords[1] is not None:
                                     charger_km = route_segment_distance(route[0][0], route[0][1], charger_coords[0], charger_coords[1])
-                                    delay_pct = get_traffic_delay_percent(start_coords, charger_coords)
+                                    delay_pct = get_traffic_delay_percent(start_coords, charger_coords, depart_at=journey_start)
                                 else:
                                     charger_km = None
                                     delay_pct = 0.0
@@ -494,13 +484,15 @@ def main():
                             lat = addr.get('Latitude')
                             lon = addr.get('Longitude')
                             if lat is not None and lon is not None and has_nearby_food(lat, lon, window_type=window_type):
+                                places = get_nearby_food_places(lat, lon, window_type=window_type)
                                 charger_coords = (lat, lon)
-                                delay_pct = get_traffic_delay_percent(start_coords, charger_coords) if charger_coords[0] is not None and charger_coords[1] is not None else 0.0
+                                delay_pct = get_traffic_delay_percent(start_coords, charger_coords, depart_at=journey_start) if charger_coords[0] is not None and charger_coords[1] is not None else 0.0
                                 c['traffic_delay'] = delay_pct
                                 c['meal_stop'] = True
                                 c['distance_stop'] = False
                                 c['route_km'] = pt_km
                                 c['meal_window'] = window_type
+                                c['nearby_places'] = (places or [])[:3]
                                 # Set default values for ranking fields if missing
                                 c['price'] = c.get('price') if c.get('price') is not None else 0.1
                                 c['max_power'] = c.get('max_power') if c.get('max_power') is not None else 100.0
@@ -557,7 +549,7 @@ def main():
                         charger_coords = (addr.get('Latitude'), addr.get('Longitude'))
                         if charger_coords[0] is not None and charger_coords[1] is not None:
                             charger_km = route_segment_distance(route[0][0], route[0][1], charger_coords[0], charger_coords[1])
-                            delay_pct = get_traffic_delay_percent(start_coords, charger_coords)
+                            delay_pct = get_traffic_delay_percent(start_coords, charger_coords, depart_at=journey_start)
                         else:
                             charger_km = None
                             delay_pct = 0.0

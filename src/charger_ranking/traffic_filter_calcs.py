@@ -1,6 +1,19 @@
 import requests
+from datetime import datetime
 
-def get_traffic_delay_percent(start_coords, dest_coords):
+def _normalize_depart_at(depart_at):
+    if depart_at is None:
+        return None
+    if isinstance(depart_at, datetime):
+        if depart_at.tzinfo is None:
+            depart_at = depart_at.astimezone()
+        return depart_at.isoformat(timespec="seconds")
+    if isinstance(depart_at, str):
+        return depart_at
+    return None
+
+
+def get_traffic_delay_percent(start_coords, dest_coords, depart_at=None):
     """
     Returns the percentage traffic delay for a route using TomTom API.
     """
@@ -16,6 +29,9 @@ def get_traffic_delay_percent(start_coords, dest_coords):
         "travelMode": "car",
         "computeTravelTimeFor": "all"
     }
+    depart_at_value = _normalize_depart_at(depart_at)
+    if depart_at_value:
+        params["departAt"] = depart_at_value
     try:
         response = requests.get(url, params=params, timeout=10)
         response.raise_for_status()

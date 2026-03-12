@@ -1,0 +1,26 @@
+{
+  "v1_route": {
+    "total_km": 160.6,
+    "est_range_km": 42.6,
+    "chargers": [
+      {
+        "id": 1,
+        "title": "InstaVolt Stroud Park",
+        "route_km": 38.0,
+        "max_power": 150,
+        "is_fast": true,
+        "num_points": 4,
+        "distance": 0.86
+      },
+      {
+        "id": 2,
+        "title": "Banbury Gateway Shopping Park",
+        "route_km": 38.0,
+        "max_power": 7,
+        "is_fast": false,
+        "num_points": 2,
+        "distance": 0.22
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "null": {
+    "car_model": "BMW iX1 eDrive20",
+    "home_destination_postcode": "SW6 4BL",
+    "default_mode": "distance",
+    "default_priorities": [
+      "price",
+      "max_power"
+    ],
+    "updated_by": "elliedeaner@hotmail.com"
+  },
+  "null": {
+    "car_model": "BMW iX1 eDrive20",
+    "home_destination_postcode": "SW6 4BL",
+    "default_mode": "distance",
+    "default_priorities": [],
+    "updated_by": "elliedeaner@hotmail.com"
+  }
+}

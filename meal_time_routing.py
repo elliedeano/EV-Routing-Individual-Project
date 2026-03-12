@@ -1,9 +1,10 @@
 def get_nearby_food_places(lat, lon, radius=500, limit=5, window_type="lunch"):
     """
     Returns a list of names of food/cafe venues within radius (meters) of (lat, lon) using Yelp Fusion API.
-    window_type: "lunch", "dinner", or "coffee". Determines categories searched.
+    window_type: "breakfast", "lunch", "dinner", or "coffee". Determines categories searched.
     """
     categories_by_window = {
+        "breakfast": "breakfast_brunch,coffee,cafes,supermarkets",
         "lunch": "restaurants,food,cafes,fastfood,supermarkets",
         "dinner": "restaurants,food,cafes,fastfood,supermarkets",
         "coffee": "coffee,supermarkets"
@@ -40,8 +41,9 @@ from datetime import datetime, timedelta
 # Yelp Fusion API Key (replace with your own if needed)
 YELP_API_KEY = "AlQNzNZ0I0M6dF_3sfXTLiQjrntZMOPdyg1iqMCAbeWzyDnR6K6MBrt71jXboqh7EdC5_33JTAehhMW-WgSDCSyrpgZY82nn7mYcsurtxmtJqMCJrQBMi7fRkjubaXYx"
 
-# Define time windows for lunch, dinner, and coffee
+# Define time windows for breakfast, coffee, lunch, and dinner
 TIME_WINDOWS = {
+    "breakfast": (7, 0, 9, 30),   # 07:00-09:30
     "lunch":    (12, 0, 14, 0),   # 12:00-14:00
     "dinner":   (18, 0, 20, 0),   # 18:00-20:00
     "coffee":   (9, 0, 11, 0),    # 09:00-11:00
@@ -49,7 +51,7 @@ TIME_WINDOWS = {
 
 def is_meal_time(arrival_time, window_type="lunch"):
     """
-    Returns True if arrival_time is within the specified window_type (lunch, dinner, coffee).
+    Returns True if arrival_time is within the specified window_type (breakfast, lunch, dinner, coffee).
     """
     if window_type not in TIME_WINDOWS:
         raise ValueError(f"Unknown window_type: {window_type}")
@@ -62,9 +64,10 @@ def is_meal_time(arrival_time, window_type="lunch"):
 def has_nearby_food(lat, lon, radius=500, window_type="lunch"):
     """
     Returns True if there are food/cafe venues within radius (meters) of (lat, lon) using Yelp Fusion API.
-    window_type: "lunch", "dinner", or "coffee". Determines categories searched.
+    window_type: "breakfast", "lunch", "dinner", or "coffee". Determines categories searched.
     """
     categories_by_window = {
+        "breakfast": "breakfast_brunch,coffee,cafes,supermarkets",
         "lunch": "restaurants,food,cafes,fastfood,supermarkets",
         "dinner": "restaurants,food,cafes,fastfood,supermarkets",
         "coffee": "coffee,supermarkets"
