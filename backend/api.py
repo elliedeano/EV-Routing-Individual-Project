@@ -93,8 +93,12 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
                 f"Token project mismatch. Expected {EXPECTED_FIREBASE_PROJECT_ID}, got aud={aud}, iss={iss}"
             )
 
+        uid = decoded.get("uid") or decoded.get("user_id") or decoded.get("sub")
+        if not uid:
+            raise ValueError("Token missing user id")
+
         return {
-            "uid": decoded.get("uid"),
+            "uid": str(uid),
             "email": decoded.get("email"),
         }
     except Exception as e:
@@ -214,7 +218,9 @@ def get_car_models(current_user: Dict[str, Optional[str]] = Depends(get_current_
 @app.get('/api/v1/profile', response_model=UserProfileOut)
 def get_profile(current_user: Dict[str, Optional[str]] = Depends(get_current_user)):
     try:
-        uid = current_user.get("uid")
+        uid = str(current_user.get("uid") or "").strip()
+        if not uid:
+            raise HTTPException(status_code=401, detail="Missing user id in token")
         data: Dict[str, Any] = {}
         try:
             db = _get_firestore_client()
@@ -241,7 +247,9 @@ def get_profile(current_user: Dict[str, Optional[str]] = Depends(get_current_use
 @app.put('/api/v1/profile', response_model=UserProfileOut)
 def save_profile(profile: UserProfileIn, current_user: Dict[str, Optional[str]] = Depends(get_current_user)):
     try:
-        uid = current_user.get("uid")
+        uid = str(current_user.get("uid") or "").strip()
+        if not uid:
+            raise HTTPException(status_code=401, detail="Missing user id in token")
         valid_modes = {"distance", "meal", None}
         if profile.default_mode not in valid_modes:
             raise HTTPException(status_code=400, detail="default_mode must be 'distance' or 'meal'")

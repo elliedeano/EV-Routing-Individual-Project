@@ -4,21 +4,63 @@ import re
 import math
 
 def parse_price(usage_cost):
-    if not usage_cost:
+    if usage_cost is None:
         return float('inf')
-    match = re.search(r"[\d.]+", usage_cost)
-    if match:
-        value = match.group()
-        # Avoid cases where match is just '.' or empty
+
+    if isinstance(usage_cost, (int, float)):
+        value = float(usage_cost)
+        return value if math.isfinite(value) and value >= 0 else float('inf')
+
+    usage_text = str(usage_cost).strip().lower()
+    if not usage_text:
+        return float('inf')
+
+    if usage_text in {"free", "no charge", "0", "0.0", "£0", "€0", "$0"}:
+        return 0.0
+
+    # Support common pence formats like "35p/kWh" as £0.35.
+    pence_match = re.search(r"(\d+(?:\.\d+)?)\s*p(?:\s*/\s*kwh)?", usage_text)
+    if pence_match and "£" not in usage_text and "gbp" not in usage_text:
         try:
-            if value and value != ".":
-                return float(value)
+            pence_value = float(pence_match.group(1))
+            if math.isfinite(pence_value) and pence_value >= 0:
+                return pence_value / 100.0
+        except ValueError:
+            pass
+
+    match = re.search(r"\d+(?:\.\d+)?", usage_text)
+    if match:
+        try:
+            value = float(match.group())
+            if math.isfinite(value) and value >= 0:
+                return value
         except ValueError:
             pass
     return float('inf')
 
 def extract_charger_features(charger):
-    price = parse_price(charger.get('UsageCost'))
+    raw_price = charger.get('price')
+    if raw_price is None:
+        price = parse_price(charger.get('UsageCost'))
+    else:
+        if isinstance(raw_price, str):
+            stripped = raw_price.strip()
+            if stripped:
+                try:
+                    numeric_price = float(stripped)
+                except ValueError:
+                    numeric_price = parse_price(stripped)
+            else:
+                numeric_price = float('inf')
+        elif isinstance(raw_price, (int, float)):
+            numeric_price = float(raw_price)
+        else:
+            numeric_price = float('inf')
+
+        if math.isfinite(numeric_price) and numeric_price >= 0:
+            price = numeric_price
+        else:
+            price = parse_price(charger.get('UsageCost'))
     connections = charger.get('Connections', [])
     if connections:
         max_power = max((c.get('PowerKW', 0) or 0) for c in connections)
@@ -58,15 +100,37 @@ def extract_charger_features(charger):
     }
 
 def normalize_feature(values, ascendingVsDescending=True):
-    clean_values = [v if v is not None else 0 for v in values]
+    numeric_values = []
+    for value in values:
+        if value is None:
+            numeric_values.append(None)
+            continue
+        try:
+            numeric_value = float(value)
+        except (TypeError, ValueError):
+            numeric_values.append(None)
+            continue
+        if not math.isfinite(numeric_value):
+            numeric_values.append(None)
+            continue
+        numeric_values.append(numeric_value)
+
+    finite_values = [value for value in numeric_values if value is not None]
+    if not finite_values:
+        return [0.0 for _ in numeric_values]
+
+    finite_min = min(finite_values)
+    finite_max = max(finite_values)
+    fallback_value = finite_min if ascendingVsDescending else finite_max
+    clean_values = [value if value is not None else fallback_value for value in numeric_values]
+
     min_v = min(clean_values)
     max_v = max(clean_values)
     if max_v == min_v:
-        return [1.0 for _ in clean_values]
+        return [0.0 for _ in clean_values]
     if ascendingVsDescending:
-        return [(v - min_v) / (max_v - min_v) for v in clean_values]
-    else:
-        return [(max_v - v) / (max_v - min_v) for v in clean_values]
+        return [(value - min_v) / (max_v - min_v) for value in clean_values]
+    return [(max_v - value) / (max_v - min_v) for value in clean_values]
 
 def rank_and_filter_chargers(chargers, priorities):
     features = [extract_charger_features(c) for c in chargers]
@@ -96,6 +160,7 @@ def rank_and_filter_chargers(chargers, priorities):
     for i, f in enumerate(features):
         score = 0
         breakdown = {}
+        missing_penalty = 0.0
         for p in priorities:
             part = weights[p] * normed[p][i]
             breakdown[p] = {
@@ -104,10 +169,42 @@ def rank_and_filter_chargers(chargers, priorities):
                 'points': part
             }
             score += part
+            raw_value = f.get(p)
+            if isinstance(raw_value, bool):
+                value_missing = False
+            elif raw_value is None:
+                value_missing = True
+            else:
+                try:
+                    numeric_value = float(raw_value)
+                    value_missing = not math.isfinite(numeric_value)
+                except (TypeError, ValueError):
+                    value_missing = False
+            if value_missing:
+                missing_penalty += weights[p] * 1e-6
+        if 'price' in priorities and not math.isfinite(float(f.get('price', float('inf')))):
+            missing_penalty += 1000.0
+        score -= missing_penalty
         f['score'] = score
         f['breakdown'] = breakdown
 
-    features.sort(key=lambda f: f['score'], reverse=True)
+    if 'price' in priorities:
+        def _price_missing(feature):
+            raw_price = feature.get('price')
+            try:
+                return not math.isfinite(float(raw_price))
+            except (TypeError, ValueError):
+                return True
+
+        def _price_value(feature):
+            if _price_missing(feature):
+                return float('inf')
+            return float(feature.get('price'))
+
+        # Explicitly prioritize cheaper known prices first, then use score as tie-breaker.
+        features.sort(key=lambda f: (_price_missing(f), _price_value(f), -f['score']))
+    else:
+        features.sort(key=lambda f: f['score'], reverse=True)
     return features[:3]
 
 def get_user_priorities(input_str):

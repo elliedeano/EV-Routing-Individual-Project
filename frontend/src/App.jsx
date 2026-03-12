@@ -20,16 +20,16 @@ const PRIORITIES = [
   { key: 'max_power', label: 'Highest Charging Power (kW)' },
   { key: 'is_fast', label: 'Fast Charge Capable' },
   { key: 'num_points', label: 'Most Charging Points' },
-  { key: 'distance', label: 'Closest Distance' },
   { key: 'traffic_delay', label: 'Least Traffic Delay (% Increase)' },
 ];
+
+const PRIORITY_KEYS = new Set(PRIORITIES.map((priority) => priority.key));
 
 const PRIORITY_VALUE_FORMATTERS = {
   price: (value) => (typeof value === 'number' ? `£${value.toFixed(2)} / kWh` : '-'),
   max_power: (value) => (typeof value === 'number' ? `${Math.round(value)} kW` : '-'),
   is_fast: (value) => (typeof value === 'boolean' ? (value ? 'Yes' : 'No') : '-'),
   num_points: (value) => (typeof value === 'number' ? `${Math.round(value)}` : '-'),
-  distance: (value) => (typeof value === 'number' ? `${Math.round(value)} km` : '-'),
   traffic_delay: (value) => {
     if (typeof value !== 'number') return '-';
     if (value > 0 && value < 0.1) return '<0.1%';
@@ -59,7 +59,6 @@ const PRIORITY_DIRECTIONS = {
   max_power: 'max',
   is_fast: 'max',
   num_points: 'max',
-  distance: 'min',
   traffic_delay: 'min',
 };
 
@@ -76,6 +75,16 @@ export default function App() {
   const [authMode, setAuthMode] = useState('login');
   const [authForm, setAuthForm] = useState({ email: '', password: '' });
   const [authError, setAuthError] = useState(null);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [savedDefaults, setSavedDefaults] = useState(null);
+  const [loadingSavedDefaults, setLoadingSavedDefaults] = useState(false);
+  const [profileDefaultsOpen, setProfileDefaultsOpen] = useState(false);
+  const [profileDraft, setProfileDraft] = useState({
+    car_model: '',
+    home_destination_postcode: '',
+    default_mode: 'distance',
+    default_priorities: [],
+  });
 
   const [models, setModels] = useState([]);
   const [loadingModels, setLoadingModels] = useState(false);
@@ -96,6 +105,22 @@ export default function App() {
   const [error, setError] = useState(null);
   const [profileStatus, setProfileStatus] = useState(null);
 
+  const normalizeProfile = (profile) => ({
+    car_model: profile?.car_model ?? null,
+    home_destination_postcode: profile?.home_destination_postcode ?? null,
+    default_mode: profile?.default_mode ?? null,
+    default_priorities: Array.isArray(profile?.default_priorities)
+      ? profile.default_priorities.filter((key) => PRIORITY_KEYS.has(key)).slice(0, 2)
+      : [],
+  });
+
+  const toProfileDraft = (profile) => ({
+    car_model: profile?.car_model ?? '',
+    home_destination_postcode: profile?.home_destination_postcode ?? '',
+    default_mode: profile?.default_mode ?? 'distance',
+    default_priorities: Array.isArray(profile?.default_priorities) ? profile.default_priorities.slice(0, 2) : [],
+  });
+
   useEffect(() => {
     if (!auth) {
       setAuthReady(true);
@@ -112,6 +137,14 @@ export default function App() {
     if (!currentUser) {
       setModels([]);
       setLoadingModels(false);
+      setSavedDefaults(null);
+      setProfileDefaultsOpen(false);
+      setProfileDraft({
+        car_model: '',
+        home_destination_postcode: '',
+        default_mode: 'distance',
+        default_priorities: [],
+      });
       return undefined;
     }
 
@@ -139,6 +172,35 @@ export default function App() {
     };
   }, [currentUser]);
 
+  const fetchSavedDefaults = async () => {
+    if (!currentUser) return null;
+    const token = await currentUser.getIdToken();
+    const res = await fetch(`${API_BASE}/api/v1/profile`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) throw new Error('Failed to load profile defaults');
+    const profile = normalizeProfile(await res.json());
+    setSavedDefaults(profile);
+    setProfileDraft(toProfileDraft(profile));
+    return profile;
+  };
+
+  useEffect(() => {
+    if (!currentUser) return;
+    let cancelled = false;
+    setLoadingSavedDefaults(true);
+    fetchSavedDefaults()
+      .catch((err) => {
+        if (!cancelled) setProfileStatus(err.message || 'Failed to load profile defaults');
+      })
+      .finally(() => {
+        if (!cancelled) setLoadingSavedDefaults(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [currentUser]);
+
   const umbrellaPriority = useMemo(() => {
     return form.umbrella_choice === 'meal' ? 'meal_stop' : 'distance_stop';
   }, [form.umbrella_choice]);
@@ -159,6 +221,27 @@ export default function App() {
 
   const handleModeSelect = (mode) => {
     setForm((prev) => ({ ...prev, umbrella_choice: mode }));
+  };
+
+  const handleProfileDraftChange = (e) => {
+    const { name, value } = e.target;
+    setProfileDraft((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const toggleProfileDraftPriority = (key) => {
+    setProfileDraft((prev) => {
+      if (prev.default_priorities.includes(key)) {
+        return {
+          ...prev,
+          default_priorities: prev.default_priorities.filter((p) => p !== key),
+        };
+      }
+      if (prev.default_priorities.length >= 2) return prev;
+      return {
+        ...prev,
+        default_priorities: [...prev.default_priorities, key],
+      };
+    });
   };
 
   const handleAuthFormChange = (e) => {
@@ -193,6 +276,7 @@ export default function App() {
         await signInWithEmailAndPassword(auth, authForm.email.trim(), authForm.password);
       }
       setAuthForm((prev) => ({ ...prev, password: '' }));
+      setProfileMenuOpen(false);
     } catch (err) {
       setAuthError(getFriendlyAuthError(err));
     }
@@ -203,55 +287,104 @@ export default function App() {
     setResult(null);
     setSelectedPriorities([]);
     setProfileStatus(null);
+    setSavedDefaults(null);
+    setProfileDefaultsOpen(false);
+    setProfileMenuOpen(false);
     setError(null);
   };
 
+  const persistProfileDefaults = async (payload) => {
+    const token = await currentUser.getIdToken();
+    const res = await fetch(`${API_BASE}/api/v1/profile`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error('Failed to save profile defaults');
+    const updatedProfile = normalizeProfile(await res.json());
+    setSavedDefaults(updatedProfile);
+    return updatedProfile;
+  };
+
   const saveProfileDefaults = async () => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      setProfileStatus('Sign in to save defaults.');
+      return;
+    }
     try {
       setProfileStatus('Saving defaults...');
-      const token = await currentUser.getIdToken();
       const payload = {
         car_model: form.car_model || null,
         home_destination_postcode: form.end_postcode.trim() || null,
         default_mode: form.umbrella_choice || 'distance',
         default_priorities: selectedPriorities,
       };
-      const res = await fetch(`${API_BASE}/api/v1/profile`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error('Failed to save profile defaults');
+      const updatedProfile = await persistProfileDefaults(payload);
+      setProfileDraft(toProfileDraft(updatedProfile));
       setProfileStatus('Defaults saved.');
     } catch (err) {
       setProfileStatus(err.message || 'Failed to save defaults');
     }
   };
 
+  const saveProfileDefaultsFromMenu = async () => {
+    if (!currentUser) {
+      setProfileStatus('Sign in to save defaults.');
+      return;
+    }
+    try {
+      setProfileStatus('Saving defaults...');
+      const payload = {
+        car_model: profileDraft.car_model || null,
+        home_destination_postcode: profileDraft.home_destination_postcode.trim() || null,
+        default_mode: profileDraft.default_mode || 'distance',
+        default_priorities: profileDraft.default_priorities,
+      };
+      const updatedProfile = await persistProfileDefaults(payload);
+      setProfileDraft(toProfileDraft(updatedProfile));
+      setProfileStatus('Defaults saved.');
+    } catch (err) {
+      setProfileStatus(err.message || 'Failed to save defaults');
+    }
+  };
+
+  const toggleSavedDefaultsPanel = async () => {
+    const nextOpen = !profileDefaultsOpen;
+    setProfileDefaultsOpen(nextOpen);
+    if (!nextOpen) return;
+    if (savedDefaults) {
+      setProfileDraft(toProfileDraft(savedDefaults));
+      return;
+    }
+    try {
+      setLoadingSavedDefaults(true);
+      await fetchSavedDefaults();
+    } catch (err) {
+      setProfileStatus(err.message || 'Failed to load profile defaults');
+    } finally {
+      setLoadingSavedDefaults(false);
+    }
+  };
+
   const loadProfileDefaults = async () => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      setProfileStatus('Sign in to load defaults.');
+      return;
+    }
     try {
       setProfileStatus('Loading defaults...');
-      const token = await currentUser.getIdToken();
-      const res = await fetch(`${API_BASE}/api/v1/profile`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!res.ok) throw new Error('Failed to load profile defaults');
-      const profile = await res.json();
+      const profile = await fetchSavedDefaults();
 
       setForm((prev) => ({
         ...prev,
-        car_model: profile?.car_model || prev.car_model,
-        end_postcode: profile?.home_destination_postcode || prev.end_postcode,
-        umbrella_choice: profile?.default_mode || prev.umbrella_choice,
+        car_model: profile.car_model ?? '',
+        end_postcode: profile.home_destination_postcode ?? '',
+        umbrella_choice: profile.default_mode ?? 'distance',
       }));
-      if (Array.isArray(profile?.default_priorities)) {
-        setSelectedPriorities(profile.default_priorities.slice(0, 2));
-      }
+      setSelectedPriorities(profile.default_priorities || []);
       setProfileStatus('Defaults loaded.');
     } catch (err) {
       setProfileStatus(err.message || 'Failed to load defaults');
@@ -334,9 +467,9 @@ export default function App() {
     for (const key of selectedPriorities) {
       const direction = PRIORITY_DIRECTIONS[key] || 'max';
       const scores = chargers.map((charger) => getPriorityScore(charger, key));
-      const hasMissingValues = scores.some((score) => Number.isNaN(score));
-      if (hasMissingValues) continue;
-      out[key] = direction === 'min' ? Math.min(...scores) : Math.max(...scores);
+      const validScores = scores.filter((score) => !Number.isNaN(score));
+      if (validScores.length === 0) continue;
+      out[key] = direction === 'min' ? Math.min(...validScores) : Math.max(...validScores);
     }
     return out;
   }, [result, selectedPriorities]);
@@ -346,17 +479,45 @@ export default function App() {
     if (typeof bestScore !== 'number' || Number.isNaN(bestScore)) return false;
     const score = getPriorityScore(charger, key);
     if (Number.isNaN(score)) return false;
-    return score === bestScore;
+    return Math.abs(score - bestScore) < 1e-9;
   };
 
   const noChargingNeeded = result && toNumber(result.est_range_km) >= toNumber(result.total_km);
+  const rankedChargers = useMemo(() => {
+    const chargers = Array.isArray(result?.chargers) ? [...result.chargers] : [];
+    if (chargers.length <= 1 || selectedPriorities.length === 0) return chargers;
+
+    const compareByPriority = (a, b, key) => {
+      const direction = PRIORITY_DIRECTIONS[key] || 'max';
+      const aScore = getPriorityScore(a, key);
+      const bScore = getPriorityScore(b, key);
+      const aMissing = Number.isNaN(aScore);
+      const bMissing = Number.isNaN(bScore);
+
+      if (aMissing && bMissing) return 0;
+      if (aMissing) return 1;
+      if (bMissing) return -1;
+
+      if (Math.abs(aScore - bScore) < 1e-9) return 0;
+      if (direction === 'min') return aScore < bScore ? -1 : 1;
+      return aScore > bScore ? -1 : 1;
+    };
+
+    return chargers.sort((a, b) => {
+      for (const key of selectedPriorities) {
+        const cmp = compareByPriority(a, b, key);
+        if (cmp !== 0) return cmp;
+      }
+      return 0;
+    });
+  }, [result, selectedPriorities]);
+
   const showMealFallbackNotice = (
     form.umbrella_choice === 'meal'
     && !!result
     && !noChargingNeeded
-    && Array.isArray(result.chargers)
-    && result.chargers.length > 0
-    && !result.chargers.some((charger) => charger?.meal_stop)
+    && rankedChargers.length > 0
+    && !rankedChargers.some((charger) => charger?.meal_stop)
   );
 
   const handleSubmit = async (e) => {
@@ -435,69 +596,135 @@ export default function App() {
     );
   }
 
-  if (!currentUser) {
-    return (
-      <main className="page">
-        <header className="header">
-          <h1>EV Charger Planner</h1>
-        </header>
-        <div className="layout">
-          <section className="panel">
-            <div className="card section-card">
-              <h2>{authMode === 'signup' ? 'Create account' : 'Sign in'}</h2>
-              <form className="grid" onSubmit={handleAuthSubmit}>
-                <label>
-                  Email
-                  <input
-                    name="email"
-                    type="email"
-                    value={authForm.email}
-                    onChange={handleAuthFormChange}
-                    required
-                  />
-                </label>
-                <label>
-                  Password
-                  <input
-                    name="password"
-                    type="password"
-                    value={authForm.password}
-                    onChange={handleAuthFormChange}
-                    minLength={6}
-                    required
-                  />
-                </label>
-                <div className="actions">
-                  <button type="submit">{authMode === 'signup' ? 'Create account' : 'Sign in'}</button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setAuthMode((prev) => (prev === 'signup' ? 'login' : 'signup'));
-                      setAuthError(null);
-                    }}
-                  >
-                    {authMode === 'signup' ? 'Use sign in' : 'Create account instead'}
-                  </button>
-                </div>
-                {authError && <p className="error">{authError}</p>}
-                {authError === 'Firebase Authentication is not enabled for this project yet.' && (
-                  <p className="hint">
-                    In Firebase Console: Build → Authentication → Get started, then enable Email/Password.
-                  </p>
-                )}
-              </form>
-            </div>
-          </section>
-        </div>
-      </main>
-    );
-  }
-
   return (
     <main className="page">
       <header className="header">
         <h1>EV Charger Planner</h1>
-        <p className="hint">Signed in as {currentUser.email}</p>
+        <div className="profile-menu-wrap">
+          <button type="button" className="profile-btn" onClick={() => setProfileMenuOpen((prev) => !prev)}>
+            {currentUser ? 'Profile' : 'Sign in'}
+          </button>
+          {profileMenuOpen && (
+            <div className="profile-menu card">
+              {currentUser ? (
+                <>
+                  <p className="hint">Signed in as {currentUser.email}</p>
+                  <button type="button" onClick={toggleSavedDefaultsPanel}>
+                    Defaults
+                  </button>
+                  {profileDefaultsOpen && (
+                    <div className="profile-submenu">
+                      <div className="profile-mini-form">
+                        {loadingSavedDefaults && <p className="hint">Refreshing saved defaults...</p>}
+                        <label>
+                          Car model
+                          <select
+                            name="car_model"
+                            value={profileDraft.car_model}
+                            onChange={handleProfileDraftChange}
+                            disabled={loadingModels}
+                          >
+                            <option value="">Select a model</option>
+                            {models.map((modelName) => (
+                              <option key={modelName} value={modelName}>{modelName}</option>
+                            ))}
+                          </select>
+                        </label>
+
+                        <label>
+                          Home destination postcode
+                          <input
+                            name="home_destination_postcode"
+                            value={profileDraft.home_destination_postcode}
+                            onChange={handleProfileDraftChange}
+                            placeholder="e.g. SW6 4BL"
+                          />
+                        </label>
+
+                        <label>
+                          Default mode
+                          <select
+                            name="default_mode"
+                            value={profileDraft.default_mode}
+                            onChange={handleProfileDraftChange}
+                          >
+                            <option value="distance">Distance-Based</option>
+                            <option value="meal">Meal-Based</option>
+                          </select>
+                        </label>
+
+                        <p className="hint">Default priorities (choose up to 2)</p>
+                        <div className="profile-priority-row">
+                          {PRIORITIES.map((priority) => (
+                            <button
+                              type="button"
+                              key={`profile-${priority.key}`}
+                              className={`filter-btn ${profileDraft.default_priorities.includes(priority.key) ? 'filter-btn--active' : ''}`}
+                              onClick={() => toggleProfileDraftPriority(priority.key)}
+                              disabled={profileDraft.default_priorities.length >= 2 && !profileDraft.default_priorities.includes(priority.key)}
+                            >
+                              {priority.label}
+                              {profileDraft.default_priorities.includes(priority.key) && (
+                                <span className="priority-order-badge">{profileDraft.default_priorities.indexOf(priority.key) + 1}</span>
+                              )}
+                            </button>
+                          ))}
+                        </div>
+                        <p className="hint">Selection order sets weighting: 1 is stronger than 2.</p>
+
+                        <div className="actions">
+                          <button type="button" onClick={saveProfileDefaultsFromMenu}>Save defaults</button>
+                          <button type="button" onClick={loadProfileDefaults}>Load into planner</button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <button type="button" onClick={handleLogout}>Sign out</button>
+                </>
+              ) : (
+                <>
+                  <h2>{authMode === 'signup' ? 'Create account' : 'Sign in'}</h2>
+                  <form className="grid" onSubmit={handleAuthSubmit}>
+                    <label>
+                      Email
+                      <input
+                        name="email"
+                        type="email"
+                        value={authForm.email}
+                        onChange={handleAuthFormChange}
+                        required
+                      />
+                    </label>
+                    <label>
+                      Password
+                      <input
+                        name="password"
+                        type="password"
+                        value={authForm.password}
+                        onChange={handleAuthFormChange}
+                        minLength={6}
+                        required
+                      />
+                    </label>
+                    <div className="actions">
+                      <button type="submit">{authMode === 'signup' ? 'Create account' : 'Sign in'}</button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setAuthMode((prev) => (prev === 'signup' ? 'login' : 'signup'));
+                          setAuthError(null);
+                        }}
+                      >
+                        {authMode === 'signup' ? 'Use sign in' : 'Create account instead'}
+                      </button>
+                    </div>
+                    {authError && <p className="error">{authError}</p>}
+                  </form>
+                </>
+              )}
+            </div>
+          )}
+        </div>
       </header>
 
       <div className="layout">
@@ -615,9 +842,13 @@ export default function App() {
                   disabled={selectedPriorities.length >= 2 && !selectedPriorities.includes(p.key)}
                 >
                   {p.label}
+                  {selectedPriorities.includes(p.key) && (
+                    <span className="priority-order-badge">{selectedPriorities.indexOf(p.key) + 1}</span>
+                  )}
                 </button>
               ))}
             </div>
+            <p className="hint priorities-hint">Selection order sets weighting: 1 is stronger than 2.</p>
             {selectedPriorities.length >= 2 && (
               <p className="hint priorities-hint">Only 2 priorities can be selected.</p>
             )}
@@ -627,9 +858,8 @@ export default function App() {
             <button type="submit" disabled={loading || selectedPriorities.length !== 2}>
               {loading ? 'Loading…' : 'Get recommendations'}
             </button>
-            <button type="button" onClick={loadProfileDefaults}>Load saved defaults</button>
-            <button type="button" onClick={saveProfileDefaults}>Save as defaults</button>
-            <button type="button" onClick={handleLogout}>Log out</button>
+            <button type="button" onClick={loadProfileDefaults} disabled={!currentUser}>Load saved defaults</button>
+            <button type="button" onClick={saveProfileDefaults} disabled={!currentUser}>Save as defaults</button>
             {selectedPriorities.length !== 2 && (
               <span className="hint">Select exactly 2 priorities to match CLI.</span>
             )}
@@ -672,7 +902,7 @@ export default function App() {
                 </div>
               )}
               <ul className="charger-list">
-                {result.chargers?.map((c, i) => {
+                {rankedChargers?.map((c, i) => {
                 if (noChargingNeeded) return null;
                 const selectedDetails = getSelectedPriorityDetails(c);
                 return (
