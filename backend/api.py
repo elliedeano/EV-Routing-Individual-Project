@@ -18,9 +18,11 @@ from google.auth.transport import requests as google_requests
 
 # Make src/routing importable
 project_root = Path(__file__).resolve().parents[1]
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
 sys.path.insert(0, str(project_root / 'src' / 'routing'))
 
-import cli_shim
+from src.routing import api_logic
 
 
 security = HTTPBearer(auto_error=False)
@@ -180,17 +182,16 @@ def compute_route(req: RouteRequest, current_user: Dict[str, Optional[str]] = De
     print("Received POST /api/v1/route with data:", req)
     print("Authenticated user:", current_user.get("uid"))
     try:
-        out = cli_shim.compute_route_via_cli(
+        out = api_logic.compute_route(
             req.start_postcode,
             req.end_postcode,
             req.soc,
             req.car_model,
             umbrella_choice=(req.umbrella_choice or 'distance'),
-            meal_window=req.meal_window,
             priorities=req.priorities,
             journey_start=req.journey_start,
         )
-        print("Returning response:", {**out, "logs": "<captured>"})
+        print("Returning response:", {**out, "logs": "<service>"})
         return RouteResponse(**out)
     except Exception as e:
         print("Error in compute_route:", e)

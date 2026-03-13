@@ -1,22 +1,18 @@
-import io
-import builtins
 """Programmatic API logic for computing routes and chargers.
-This wraps the existing helper functions in `routing_main.py` so the CLI can remain unchanged
-while allowing the backend API to call a single function `compute_route`.
+This wraps routing helpers in `routing_main.py`
+to provide a single backend-friendly function `compute_route`.
 """
 from pathlib import Path
 import sys
 import math
 from typing import Optional, List, Dict, Any
-from datetime import datetime
 
 # Ensure we can import routing_main helpers and meal_time_routing
 project_root = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(project_root / 'src' / 'routing'))
 import routing_main
 sys.path.insert(0, str(project_root))
-from meal_time_routing import filter_meal_time_chargers
-from traffic import get_traffic_delay_percent as get_cli_traffic_delay_percent
+from traffic import get_traffic_delay_percent as get_traffic_delay_percent
 
 
 def _safe_float(value, default=0.0):
@@ -33,7 +29,7 @@ def _safe_float(value, default=0.0):
 
 def _compute_traffic_delay(start_coords, dest_coords, depart_at=None):
     try:
-        return _safe_float(get_cli_traffic_delay_percent(start_coords, dest_coords, depart_at=depart_at), default=0.0)
+        return _safe_float(get_traffic_delay_percent(start_coords, dest_coords, depart_at=depart_at), default=0.0)
     except Exception:
         return 0.0
 
@@ -226,7 +222,7 @@ def compute_route(
         traffic_delay = _safe_float(traffic_delay, default=0.0)
 
         # Defensive fallback: if delay is missing/zero, recompute from coordinates for returned chargers.
-        # This keeps frontend and CLI behaviour aligned when upstream values are absent.
+        # This keeps frontend behaviour stable when upstream values are absent.
         if traffic_delay == 0.0:
             lat = addr.get('Latitude')
             lon = addr.get('Longitude')

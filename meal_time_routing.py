@@ -61,6 +61,20 @@ def is_meal_time(arrival_time, window_type="lunch"):
     return start <= arrival_time <= end
 
 
+def _window_bounds(base_time, window_type):
+    start_h, start_m, end_h, end_m = TIME_WINDOWS[window_type]
+    window_start = base_time.replace(hour=start_h, minute=start_m, second=0, microsecond=0)
+    window_end = base_time.replace(hour=end_h, minute=end_m, second=0, microsecond=0)
+    return window_start, window_end
+
+
+def _interval_overlaps_window(start_time, end_time, window_type):
+    if end_time < start_time:
+        start_time, end_time = end_time, start_time
+    window_start, window_end = _window_bounds(start_time, window_type)
+    return max(start_time, window_start) <= min(end_time, window_end)
+
+
 def has_nearby_food(lat, lon, radius=500, window_type="lunch"):
     """
     Returns True if there are food/cafe venues within radius (meters) of (lat, lon) using Yelp Fusion API.
@@ -97,19 +111,56 @@ def has_nearby_food(lat, lon, radius=500, window_type="lunch"):
     return len(data.get("businesses", [])) > 0
 
 
-def filter_meal_time_chargers(chargers, journey_start):
+def filter_meal_time_chargers(chargers, journey_start, window_type=None):
     """
     chargers: list of dicts, each with at least 'Latitude', 'Longitude', 'minutes_from_start'
     journey_start: datetime object
-    Returns: list of chargers suitable for meal stops
+    Returns: list of chargers suitable for meal stops.
+    A charger is eligible if the interval from journey_start to charger arrival:
+    - starts during a meal window, or
+    - travels through a meal window, or
+    - arrives during a meal window.
+
+    window_type: optional specific window (breakfast/lunch/dinner/coffee).
+                 If None, checks all windows.
     """
     meal_stops = []
+    if window_type is not None and window_type not in TIME_WINDOWS:
+        raise ValueError(f"Unknown window_type: {window_type}")
+
+    candidate_windows = [window_type] if window_type else list(TIME_WINDOWS.keys())
+
     for charger in chargers:
-        arrival_time = journey_start + timedelta(minutes=charger['minutes_from_start'])
-        if is_meal_time(arrival_time):
-            if has_nearby_food(charger['Latitude'], charger['Longitude']):
-                charger['arrival_time'] = arrival_time
-                meal_stops.append(charger)
+        minutes_from_start = charger.get('minutes_from_start', 0)
+        arrival_time = journey_start + timedelta(minutes=minutes_from_start)
+
+        lat = charger.get('Latitude', charger.get('latitude'))
+        lon = charger.get('Longitude', charger.get('longitude'))
+        if lat is None or lon is None:
+            continue
+
+        matched_windows = [
+            window
+            for window in candidate_windows
+            if _interval_overlaps_window(journey_start, arrival_time, window)
+        ]
+
+        if not matched_windows:
+            continue
+
+        accepted_window = None
+        for window in matched_windows:
+            if has_nearby_food(lat, lon, window_type=window):
+                accepted_window = window
+                break
+
+        if accepted_window:
+            enriched = dict(charger)
+            enriched['arrival_time'] = arrival_time
+            enriched['meal_window'] = accepted_window
+            enriched['meal_windows_matched'] = matched_windows
+            meal_stops.append(enriched)
+
     return meal_stops
 
 

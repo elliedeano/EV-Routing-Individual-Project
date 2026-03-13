@@ -239,7 +239,7 @@ if __name__ == "__main__":
         else:
             print("Invalid input. Please enter 3 numbers from the list above.")
     if not chargers:
-        print("No baseline chargers loaded. Please run routing_main.py to generate baseline_chargers.json.")
+        print("No baseline chargers loaded. Generate baseline_chargers.json before running this ranking script.")
     else:
         if 'traffic_delay' in priorities:
             from src.routing.traffic import get_traffic_delay_percent

@@ -28,5 +28,15 @@
       "price"
     ],
     "updated_by": "elliedeaner@hotmail.com"
+  },
+  "2Kg2cYu6jNY339avOOvUT2QMVVI3": {
+    "car_model": "Citroen C5",
+    "home_destination_postcode": "SW6 4BL",
+    "default_mode": "distance",
+    "default_priorities": [
+      "max_power",
+      "price"
+    ],
+    "updated_by": "elliedeaner@hotmail.com"
   }
 }
