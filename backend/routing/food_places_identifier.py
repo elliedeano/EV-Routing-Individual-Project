@@ -1,53 +1,77 @@
-def get_nearby_food_places(lat, lon, radius=500, limit=5, window_type="lunch"):
-    """
-    Returns a list of names of food/cafe venues within radius (meters) of (lat, lon) using Yelp Fusion API.
-    window_type: "breakfast", "lunch", "dinner", or "coffee". Determines categories searched.
-    """
-    categories_by_window = {
-        "breakfast": "breakfast_brunch,coffee,cafes,supermarkets",
-        "lunch": "restaurants,food,cafes,fastfood,supermarkets",
-        "dinner": "restaurants,food,cafes,fastfood,supermarkets",
-        "coffee": "coffee,supermarkets"
-    }
-    categories = categories_by_window.get(window_type, "restaurants,food,cafes,fastfood,supermarkets")
-    url = "https://api.yelp.com/v3/businesses/search"
-    headers = {
-        "Authorization": f"Bearer {YELP_API_KEY}"
-    }
+import os
+from datetime import datetime, timedelta
+
+import requests
+
+
+YELP_API_KEY = os.getenv("YELP_API_KEY")
+REQUEST_TIMEOUT_SECONDS = float(os.getenv("EXTERNAL_API_TIMEOUT_SECONDS", "10"))
+
+YELP_SEARCH_URL = "https://api.yelp.com/v3/businesses/search"
+
+TIME_WINDOWS = {
+    "breakfast": (7, 0, 9, 30),
+    "lunch": (12, 0, 14, 0),
+    "dinner": (18, 0, 20, 0),
+    "coffee": (9, 0, 11, 0),
+}
+
+CATEGORIES_BY_WINDOW = {
+    "breakfast": "breakfast_brunch,coffee,cafes,supermarkets",
+    "lunch": "restaurants,food,cafes,fastfood,supermarkets",
+    "dinner": "restaurants,food,cafes,fastfood,supermarkets",
+    "coffee": "coffee,supermarkets",
+}
+
+DEFAULT_CATEGORIES = CATEGORIES_BY_WINDOW["lunch"]
+
+
+def _search_yelp_businesses(lat, lon, *, radius, limit, window_type):
+    if not YELP_API_KEY:
+        return []
+
+    categories = CATEGORIES_BY_WINDOW.get(window_type, DEFAULT_CATEGORIES)
     params = {
         "latitude": lat,
         "longitude": lon,
         "radius": radius,
         "categories": categories,
-        "limit": limit
+        "limit": limit,
     }
+    headers = {"Authorization": f"Bearer {YELP_API_KEY}"}
+
     try:
-        resp = requests.get(url, headers=headers, params=params)
+        resp = requests.get(
+            YELP_SEARCH_URL,
+            headers=headers,
+            params=params,
+            timeout=REQUEST_TIMEOUT_SECONDS,
+        )
     except Exception:
         return []
+
     if resp.status_code != 200:
         return []
+
     try:
         data = resp.json()
     except Exception:
         return []
-    return [b.get("name", "Unknown") for b in data.get("businesses", [])]
-import requests
-from datetime import datetime, timedelta
+
+    return data.get("businesses", [])
 
 
+def get_nearby_food_places(lat, lon, radius=500, limit=5, window_type="lunch"):
+    """Return nearby venue names for the provided meal window."""
+    businesses = _search_yelp_businesses(
+        lat,
+        lon,
+        radius=radius,
+        limit=limit,
+        window_type=window_type,
+    )
+    return [business.get("name", "Unknown") for business in businesses]
 
-
-# Yelp Fusion API Key (replace with your own if needed)
-YELP_API_KEY = "AlQNzNZ0I0M6dF_3sfXTLiQjrntZMOPdyg1iqMCAbeWzyDnR6K6MBrt71jXboqh7EdC5_33JTAehhMW-WgSDCSyrpgZY82nn7mYcsurtxmtJqMCJrQBMi7fRkjubaXYx"
-
-# Define time windows for breakfast, coffee, lunch, and dinner
-TIME_WINDOWS = {
-    "breakfast": (7, 0, 9, 30),   # 07:00-09:30
-    "lunch":    (12, 0, 14, 0),   # 12:00-14:00
-    "dinner":   (18, 0, 20, 0),   # 18:00-20:00
-    "coffee":   (9, 0, 11, 0),    # 09:00-11:00
-}
 
 def is_meal_time(arrival_time, window_type="lunch"):
     """
@@ -76,39 +100,15 @@ def _interval_overlaps_window(start_time, end_time, window_type):
 
 
 def has_nearby_food(lat, lon, radius=500, window_type="lunch"):
-    """
-    Returns True if there are food/cafe venues within radius (meters) of (lat, lon) using Yelp Fusion API.
-    window_type: "breakfast", "lunch", "dinner", or "coffee". Determines categories searched.
-    """
-    categories_by_window = {
-        "breakfast": "breakfast_brunch,coffee,cafes,supermarkets",
-        "lunch": "restaurants,food,cafes,fastfood,supermarkets",
-        "dinner": "restaurants,food,cafes,fastfood,supermarkets",
-        "coffee": "coffee,supermarkets"
-    }
-    categories = categories_by_window.get(window_type, "restaurants,food,cafes,fastfood,supermarkets")
-    url = "https://api.yelp.com/v3/businesses/search"
-    headers = {
-        "Authorization": f"Bearer {YELP_API_KEY}"
-    }
-    params = {
-        "latitude": lat,
-        "longitude": lon,
-        "radius": radius,
-        "categories": categories,
-        "limit": 1
-    }
-    try:
-        resp = requests.get(url, headers=headers, params=params)
-    except Exception as e:
-        return False
-    if resp.status_code != 200:
-        return False
-    try:
-        data = resp.json()
-    except Exception:
-        return False
-    return len(data.get("businesses", [])) > 0
+    """Return True if at least one nearby food venue exists for the meal window."""
+    businesses = _search_yelp_businesses(
+        lat,
+        lon,
+        radius=radius,
+        limit=1,
+        window_type=window_type,
+    )
+    return bool(businesses)
 
 
 def filter_meal_time_chargers(chargers, journey_start, window_type=None):
@@ -165,14 +165,11 @@ def filter_meal_time_chargers(chargers, journey_start, window_type=None):
 
 
 if __name__ == "__main__":
-    # Example usage (replace with your real data and routing logic)
     chargers = [
         {"ChargerID": 1, "Latitude": 51.5, "Longitude": -0.1, "minutes_from_start": 180},
         {"ChargerID": 2, "Latitude": 53.48, "Longitude": -2.24, "minutes_from_start": 240},
-        # ... more chargers ...
     ]
 
-    # Ask user for journey start time
     user_time = input("Enter your journey start time (HH:MM) or type 'now': ").strip().lower()
     if user_time == 'now':
         journey_start = datetime.now()
@@ -181,10 +178,9 @@ if __name__ == "__main__":
             today = datetime.now()
             hour, minute = map(int, user_time.split(":"))
             journey_start = today.replace(hour=hour, minute=minute, second=0, microsecond=0)
-            # If the time has already passed today, assume it's for tomorrow
             if journey_start < today:
                 journey_start += timedelta(days=1)
-        except Exception as e:
+        except Exception:
             print("Invalid time format. Using current time.")
             journey_start = datetime.now()
 

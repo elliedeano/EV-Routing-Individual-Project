@@ -18,7 +18,6 @@ def parse_price(usage_cost):
     if usage_text in {"free", "no charge", "0", "0.0", "£0", "€0", "$0"}:
         return 0.0
 
-    # Support common pence formats like "35p/kWh" as £0.35.
     pence_match = re.search(r"(\d+(?:\.\d+)?)\s*p(?:\s*/\s*kwh)?", usage_text)
     if pence_match and "£" not in usage_text and "gbp" not in usage_text:
         try:
@@ -83,7 +82,7 @@ def extract_charger_features(charger):
         traffic_delay = 0.0
     if traffic_delay < 0:
         traffic_delay = 0.0
-    # Ensure 'meal_stop' and 'distance_stop' keys always exist
+   
     meal_stop = charger.get('meal_stop', False)
     distance_stop = charger.get('distance_stop', False)
     return {
@@ -200,8 +199,6 @@ def rank_and_filter_chargers(chargers, priorities):
             if _price_missing(feature):
                 return float('inf')
             return float(feature.get('price'))
-
-        # Explicitly prioritize cheaper known prices first, then use score as tie-breaker.
         features.sort(key=lambda f: (_price_missing(f), _price_value(f), -f['score']))
     else:
         features.sort(key=lambda f: f['score'], reverse=True)
@@ -242,7 +239,7 @@ if __name__ == "__main__":
         print("No baseline chargers loaded. Generate baseline_chargers.json before running this ranking script.")
     else:
         if 'traffic_delay' in priorities:
-            from src.routing.traffic import get_traffic_delay_percent
+            from backend.routing.traffic_calculations import get_traffic_delay_percent
             start_lat = input("Enter your trip start latitude: ")
             start_lon = input("Enter your trip start longitude: ")
             start_coords = (float(start_lat), float(start_lon))

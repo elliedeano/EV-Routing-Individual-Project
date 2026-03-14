@@ -1,77 +1,34 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
 import { auth, authInitError } from './firebase';
-
-const CLOUD_API_BASE = 'https://ev-routing-api-896098390327.europe-west2.run.app';
-const ENV_API_BASE = import.meta.env.VITE_API_BASE || '';
-const IS_LOCAL_HOST = typeof window !== 'undefined'
-  && ['localhost', '127.0.0.1'].includes(window.location.hostname);
-const API_BASE = (!IS_LOCAL_HOST && ENV_API_BASE.includes('localhost'))
-  ? CLOUD_API_BASE
-  : (ENV_API_BASE || CLOUD_API_BASE);
-
-const PRIORITIES = [
-  { key: 'price', label: 'Lowest Price per kWh' },
-  { key: 'max_power', label: 'Highest Charging Power (kW)' },
-  { key: 'is_fast', label: 'Fast Charge Capable' },
-  { key: 'num_points', label: 'Most Charging Points' },
-  { key: 'traffic_delay', label: 'Least Traffic Delay (% Increase)' },
-];
-
-const PRIORITY_KEYS = new Set(PRIORITIES.map((priority) => priority.key));
-
-const PRIORITY_VALUE_FORMATTERS = {
-  price: (value) => (typeof value === 'number' ? `£${value.toFixed(2)} / kWh` : '-'),
-  max_power: (value) => (typeof value === 'number' ? `${Math.round(value)} kW` : '-'),
-  is_fast: (value) => (typeof value === 'boolean' ? (value ? 'Yes' : 'No') : '-'),
-  num_points: (value) => (typeof value === 'number' ? `${Math.round(value)}` : '-'),
-  traffic_delay: (value) => {
-    if (typeof value !== 'number') return '-';
-    if (value > 0 && value < 0.1) return '<0.1%';
-    return `${value.toFixed(1)}%`;
-  },
-};
-
-const hasValue = (value) => {
-  if (value === null || value === undefined) return false;
-  if (typeof value === 'string' && value.trim() === '') return false;
-  if (typeof value === 'number' && Number.isNaN(value)) return false;
-  return true;
-};
-
-const toNumber = (value) => {
-  if (typeof value === 'number') return value;
-  if (typeof value === 'string') {
-    const parsed = Number.parseFloat(value.replace(/[^\d.-]/g, ''));
-    return Number.isNaN(parsed) ? NaN : parsed;
-  }
-  return NaN;
-};
-
-
-const PRIORITY_DIRECTIONS = {
-  price: 'min',
-  max_power: 'max',
-  is_fast: 'max',
-  num_points: 'max',
-  traffic_delay: 'min',
-};
-
-const getPriorityScore = (charger, key) => {
-  const value = charger?.[key];
-  if (!hasValue(value)) return NaN;
-  if (key === 'is_fast') return value ? 1 : 0;
-  return typeof value === 'number' ? value : NaN;
-};
+import { fetchCarModels } from './services/apiClient';
+import {
+  PRIORITIES,
+  PRIORITY_DIRECTIONS,
+  PRIORITY_VALUE_FORMATTERS,
+  hasValue,
+  toNumber,
+  getPriorityScore,
+} from './features/routing/mappers';
+import { useAuth } from './hooks/useAuth';
+import {
+  loadProfileDefaults as loadProfileDefaultsApi,
+  persistProfileDefaults as persistProfileDefaultsApi,
+  toProfileDraft,
+} from './hooks/useProfileDefaults';
+import { submitRouteRequest } from './hooks/useRoutePlanner';
+import {
+  getNearbyStopsLabel,
+  formatRoundedKm,
+  getRankLabel,
+} from './features/routing/RoutingResultHelpers';
 
 export default function App() {
-  const [authReady, setAuthReady] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const { authReady, currentUser } = useAuth(auth);
   const [authMode, setAuthMode] = useState('login');
   const [authForm, setAuthForm] = useState({ email: '', password: '' });
   const [authError, setAuthError] = useState(null);
@@ -105,34 +62,6 @@ export default function App() {
   const [error, setError] = useState(null);
   const [profileStatus, setProfileStatus] = useState(null);
 
-  const normalizeProfile = (profile) => ({
-    car_model: profile?.car_model ?? null,
-    home_destination_postcode: profile?.home_destination_postcode ?? null,
-    default_mode: profile?.default_mode ?? null,
-    default_priorities: Array.isArray(profile?.default_priorities)
-      ? profile.default_priorities.filter((key) => PRIORITY_KEYS.has(key)).slice(0, 2)
-      : [],
-  });
-
-  const toProfileDraft = (profile) => ({
-    car_model: profile?.car_model ?? '',
-    home_destination_postcode: profile?.home_destination_postcode ?? '',
-    default_mode: profile?.default_mode ?? 'distance',
-    default_priorities: Array.isArray(profile?.default_priorities) ? profile.default_priorities.slice(0, 2) : [],
-  });
-
-  useEffect(() => {
-    if (!auth) {
-      setAuthReady(true);
-      return undefined;
-    }
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user || null);
-      setAuthReady(true);
-    });
-    return () => unsubscribe();
-  }, []);
-
   useEffect(() => {
     if (!currentUser) {
       setModels([]);
@@ -151,13 +80,7 @@ export default function App() {
     let cancelled = false;
     setLoadingModels(true);
     currentUser.getIdToken()
-      .then((token) => fetch(`${API_BASE}/api/v1/car-models`, {
-        headers: { Authorization: `Bearer ${token}` },
-      }))
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to load car models');
-        return res.json();
-      })
+      .then((token) => fetchCarModels(token))
       .then((data) => {
         if (!cancelled) setModels(data.models || []);
       })
@@ -173,13 +96,8 @@ export default function App() {
   }, [currentUser]);
 
   const fetchSavedDefaults = async () => {
-    if (!currentUser) return null;
-    const token = await currentUser.getIdToken();
-    const res = await fetch(`${API_BASE}/api/v1/profile`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    if (!res.ok) throw new Error('Failed to load profile defaults');
-    const profile = normalizeProfile(await res.json());
+    const profile = await loadProfileDefaultsApi(currentUser);
+    if (!profile) return null;
     setSavedDefaults(profile);
     setProfileDraft(toProfileDraft(profile));
     return profile;
@@ -294,17 +212,7 @@ export default function App() {
   };
 
   const persistProfileDefaults = async (payload) => {
-    const token = await currentUser.getIdToken();
-    const res = await fetch(`${API_BASE}/api/v1/profile`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error('Failed to save profile defaults');
-    const updatedProfile = normalizeProfile(await res.json());
+    const updatedProfile = await persistProfileDefaultsApi(currentUser, payload);
     setSavedDefaults(updatedProfile);
     return updatedProfile;
   };
@@ -404,27 +312,6 @@ export default function App() {
   const journey_start = form.journeyStartMode === 'now'
     ? 'now'
     : form.journeyTime;
-
-  const getRankLabel = (index) => {
-    if (index === 0) return 'Best overall';
-    if (index === 1) return 'Strong alternative';
-    if (index === 2) return 'Backup option';
-    return `Option ${index + 1}`;
-  };
-
-  const formatRoundedKm = (value) => {
-    if (typeof value !== 'number' || Number.isNaN(value)) return '-';
-    return `${Math.round(value)} km`;
-  };
-
-  const getNearbyStopsLabel = (charger) => {
-    const windowType = (charger?.meal_window || '').toLowerCase();
-    if (windowType === 'breakfast') return 'Breakfast Stops Nearby';
-    if (windowType === 'coffee') return 'Coffee Stops Nearby';
-    if (windowType === 'lunch') return 'Lunch Stops Nearby';
-    if (windowType === 'dinner') return 'Dinner Stops Nearby';
-    return 'Food Stops Nearby';
-  };
 
   const getSelectedPriorityDetails = (charger) => {
     return selectedPriorities.map((key) => {
@@ -530,7 +417,6 @@ export default function App() {
     setError(null);
     setResult(null);
     try {
-      const token = await currentUser.getIdToken();
       const priorities = [umbrellaPriority, ...selectedPriorities];
       const payload = {
         start_postcode: form.start_postcode.trim(),
@@ -542,16 +428,7 @@ export default function App() {
         priorities,
         journey_start,
       };
-      const res = await fetch(`${API_BASE}/api/v1/route`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error('Server error');
-      const data = await res.json();
+      const data = await submitRouteRequest(currentUser, payload);
       setResult(data);
     } catch (err) {
       setError(err.message || 'Request failed');

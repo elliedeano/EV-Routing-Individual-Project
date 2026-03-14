@@ -2,7 +2,7 @@
 traffic.py
 Unified traffic analysis and travel time module for TomTom API.
 """
-from fetch_traffic_data import fetch_travel_time, fetch_route_summary
+from backend.routing.traffic_api_client import fetch_travel_time, fetch_route_summary
 
 # --- Travel Time Functions ---
 def get_travel_time_from_coords(start_coords, dest_coords, depart_at=None):

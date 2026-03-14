@@ -1,4 +1,5 @@
 import requests
+import os
 from datetime import datetime
 
 
@@ -19,7 +20,9 @@ def fetch_route_summary(start_lat, start_lon, end_lat, end_lon, depart_at=None):
     Fetches TomTom route summary for a route between two coordinates.
     Returns the `summary` dict or None if the API call fails.
     """
-    api_key = "AlmtymL0xYZG08ULKfWbjWOg6PzcZtEd"
+    api_key = os.getenv("TOMTOM_API_KEY")
+    if not api_key:
+        return None
     url = (
         f"https://api.tomtom.com/routing/1/calculateRoute/"
         f"{start_lat},{start_lon}:{end_lat},{end_lon}/json"
