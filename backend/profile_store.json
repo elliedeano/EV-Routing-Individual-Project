@@ -30,12 +30,12 @@
     "updated_by": "elliedeaner@hotmail.com"
   },
   "2Kg2cYu6jNY339avOOvUT2QMVVI3": {
-    "car_model": "Citroen C5",
-    "home_destination_postcode": "SW6 4BL",
+    "car_model": "Kia EV3",
+    "home_destination_postcode": "SP4 7DE",
     "default_mode": "distance",
     "default_priorities": [
-      "max_power",
-      "price"
+      "num_points",
+      "traffic_delay"
     ],
     "updated_by": "elliedeaner@hotmail.com"
   }

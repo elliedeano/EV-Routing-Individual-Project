@@ -12,7 +12,10 @@ const ensureOk = async (res, fallbackMessage) => {
     let detail = '';
     try {
       const data = await res.json();
-      detail = data?.detail ? `: ${data.detail}` : '';
+      const d = data?.detail;
+      if (d) {
+        detail = `: ${typeof d === 'string' ? d : JSON.stringify(d)}`;
+      }
     } catch (_) {
       detail = '';
     }

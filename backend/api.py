@@ -3,10 +3,12 @@ import sys
 import csv
 import json
 import os
+from dotenv import load_dotenv
 from threading import Lock
 from typing import List, Optional, Dict, Any
 
 from fastapi import FastAPI, HTTPException, Depends, status, Request
+from fastapi.exceptions import RequestValidationError
 from pydantic import BaseModel, Field
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -63,20 +65,24 @@ from backend.routing.services.route_planner import compute_route as compute_rout
 
 
 security = HTTPBearer(auto_error=False)
+load_dotenv()
 EXPECTED_FIREBASE_PROJECT_ID = os.getenv("FIREBASE_PROJECT_ID", "project-27ffc5fd-b1d7-41-e0556")
 LOCAL_PROFILE_STORE = PROJECT_ROOT / "backend" / "profile_store.json"
 _profile_store_lock = Lock()
 
 
+
+from pydantic import Field
+
 class RouteRequest(BaseModel):
-	start_postcode: str
-	end_postcode: str
+	start_postcode: str = Field(..., min_length=1)
+	end_postcode: str = Field(..., min_length=1)
 	soc: float
-	car_model: Optional[str] = None
-	umbrella_choice: Optional[str] = 'distance'
-	meal_window: Optional[str] = None
-	priorities: Optional[List[str]] = None
-	journey_start: Optional[str] = None
+	car_model: str = Field(..., min_length=1)
+	umbrella_choice: str = Field('distance', min_length=1)
+	meal_window: str = None
+	priorities: List[str] = Field(..., min_items=2)
+	journey_start: str = Field(..., min_length=1)
 
 
 class ChargerOut(BaseModel):
@@ -276,6 +282,24 @@ def compute_route(req: RouteRequest, current_user: Dict[str, Optional[str]] = De
 		raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post('/api/v1/route-debug', response_model=RouteResponse)
+def compute_route_debug(req: RouteRequest):
+	"""Temporary unauthenticated endpoint for debugging request validation."""
+	try:
+		out = compute_route_service(
+			req.start_postcode,
+			req.end_postcode,
+			req.soc,
+			req.car_model,
+			umbrella_choice=(req.umbrella_choice or 'distance'),
+			priorities=req.priorities,
+			journey_start=req.journey_start,
+		)
+		return RouteResponse(**out)
+	except Exception as e:
+		raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.get('/api/v1/car-models', response_model=CarModelsResponse)
 def get_car_models(current_user: Dict[str, Optional[str]] = Depends(get_current_user)):
 	try:
@@ -354,4 +378,18 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
 	return JSONResponse(
 		status_code=500,
 		content={"detail": "Internal server error"},
+	)
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+	try:
+		body_bytes = await request.body()
+		body_text = body_bytes.decode('utf-8', errors='replace')
+	except Exception:
+		body_text = '<could not read body>'
+	print(f"Request validation error on {request.url.path}: {exc}\nBody: {body_text}")
+	return JSONResponse(
+		status_code=422,
+		content={"detail": exc.errors(), "body": body_text},
 	)

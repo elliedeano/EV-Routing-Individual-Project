@@ -119,6 +119,14 @@ export default function App() {
     };
   }, [currentUser]);
 
+  useEffect(() => {
+    if (currentUser) {
+      currentUser.getIdToken(true).then(token => {
+        console.log('FIREBASE TOKEN:', token);
+      });
+    }
+  }, [currentUser]);
+
   const umbrellaPriority = useMemo(() => {
     return form.umbrella_choice === 'meal' ? 'meal_stop' : 'distance_stop';
   }, [form.umbrella_choice]);
@@ -417,17 +425,43 @@ export default function App() {
     setError(null);
     setResult(null);
     try {
+      const socVal = Number(form.soc);
+      if (Number.isNaN(socVal)) {
+        setError('Please enter a valid State of Charge (SoC)');
+        setLoading(false);
+        return;
+      }
+      // basic client-side validation to avoid sending null/invalid values
+      if (!form.start_postcode || !form.start_postcode.trim()) {
+        setError('Enter a valid start postcode');
+        setLoading(false);
+        return;
+      }
+      if (!form.end_postcode || !form.end_postcode.trim()) {
+        setError('Enter a valid destination postcode');
+        setLoading(false);
+        return;
+      }
+      if (!form.car_model) {
+        setError('Select a car model');
+        setLoading(false);
+        return;
+      }
+
       const priorities = [umbrellaPriority, ...selectedPriorities];
       const payload = {
         start_postcode: form.start_postcode.trim(),
         end_postcode: form.end_postcode.trim(),
-        soc: Number(form.soc),
-        car_model: form.car_model || null,
+        soc: socVal,
+        car_model: form.car_model,
         umbrella_choice: form.umbrella_choice,
-        meal_window: null,
         priorities,
         journey_start,
       };
+      // include meal_window only for meal-based mode to avoid sending null
+      if (form.umbrella_choice === 'meal') {
+        payload.meal_window = journey_start;
+      }
       const data = await submitRouteRequest(currentUser, payload);
       setResult(data);
     } catch (err) {
@@ -584,7 +618,7 @@ export default function App() {
                       />
                     </label>
                     <div className="actions">
-                      <button type="submit">{authMode === 'signup' ? 'Create account' : 'Sign in'}</button>
+                      <button type="submit">{authMode === 'signup' ? 'Create account' : 'Log In'}</button>
                       <button
                         type="button"
                         onClick={() => {
