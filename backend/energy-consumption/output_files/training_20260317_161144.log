@@ -1,0 +1,33 @@
+Training run started at 2026-03-17T16:11:44.555936
+Writing log to /Users/elliedeaner/Downloads/ev-routing-project/backend/energy-consumption/output_files/training_20260317_161144.log
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000483 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 4596
+[LightGBM] [Info] Number of data points in the train set: 3076, number of used features: 26
+[LightGBM] [Info] Start training from score 7.979642
+Model trained and saved to /Users/elliedeaner/Downloads/ev-routing-project/backend/energy-consumption/output_files/lgbm_ev_energy_model.pkl
+
+Model training complete.
+
+Prediction complete. Sample output:
+   COND  trip_energy_Wh  trip_rows  trip_distance_km  wh_per_km_raw
+0     7    15686.790182       2030              76.2     205.863388
+1     8    14376.651010       1816              72.3     198.847179
+trip_energy.csv saved to /Users/elliedeaner/Downloads/ev-routing-project/backend/energy-consumption/output_files/trip_energy.csv
+
+Trip energy prediction sample:
+    COND  trip_energy_Wh  trip_rows  trip_distance_km  wh_per_km_raw
+0     7    15686.790182       2030              76.2     205.863388
+1     8    14376.651010       1816              72.3     198.847179
+
+Scaled energy sample:
+    COND       Car Model  wh_per_km_raw
+0   7.0       JAC iEV7s     205.863388
+1   8.0       JAC iEV7s     198.847179
+2   7.0         Kia EV3     201.103541
+3   8.0         Kia EV3     194.249556
+4   7.0  Tesla Model 3      160.644841
+
+Energy modeling complete. Scaled results ready for routing.
+
+Training run finished at 2026-03-17T16:11:49.802921

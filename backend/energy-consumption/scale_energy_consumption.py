@@ -20,8 +20,8 @@ def scale_to_other_cars(trip_df):
                 "Car Model": car["Car Model"],
                 "wh_per_km_raw": trip["wh_per_km_raw"] * scale
             })
-    scaled_df = pd.DataFrame(scaled)
-    scaled_df = scaled_df.rename(columns={"wh_per_km": "wh_per_km_raw"})
+    # Ensure the DataFrame has the expected columns even when `scaled` is empty
+    scaled_df = pd.DataFrame(scaled, columns=["COND", "Car Model", "wh_per_km_raw"]) 
     output_dir = Path(__file__).parent / "output_files"
     output_dir.mkdir(exist_ok=True)
     scaled_df.to_csv(

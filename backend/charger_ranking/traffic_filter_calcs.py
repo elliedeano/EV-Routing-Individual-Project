@@ -14,9 +14,6 @@ def _normalize_depart_at(depart_at):
 
 
 def get_traffic_delay_percent(start_coords, dest_coords, depart_at=None):
-    """
-    Returns the percentage traffic delay for a route using TomTom API.
-    """
     api_key = "AlmtymL0xYZG08ULKfWbjWOg6PzcZtEd"
     url = (
         f"https://api.tomtom.com/routing/1/calculateRoute/"

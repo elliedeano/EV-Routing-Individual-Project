@@ -1,19 +1,8 @@
-"""
-traffic.py
-Unified traffic analysis and travel time module for TomTom API.
-"""
+
 from backend.routing.traffic_api_client import fetch_travel_time, fetch_route_summary
 
-# --- Travel Time Functions ---
 def get_travel_time_from_coords(start_coords, dest_coords, depart_at=None):
-    """
-    Fetches travel time (in seconds) from TomTom API using start and end coordinates.
-    Args:
-        start_coords: (lat, lon) tuple
-        dest_coords: (lat, lon) tuple
-    Returns:
-        travel_time_sec: Estimated travel time in seconds (or None if error)
-    """
+    
     return fetch_travel_time(
         start_coords[0], start_coords[1], dest_coords[0], dest_coords[1], depart_at=depart_at
     )
@@ -25,11 +14,9 @@ def print_travel_time_with_traffic(start_coords, dest_coords, depart_at=None):
     else:
         print("Could not fetch travel time from TomTom API.")
 
-# --- Traffic Delay Functions ---
+
 def get_traffic_delay_percent(start_coords, dest_coords, depart_at=None):
-    """
-    Returns the percentage traffic delay for a route using TomTom API.
-    """
+    
     summary = fetch_route_summary(
         start_coords[0], start_coords[1], dest_coords[0], dest_coords[1], depart_at=depart_at
     )
@@ -47,9 +34,6 @@ def get_traffic_delay_percent(start_coords, dest_coords, depart_at=None):
         return 0.0
 
 def analyze_traffic(start_coords, dest_coords, distance_km, depart_at=None):
-    """
-    Prints both ideal (no traffic) and traffic-adjusted times from TomTom API for a given route.
-    """
     summary = fetch_route_summary(
         start_coords[0], start_coords[1], dest_coords[0], dest_coords[1], depart_at=depart_at
     )

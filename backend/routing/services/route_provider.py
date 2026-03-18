@@ -1,13 +1,9 @@
 import os
-
 import polyline
 import requests
-
 from backend.routing.services.geocoding import ORS_API_KEY
 
-
 REQUEST_TIMEOUT_SECONDS = float(os.getenv("EXTERNAL_API_TIMEOUT_SECONDS", "10"))
-
 
 def get_route(start_coords, dest_coords):
     if not ORS_API_KEY:

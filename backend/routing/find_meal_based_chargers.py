@@ -112,7 +112,7 @@ def find_meal_based_chargers(route, car_specs, soc, journey_start, priorities=No
             traffic_depart_at,
         )
     selected_windows = [w for w in window_types if w in covered_windows]
-    # Determine which meal windows are reachable within estimated range
+   
     reachable_windows = []
     for window_type in selected_windows:
         indices_in_window = [i for i, eta in enumerate(route_times) if is_meal_time(eta, window_type=window_type)]
@@ -123,7 +123,6 @@ def find_meal_based_chargers(route, car_specs, soc, journey_start, priorities=No
         if earliest_km <= est_reachable_km:
             reachable_windows.append(window_type)
 
-    # If no meal windows are reachable, fall back to distance-based chargers
     if not reachable_windows:
         return _rank_distance_fallback_chargers(
             route,

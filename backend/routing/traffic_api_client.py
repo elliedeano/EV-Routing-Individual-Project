@@ -1,6 +1,9 @@
 import requests
 import os
+import logging
 from datetime import datetime
+
+logger = logging.getLogger(__name__)
 
 
 def _normalize_depart_at(depart_at):
@@ -16,13 +19,10 @@ def _normalize_depart_at(depart_at):
 
 
 def fetch_route_summary(start_lat, start_lon, end_lat, end_lon, depart_at=None):
-    """
-    Fetches TomTom route summary for a route between two coordinates.
-    Returns the `summary` dict or None if the API call fails.
-    """
-    api_key = os.getenv("TOMTOM_API_KEY")
-    if not api_key:
-        return None
+    # Prefer environment-provided key but fall back to the project's default
+    # TomTom key (used elsewhere in the repo) so traffic calculations still
+    # work when the env var is not set during local development.
+    api_key = os.getenv("TOMTOM_API_KEY") or "AlmtymL0xYZG08ULKfWbjWOg6PzcZtEd"
     url = (
         f"https://api.tomtom.com/routing/1/calculateRoute/"
         f"{start_lat},{start_lon}:{end_lat},{end_lon}/json"
@@ -42,16 +42,16 @@ def fetch_route_summary(start_lat, start_lon, end_lat, end_lon, depart_at=None):
         data = response.json()
         routes = data.get("routes", [])
         if not routes:
+            logger.debug("TomTom response had no routes: %s", data)
             return None
-        return routes[0].get("summary", {})
-    except Exception:
+        summary = routes[0].get("summary", {})
+        logger.debug("TomTom route summary: %s", summary)
+        return summary
+    except Exception as exc:
+        logger.exception("Error fetching TomTom route summary: %s", exc)
         return None
 
 def fetch_travel_time(start_lat, start_lon, end_lat, end_lon, depart_at=None):
-    """
-    Fetches travel time (in seconds) from TomTom API for a route between two coordinates.
-    Returns None if the API call fails.
-    """
     summary = fetch_route_summary(start_lat, start_lon, end_lat, end_lon, depart_at=depart_at)
     if not summary:
         return None

@@ -1,5 +1,4 @@
 import math
-
 from backend.routing.services.charger_provider import get_chargers_near_route
 
 def route_segment_distance(lat1, lon1, lat2, lon2):

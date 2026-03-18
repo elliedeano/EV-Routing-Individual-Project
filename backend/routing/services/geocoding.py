@@ -1,7 +1,5 @@
 import os
-
 import requests
-
 
 ORS_API_KEY = os.getenv("ORS_API_KEY")
 REQUEST_TIMEOUT_SECONDS = float(os.getenv("EXTERNAL_API_TIMEOUT_SECONDS", "10"))
@@ -17,7 +15,6 @@ def _is_placeholder_key(value: str) -> bool:
         or v.endswith("_here")
         or v in {"changeme", "replace_me"}
     )
-
 
 def geocode_postcode(postcode):
     if _is_placeholder_key(ORS_API_KEY):

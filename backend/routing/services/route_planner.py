@@ -1,6 +1,5 @@
 import math
 from typing import Optional, List, Dict, Any
-
 from backend.routing.find_meal_based_chargers import find_meal_based_chargers
 from backend.routing.traffic_calculations import get_traffic_delay_percent
 from backend.routing.services.geocoding import geocode_postcode

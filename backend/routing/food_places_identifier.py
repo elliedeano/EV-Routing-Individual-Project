@@ -1,8 +1,6 @@
 import os
 from datetime import datetime, timedelta
-
 import requests
-
 
 YELP_API_KEY = os.getenv("YELP_API_KEY")
 REQUEST_TIMEOUT_SECONDS = float(os.getenv("EXTERNAL_API_TIMEOUT_SECONDS", "10"))
@@ -62,7 +60,6 @@ def _search_yelp_businesses(lat, lon, *, radius, limit, window_type):
 
 
 def get_nearby_food_places(lat, lon, radius=500, limit=5, window_type="lunch"):
-    """Return nearby venue names for the provided meal window."""
     businesses = _search_yelp_businesses(
         lat,
         lon,
@@ -74,9 +71,6 @@ def get_nearby_food_places(lat, lon, radius=500, limit=5, window_type="lunch"):
 
 
 def is_meal_time(arrival_time, window_type="lunch"):
-    """
-    Returns True if arrival_time is within the specified window_type (breakfast, lunch, dinner, coffee).
-    """
     if window_type not in TIME_WINDOWS:
         raise ValueError(f"Unknown window_type: {window_type}")
     start_h, start_m, end_h, end_m = TIME_WINDOWS[window_type]
@@ -100,7 +94,6 @@ def _interval_overlaps_window(start_time, end_time, window_type):
 
 
 def has_nearby_food(lat, lon, radius=500, window_type="lunch"):
-    """Return True if at least one nearby food venue exists for the meal window."""
     businesses = _search_yelp_businesses(
         lat,
         lon,
@@ -112,18 +105,6 @@ def has_nearby_food(lat, lon, radius=500, window_type="lunch"):
 
 
 def filter_meal_time_chargers(chargers, journey_start, window_type=None):
-    """
-    chargers: list of dicts, each with at least 'Latitude', 'Longitude', 'minutes_from_start'
-    journey_start: datetime object
-    Returns: list of chargers suitable for meal stops.
-    A charger is eligible if the interval from journey_start to charger arrival:
-    - starts during a meal window, or
-    - travels through a meal window, or
-    - arrives during a meal window.
-
-    window_type: optional specific window (breakfast/lunch/dinner/coffee).
-                 If None, checks all windows.
-    """
     meal_stops = []
     if window_type is not None and window_type not in TIME_WINDOWS:
         raise ValueError(f"Unknown window_type: {window_type}")
