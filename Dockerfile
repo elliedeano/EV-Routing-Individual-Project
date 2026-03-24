@@ -11,7 +11,6 @@ RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 COPY backend /app/backend
 COPY src /app/src
 COPY data /app/data
-COPY meal_time_routing.py /app/meal_time_routing.py
 
 WORKDIR /app/backend
 
