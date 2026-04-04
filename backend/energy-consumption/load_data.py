@@ -10,8 +10,17 @@ def load_ev_data(filename="Kaggle-EV-Dataset.csv"):
     df = pd.read_csv(file_path)
 
     df["total_seconds"] = df["H"] * 3600 + df["MIN"] * 60 + df["SEC"]
+    # ensure rows are ordered by trip and full date/time so diffs are correct
+    # sort by trip, year, month, day, then seconds-of-day to avoid day-wrap issues
+    sort_cols = ["COND"]
+    for c in ("Y", "M", "D"):
+        if c in df.columns:
+            sort_cols.append(c)
+    sort_cols.append("total_seconds")
+    df = df.sort_values(sort_cols).reset_index(drop=True)
     df["time_difference"] = df.groupby("COND")["total_seconds"].diff().fillna(0)
-    df["time_difference"] = df["time_difference"].clip(lower=0, upper=5)
+    # keep non-negative time differences
+    df["time_difference"] = df["time_difference"].clip(lower=0)
 
     df["acceleration_magnitude"] = np.sqrt(df["AX"]**2 + df["AY"]**2 + df["AZ"]**2)
     df["gyroscope_magnitude"] = np.sqrt(df["GX"]**2 + df["GY"]**2 + df["GZ"]**2)
