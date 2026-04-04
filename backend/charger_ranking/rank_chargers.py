@@ -98,7 +98,7 @@ def extract_charger_features(charger):
         'raw': charger
     }
 
-def normalize_feature(values, ascendingVsDescending=True):
+def normalise_feature(values, ascendingVsDescending=True):
     numeric_values = []
     for value in values:
         if value is None:
@@ -131,31 +131,20 @@ def normalize_feature(values, ascendingVsDescending=True):
         return [(value - min_v) / (max_v - min_v) for value in clean_values]
     return [(max_v - value) / (max_v - min_v) for value in clean_values]
 
-def rank_and_filter_chargers(chargers, priorities):
-    features = [extract_charger_features(c) for c in chargers]
-    features = [f for f in features if f['status'] is not False]
-    if not features:
-        return []
 
-    ascendingVsDescending = {
-        'price': False,
-        'max_power': True,
-        'is_fast': True,
-        'num_points': True,
-        'distance': False,
-        'traffic_delay': False,
-        'meal_stop': True,
-        'distance_stop': True
-    }
+def _compute_priority_weights(priorities):
+    return {p: 3 - i for i, p in enumerate(priorities)}
 
-   
-    weights = {p: 3-i for i, p in enumerate(priorities)}
+
+def _normalize_for_priorities(features, priorities, ascendingVsDescending):
     normed = {}
     for p in priorities:
         vals = [f[p] if not isinstance(f[p], bool) else int(f[p]) for f in features]
-        normed[p] = normalize_feature(vals, ascendingVsDescending[p])
+        normed[p] = normalise_feature(vals, ascendingVsDescending[p])
+    return normed
 
 
+def _compute_scores(features, priorities, weights, normed):
     for i, f in enumerate(features):
         score = 0
         breakdown = {}
@@ -186,7 +175,10 @@ def rank_and_filter_chargers(chargers, priorities):
         score -= missing_penalty
         f['score'] = score
         f['breakdown'] = breakdown
+    return features
 
+
+def _sort_and_select(features, priorities):
     if 'price' in priorities:
         def _price_missing(feature):
             raw_price = feature.get('price')
@@ -203,6 +195,28 @@ def rank_and_filter_chargers(chargers, priorities):
     else:
         features.sort(key=lambda f: f['score'], reverse=True)
     return features[:3]
+
+def rank_and_filter_chargers(chargers, priorities):
+    features = [extract_charger_features(c) for c in chargers]
+    features = [f for f in features if f['status'] is not False]
+    if not features:
+        return []
+
+    ascendingVsDescending = {
+        'price': False,
+        'max_power': True,
+        'is_fast': True,
+        'num_points': True,
+        'distance': False,
+        'traffic_delay': False,
+        'meal_stop': True,
+        'distance_stop': True
+    }
+
+    weights = _compute_priority_weights(priorities)
+    normed = _normalize_for_priorities(features, priorities, ascendingVsDescending)
+    features = _compute_scores(features, priorities, weights, normed)
+    return _sort_and_select(features, priorities)
 
 def get_user_priorities(input_str):
     valid = {'price', 'max_power', 'is_fast', 'num_points', 'distance', 'traffic_delay'}

@@ -1,0 +1,2 @@
+COND,trip_energy_physics,trip_distance_km,wh_per_km_physics,trip_energy_model,wh_per_km_model,delta_model_minus_physics
+8,14391.659444444444,76.20000000000073,188.86692184310112,14529.469485112182,190.6754525605255,1.8085307174243894
