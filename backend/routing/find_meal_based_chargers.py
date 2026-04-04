@@ -66,16 +66,13 @@ def rank_fallback_chargers(route, car_specs, soc, est_reachable_km, priorities, 
     return ranked
 
 
-def calculate_route_times(route_points, journey_start, avg_speed_kmh=60):
+def calculate_route_time(route_points, journey_start, avg_speed_kmh=60):
     route_times = []
-    for idx, pt in enumerate(route_points):
-        if idx == 0:
+    for idex, point in enumerate(route_points):
+        if idex == 0:
             eta = journey_start
             route_times.append(eta)
-            continue
-        seg_km = route_segment_distance(
-            route_points[idx-1][0], route_points[idx-1][1], pt[0], pt[1]
-        )
+        seg_km = route_segment_distance(route_points[idex-1][0], route_points[idex-1][1], point[0], point[1])
         seg_hr = seg_km / avg_speed_kmh
         eta = route_times[-1] + timedelta(hours=seg_hr)
         route_times.append(eta)
@@ -139,22 +136,13 @@ def enrich_chargers(c, pt_km, window_type, start_coords, route, traffic_depart_a
     return c
 
 
-def _indices_in_window(route_times, window_type):
-    return [i for i, eta in enumerate(route_times) if is_meal_time(eta, window_type=window_type)]
-
-
 def sample_reachable_indices(route_times, window_type, route_distance, est_reachable_km):
-    
     indices_in_window = [i for i, eta in enumerate(route_times) if is_meal_time(eta, window_type=window_type)]
     if not indices_in_window:
         return []
-
-   
     in_range = [i for i in indices_in_window if (route_distance[i - 1] if i > 0 else 0.0) <= est_reachable_km]
     if not in_range:
         return []
-
-    
     first_idx = in_range[0]
     mid_idx = in_range[len(in_range) // 2]
     last_idx = in_range[-1]
@@ -203,7 +191,7 @@ def find_meal_based_chargers(route, car_specs, soc, journey_start, priorities=No
     route_points = route
     window_types = ["breakfast", "coffee", "lunch", "dinner"]
 
-    route_times = calculate_route_times(route_points, journey_start, avg_speed_kmh=avg_speed_kmh)
+    route_times = calculate_route_time(route_points, journey_start, avg_speed_kmh=avg_speed_kmh)
     covered_windows = meal_windows(route_times, window_types)
     meal_window_idxs = meal_window_indices(route_times, window_types)
     route_distance = calculate_route_distance(route_points)
