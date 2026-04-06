@@ -6,7 +6,7 @@ from backend.routing.services.geocoding import geocode_postcode
 from backend.routing.services.route_provider import get_route
 from backend.routing.services.charger_provider import get_chargers_near_route
 from backend.routing.services.simulation import trip_simulation, route_segment_distance
-from backend.charger_ranking.rank_chargers import rank_and_filter_chargers
+from backend.routing.rank_chargers import rank_and_filter_chargers
 
 
 def _safe_float(value, default=0.0):

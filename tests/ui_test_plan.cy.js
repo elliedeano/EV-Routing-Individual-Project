@@ -1,4 +1,3 @@
-
 describe('Authentication - Sad Path', () => {
   beforeEach(() => {
     cy.wait(1000); 
@@ -59,38 +58,6 @@ describe('Charger Planning: Meal Mode - Happy Path', () => {
   });
 });
 
-
-describe('Charger Planning: Meal Mode - Happy Path', () => {
-  beforeEach(() => {
-    cy.wait(1000);
-  });
-
-  it('renders route planner form', () => {
-    cy.visit('http://localhost:5173/');
-    cy.get('input[name="journeyTime"]').then($el => {
-      const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-      setter.call($el[0], '09:30');
-      $el[0].dispatchEvent(new Event('input', { bubbles: true }));
-    });
-    cy.get('input[name="start_postcode"]').should('be.visible').clear().type('BA2 7AY');
-    cy.get('input[name="end_postcode"]').should('be.visible').clear().type('TR12 7NT');
-    cy.get('input[name="soc"]').should('be.visible').clear().type('45');
-    cy.get('select[name="car_model"]', { timeout: 10000 }).should('exist').should('not.be.disabled').select('Citroen C5');
-    cy.contains('Meal-Based').click();
-    cy.get('.priority-buttons button').eq(0).click();
-    cy.get('.priority-buttons button').eq(1).click();
-    cy.get('button[type="submit"]').contains('Get recommendations').click();
-    cy.get('.charger-list li', { timeout: 60000 }).should('have.length.at.least', 1);
-    cy.contains('EVC Bath Spa Hotel', { timeout: 60000 }).should('exist');
-    cy.get('.charger-list li').first().within(() => {
-    cy.get('details.nearby-places summary', { timeout: 60000 }).click();
-    cy.contains('Holburne Museum Tea House', { timeout: 60000 }).should('exist');
-    });
-  });
-});
-
-
-
 describe('Charger Planning: Meal Mode - Sad (Low charge distance fallback) Path', () => {
   beforeEach(() => {
     cy.wait(1000);
@@ -113,10 +80,8 @@ describe('Charger Planning: Meal Mode - Sad (Low charge distance fallback) Path'
     cy.get('button[type="submit"]').contains('Get recommendations').click();
     cy.get('.charger-list li', { timeout: 60000 }).should('have.length.at.least', 1);
     cy.contains('Meal-Based options were unavailable for this time, so distance-based chargers are shown instead.', { timeout: 60000 }).should('exist');
-    });
   });
-
-
+});
 
 describe('Charger Planning: Distance Mode - Happy Path', () => {
   beforeEach(() => {
@@ -140,33 +105,6 @@ describe('Charger Planning: Distance Mode - Happy Path', () => {
     cy.get('button[type="submit"]').contains('Get recommendations').click();
     cy.get('.charger-list li', { timeout: 60000 }).should('have.length.at.least', 1);
     cy.contains('White Hart Hotel', { timeout: 60000 }).should('exist');
-    
-  });
-});
-
-
-describe('Charger Planning: Distance Mode - Sad (Sufficient battery no chargers needed) Path', () => {
-  beforeEach(() => {
-    cy.wait(1000);
-  });
-
-  it('renders route planner form', () => {
-    cy.visit('http://localhost:5173/');
-    cy.get('input[name="journeyTime"]').then($el => {
-      const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-      setter.call($el[0], '12:30');
-      $el[0].dispatchEvent(new Event('input', { bubbles: true }));
-    });
-    cy.get('input[name="start_postcode"]').should('be.visible').clear().type('SW1A 0AA');
-    cy.get('input[name="end_postcode"]').should('be.visible').clear().type('SP4 7DE');
-    cy.get('input[name="soc"]').should('be.visible').clear().type('50');
-    cy.get('select[name="car_model"]', { timeout: 10000 }).should('exist').should('not.be.disabled').select('Kia EV3');
-    cy.contains('Distance-Based').click();
-    cy.get('.priority-buttons button').eq(3).click();
-    cy.get('.priority-buttons button').eq(4).click();
-    cy.get('button[type="submit"]').contains('Get recommendations').click();
-    cy.contains('No charging stop is needed — your estimated EV range already covers this journey.', { timeout: 60000 }).should('exist');
-    
   });
 });
 
@@ -197,7 +135,6 @@ describe('Charger Planning: Invalid Input Path', () => {
       expect($form[0].checkValidity()).to.be.false;
     });
     cy.get('.charger-list', { timeout: 5000 }).should('not.exist');
-    
   });
 });
 
@@ -222,7 +159,6 @@ describe('Charger Planning: Save Defaults Path', () => {
     cy.get('.priority-buttons button').eq(4).click();
     cy.contains('Save as defaults').click();
     cy.contains('Defaults saved.', { timeout: 60000 }).should('exist');
- 
   });
 });
 

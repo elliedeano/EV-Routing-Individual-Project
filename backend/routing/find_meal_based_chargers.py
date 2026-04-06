@@ -1,7 +1,7 @@
 from datetime import timedelta
 from backend.routing.food_places_identifier import has_nearby_food, get_nearby_food_places, is_meal_time
 from backend.routing.traffic_calculations import get_traffic_delay_percent
-from backend.charger_ranking.rank_chargers import rank_and_filter_chargers
+from backend.routing.rank_chargers import rank_and_filter_chargers
 from backend.routing.services.simulation import route_segment_distance, trip_simulation
 from backend.routing.services.charger_provider import get_chargers_near_route
 

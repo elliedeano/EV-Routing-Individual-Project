@@ -1,6 +1,12 @@
+import sys
+from pathlib import Path
 import math
 from datetime import datetime, timedelta
 import pandas as pd
+
+# Ensure project root is on sys.path so imports like `backend...` resolve
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from backend.routing.services.route_planner import _safe_float
 from backend.routing import range_estimator
 from backend.routing import traffic_calculations
