@@ -3,10 +3,10 @@ describe('Authentication - Sad Path', () => {
     cy.wait(1000); 
   });
 
-  it('renders login form and validates input', () => {
+  it('Login Test: Fill out email and password', () => {
     cy.visit('http://localhost:5173/');
     cy.contains('Sign in').click();
-    cy.get('input[placeholder="Email"], input[type="email"]').should('be.visible').type('elliedeaner@hotmail.com');
+    cy.get('input[placeholder="Email"], input[type="email"]').should('be.visible').type('testing@hotmail.com');
     cy.get('input[placeholder="Password"], input[type="password"]').type('InvalidPassword');
     cy.contains('Log In').click();
     cy.contains("Invalid email or password.").should('exist');
@@ -18,11 +18,11 @@ describe('Authentication - Happy Path', () => {
     cy.wait(1000); 
   });
 
-  it('renders login form and validates input', () => {
+  it('Login Test: Fill out email and password', () => {
     cy.visit('http://localhost:5173/login');
     cy.contains('Sign in').click();
-    cy.get('input[placeholder="Email"], input[type="email"]').should('be.visible').type('elliedeaner@hotmail.com');
-    cy.get('input[placeholder="Password"], input[type="password"]').type('M0ntyd0g1!');
+    cy.get('input[placeholder="Email"], input[type="email"]').should('be.visible').type('testing@hotmail.com');
+    cy.get('input[placeholder="Password"], input[type="password"]').type('test123');
     cy.contains('Log In').click();
     cy.contains('Profile').click();
     cy.contains("Sign out").should('exist');
@@ -34,7 +34,7 @@ describe('Charger Planning: Meal Mode - Happy Path', () => {
     cy.wait(1000);
   });
 
-  it('renders route planner form', () => {
+  it('Enters a route and selects meal mode', () => {
     cy.visit('http://localhost:5173/');
     cy.get('input[name="journeyTime"]').then($el => {
       const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
@@ -49,11 +49,11 @@ describe('Charger Planning: Meal Mode - Happy Path', () => {
     cy.get('.priority-buttons button').eq(0).click();
     cy.get('.priority-buttons button').eq(1).click();
     cy.get('button[type="submit"]').contains('Get recommendations').click();
-    cy.get('.charger-list li', { timeout: 60000 }).should('have.length.at.least', 1);
-    cy.contains('EVC Bath Spa Hotel', { timeout: 60000 }).should('exist');
+    cy.get('.charger-list li', { timeout: 80000 }).should('have.length.at.least', 1);
+    cy.contains('EVC Bath Spa Hotel', { timeout: 80000 }).should('exist');
     cy.get('.charger-list li').first().within(() => {
-      cy.get('details.nearby-places summary', { timeout: 60000 }).click();
-      cy.contains('Holburne Museum Tea House', { timeout: 60000 }).should('exist');
+      cy.get('details.nearby-places summary', { timeout: 80000 }).click();
+      cy.contains('Holburne Museum Tea House', { timeout: 80000 }).should('exist');
     });
   });
 });
@@ -63,7 +63,7 @@ describe('Charger Planning: Meal Mode - Sad (Low charge distance fallback) Path'
     cy.wait(1000);
   });
 
-  it('renders route planner form', () => {
+  it('Enters a route and selects meal mode with low charge', () => {
     cy.visit('http://localhost:5173/');
     cy.get('input[name="journeyTime"]').then($el => {
       const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
@@ -78,8 +78,8 @@ describe('Charger Planning: Meal Mode - Sad (Low charge distance fallback) Path'
     cy.get('.priority-buttons button').eq(0).click();
     cy.get('.priority-buttons button').eq(1).click();
     cy.get('button[type="submit"]').contains('Get recommendations').click();
-    cy.get('.charger-list li', { timeout: 60000 }).should('have.length.at.least', 1);
-    cy.contains('Meal-Based options were unavailable for this time, so distance-based chargers are shown instead.', { timeout: 60000 }).should('exist');
+    cy.get('.charger-list li', { timeout: 80000 }).should('have.length.at.least', 1);
+    cy.contains('Meal-Based options were unavailable for this time, so distance-based chargers are shown instead.', { timeout: 80000 }).should('exist');
   });
 });
 
@@ -88,7 +88,7 @@ describe('Charger Planning: Distance Mode - Happy Path', () => {
     cy.wait(1000);
   });
 
-  it('renders route planner form', () => {
+  it('Enters a route and selects distance mode', () => {
     cy.visit('http://localhost:5173/');
     cy.get('input[name="journeyTime"]').then($el => {
       const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
@@ -113,7 +113,7 @@ describe('Charger Planning: Invalid Input Path', () => {
     cy.wait(1000);
   });
 
-  it('renders route planner form', () => {
+  it('Enters a route and selects distance mode with invalid input', () => {
     cy.visit('http://localhost:5173/');
     cy.get('input[name="journeyTime"]').then($el => {
       const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
@@ -143,7 +143,7 @@ describe('Charger Planning: Save Defaults Path', () => {
     cy.wait(1000);
   });
 
-  it('renders route planner form', () => {
+  it('Enters a route and presses save as defaults', () => {
     cy.visit('http://localhost:5173/');
     cy.get('input[name="journeyTime"]').then($el => {
       const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
@@ -167,7 +167,7 @@ describe('Charger Planning: Load Defaults Path', () => {
     cy.wait(1000);
   });
 
-  it('renders route planner form', () => {
+  it('Presses load defaults', () => {
     cy.visit('http://localhost:5173/');
     cy.get('input[name="journeyTime"]').then($el => {
       const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;

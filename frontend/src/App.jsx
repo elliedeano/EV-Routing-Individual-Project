@@ -475,12 +475,12 @@ export default function App() {
     return (
       <main className="page">
         <header className="header">
-          <h1>EV Charger Planner</h1>
+          <h1>Electric Vehicle Charger Planner</h1>
         </header>
         <div className="layout">
           <section className="panel">
             <div className="card section-card">
-              <p className="hint">Loading authentication...</p>
+              <p className="hint">System Loading...</p>
             </div>
           </section>
         </div>
@@ -492,14 +492,13 @@ export default function App() {
     return (
       <main className="page">
         <header className="header">
-          <h1>EV Charger Planner</h1>
+          <h1>Electric Vehicle Charger Planner</h1>
         </header>
         <div className="layout">
           <section className="panel">
             <div className="card section-card">
               <h2>Firebase setup error</h2>
               <p className="error">{authInitError}</p>
-              <p className="hint">Check frontend/.env Firebase values and restart npm run dev.</p>
             </div>
           </section>
         </div>
@@ -510,7 +509,7 @@ export default function App() {
   return (
     <main className="page">
       <header className="header">
-        <h1>EV Charger Planner</h1>
+        <h1>Electric Vehicle Charger Planner</h1>
         <div className="profile-menu-wrap">
           <button type="button" className="profile-btn" onClick={() => setProfileMenuOpen((prev) => !prev)}>
             {currentUser ? 'Profile' : 'Sign in'}
