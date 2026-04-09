@@ -5,10 +5,9 @@ from datetime import datetime
 import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from backend.routing.services.route_planner import _safe_float
-from backend.routing import range_estimator
+from backend.routing import range_prediction
 from backend.routing import traffic_calculations
 from backend.routing.food_places_identifier import is_meal_time, _interval_overlaps_window
-from backend.routing import vehicle_specs_loader
 
 def test_float_value_conversion():
     assert _safe_float("3.9") == 3.9
@@ -35,7 +34,7 @@ def test_car_spec_extraction(monkeypatch):
         
     ])
     monkeypatch.setattr(pd, "read_csv", lambda path: df)
-    specs = vehicle_specs_loader.get_car_specs("CarTest")
+    specs = range_prediction.get_car_specs("CarTest")
     assert specs["battery_kwh"] == 65.0
     assert specs["wh_per_km"] == 150
 
@@ -43,8 +42,8 @@ def test_car_spec_extraction(monkeypatch):
 def test_ev__range_estimation(monkeypatch):
     def mock_car_specs(model):
         return {"battery_kwh": 60, "wh_per_km": 200}
-    monkeypatch.setattr(range_estimator, "get_car_specs", mock_car_specs)
-    out = range_estimator.load_and_estimate_range("AnyCar", 50)
+    monkeypatch.setattr(range_prediction, "get_car_specs", mock_car_specs)
+    out = range_prediction.load_and_estimate_range("AnyCar", 50)
     assert out is not None
     assert out["car_model"] == "AnyCar"
     assert out["usable_battery_wh"] == 60 * 1000 * 0.5

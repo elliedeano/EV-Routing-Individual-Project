@@ -6,19 +6,19 @@ import os
 from dotenv import load_dotenv
 from threading import Lock
 from typing import List, Optional, Dict, Any
-
 from fastapi import FastAPI, HTTPException, Depends, status, Request
 from fastapi.exceptions import RequestValidationError
 from pydantic import BaseModel, Field
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.responses import JSONResponse
-
 import firebase_admin
 from firebase_admin import credentials as firebase_credentials
 from firebase_admin import firestore
 from google.oauth2 import id_token as google_id_token
 from google.auth.transport import requests as google_requests
+from pydantic import Field
+from backend.routing.services.route_planner import compute_route as compute_route_service
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -61,18 +61,12 @@ def _load_env_file(path: Path, *, overwrite: bool = False) -> None:
 _load_env_file(PROJECT_ROOT / "backend" / ".env")
 _load_env_file(PROJECT_ROOT / ".env", overwrite=True)
 
-from backend.routing.services.route_planner import compute_route as compute_route_service
-
 
 security = HTTPBearer(auto_error=False)
 load_dotenv()
 EXPECTED_FIREBASE_PROJECT_ID = os.getenv("FIREBASE_PROJECT_ID", "project-27ffc5fd-b1d7-41-e0556")
 LOCAL_PROFILE_STORE = PROJECT_ROOT / "backend" / "profile_store.json"
 _profile_store_lock = Lock()
-
-
-
-from pydantic import Field
 
 class RouteRequest(BaseModel):
 	start_postcode: str = Field(..., min_length=1)

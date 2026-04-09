@@ -1,9 +1,10 @@
 from datetime import timedelta
+import os
 from backend.routing.food_places_identifier import has_nearby_food, get_nearby_food_places, is_meal_time
-from backend.routing.traffic_calculations import get_traffic_delay_percent
+from backend.routing.traffic_delay import fetch_traffic_delay_percent as get_traffic_delay_percent
 from backend.routing.rank_chargers import rank_and_filter_chargers
-from backend.routing.services.simulation import route_segment_distance, trip_simulation
-from backend.routing.services.charger_provider import get_chargers_near_route
+from backend.routing.services.ev_battery_simulation import haversine_formula as route_segment_distance, trip_range_simulation as trip_simulation
+from backend.routing.services.ocm_retrieval import ocm_retrieval
 
 
 def rank_fallback_chargers(route, car_specs, soc, est_reachable_km, priorities, start_coords, traffic_depart_at):
@@ -16,24 +17,24 @@ def rank_fallback_chargers(route, car_specs, soc, est_reachable_km, priorities, 
         return stops
 
     def distance_charger_filter(charger, route, start_coords, traffic_depart_at):
-        addr = charger.get("Address", {})
-        latitude = addr.get("Latitude")
-        longitude = addr.get("Longitude")
+        address = charger.get("Address", {})
+        latitude = address.get("Latitude")
+        longitude = address.get("Longitude")
         charger_coords = (latitude, longitude)
         if charger_coords[0] is not None and charger_coords[1] is not None:
             charger_km = route_segment_distance(route[0][0], route[0][1], charger_coords[0], charger_coords[1])
             origin_coords = start_coords or route[0]
-            delay_pct = get_traffic_delay_percent(origin_coords, charger_coords, depart_at=traffic_depart_at)
+            delay_percent = get_traffic_delay_percent(origin_coords, charger_coords, depart_at=traffic_depart_at)
         else:
             charger_km = None
-            delay_pct = 0.0
-        charger["traffic_delay"] = delay_pct
+            delay_percent = 0.0
+        charger["traffic_delay"] = delay_percent
         charger["meal_stop"] = False
         charger["distance_stop"] = True
         charger["route_distance"] = charger_km
         return charger
 
-    def search_chargers(stop, route, est_reachable_km, start_coords, traffic_depart_at, base_dist_km_window=5, max_dist_km_window=50, min_results=3):
+    def search_for_chargers(stop, route, est_reachable_km, start_coords, traffic_depart_at, base_dist_km_window=5, max_dist_km_window=50, min_results=3):
         stop_km = stop.get("at_km")
         window = base_dist_km_window
         chargers_in_window = []
@@ -58,7 +59,7 @@ def rank_fallback_chargers(route, car_specs, soc, est_reachable_km, priorities, 
         stop_km = stop.get("at_km")
         if stop_km is None or stop_km > est_reachable_km:
             continue
-        chargers = search_chargers(stop, route, est_reachable_km, start_coords, traffic_depart_at)
+        chargers = search_for_chargers(stop, route, est_reachable_km, start_coords, traffic_depart_at)
         if chargers:
             all_chargers.extend(chargers)
 
@@ -72,6 +73,7 @@ def calculate_route_time(route_points, journey_start, avg_speed_kmh=60):
         if idex == 0:
             eta = journey_start
             route_times.append(eta)
+            continue
         seg_km = route_segment_distance(route_points[idex-1][0], route_points[idex-1][1], point[0], point[1])
         seg_hr = seg_km / avg_speed_kmh
         eta = route_times[-1] + timedelta(hours=seg_hr)
@@ -157,7 +159,7 @@ def sample_reachable_indices(route_times, window_type, route_distance, est_reach
 
 def query_meal_chargers(pt, pt_km, window_type, start_coords, route, traffic_depart_at):
     try:
-        chargers = get_chargers_near_route([pt], max_results=10, distance_km=7)
+        chargers = ocm_retrieval([pt], max_results=10, distance_km=7)
     except Exception:
         return []
     meal_chargers = []
@@ -167,9 +169,12 @@ def query_meal_chargers(pt, pt_km, window_type, start_coords, route, traffic_dep
         lon = addr.get('Longitude')
         if lat is None or lon is None:
             continue
-        if not has_nearby_food(lat, lon, window_type=window_type):
+        # If Yelp key is missing, be permissive and allow chargers through
+        yelp_key = os.getenv("YELP_API_KEY")
+        has_food = True if not yelp_key else has_nearby_food(lat, lon, window_type=window_type)
+        if not has_food:
             continue
-        places = get_nearby_food_places(lat, lon, window_type=window_type)
+        places = get_nearby_food_places(lat, lon, window_type=window_type) if yelp_key else []
         c = enrich_chargers(c, pt_km, window_type, start_coords, route, traffic_depart_at)
         c['nearby_places'] = (places or [])[:3]
         c['price'] = c.get('price') if c.get('price') is not None else 0.1

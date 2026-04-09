@@ -1,28 +1,29 @@
 import lightgbm as lgb
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
-import joblib
-from datetime import datetime
-import json
 from pathlib import Path
 
 
-def train_energy_model(df):
-    target = "energy_Wh"
-    drop_cols = ["id", "COND", "H", "MIN", "SEC", "power", "VOL", "CUR", "time_difference"]
-    features = [c for c in df.columns if c not in drop_cols + [target]]
+#takes in the feature engineered dataset then trains a LightGBM model to predict energy consumption. 
+def training_lightgbm(df):
+#Define the target feature and drop any features that are used in target feature calculation so there is no data leakage. 
+    target_feature = "energy_Wh"
+    drop_columns = ["id", "COND", "H", "MIN", "SEC", "power", "VOL", "CUR", "time_difference"]
+    features = [c for c in df.columns if c not in drop_columns + [target_feature]]
+
 
     X = df[features]
-    y = df[target]
-
+    y = df[target_feature]
+#Decide on a train and test split.
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
 
-    output_dir = Path(__file__).parent / "output_files"
-    output_dir.mkdir(exist_ok=True)
+    output_directory = Path(__file__).parent / "output_files"
+    output_directory.mkdir(exist_ok=True)
 
+#Hyperparameter tuning.
     try:
-        param_dist = {
+        parameter_options = {
             "learning_rate": [0.01, 0.03, 0.05],
             "num_leaves": [30, 60],
             "n_estimators": [100, 300, 800],
@@ -32,55 +33,42 @@ def train_energy_model(df):
             "max_depth": [-1, 5, 10], 
         }
 
-        base_est = lgb.LGBMRegressor(objective="regression", random_state=42, n_jobs=-1)
-        cv = 5
+        estimation = lgb.LGBMRegressor(objective="regression", random_state=42, n_jobs=-1)
+        cross_validation = 5
 
         search = RandomizedSearchCV(
-            estimator=base_est,
-            param_distributions=param_dist,
+            estimator=estimation,
+            param_distributions=parameter_options,
             n_iter=12,
             scoring="neg_mean_squared_error",
-            cv=cv,
+            cv=cross_validation,
             random_state=42,
             n_jobs=-1,
             verbose=0,
         )
 
         search.fit(X_train, y_train)
+#save the best parameters found.
         best = search.best_params_
-        print("Tuning complete — best params:\n", best)
     except Exception as e:
-        print(f"Hyperparameter tuning failed, continuing with defaults: {e}")
+        print(f"Hyperparameter tuning error: {e}")
    
    
-    tuned_params = best if 'best' in locals() else {}
-    if tuned_params:
-        print("Using tuned params for training:", tuned_params)
-        model = lgb.LGBMRegressor(**tuned_params)
+#Create final model. 
+    selected_parameters= best if 'best' in locals() else {}
+    if selected_parameters:
+        model = lgb.LGBMRegressor(**selected_parameters)
     else:
         model = lgb.LGBMRegressor()
+#Train the model on the training data
     model.fit(X_train, y_train)
-
-    
-    tuning_used = bool(tuned_params)
-    if tuning_used:
-        print("Hyperparameter tuning applied successfully and used for final training.")
-        print("Selected hyperparameters:", tuned_params)
-    else:
-        print("Hyperparameter tuning was not applied; training used default parameters.")
-
     return model, features
 
 
 if __name__ == "__main__":
     try:
         from load_data import load_ev_data
-
-        print("Loading data...")
         df = load_ev_data()
-        print("Starting training...")
-        model, features = train_energy_model(df)
-        print("Training finished. Model saved and returned.")
-        print(f"Features used ({len(features)}):", features)
+        model, features = training_lightgbm(df)
     except Exception as e:
-        print("Error running training from CLI:", e)
+        print("Error")

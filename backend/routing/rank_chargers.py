@@ -1,8 +1,7 @@
-import json
 import re
 import math
 
-def parse_price(usage_cost):
+def price_value_to_decimal(usage_cost):
     if usage_cost is None:
         return float('inf')
 
@@ -14,7 +13,7 @@ def parse_price(usage_cost):
     if not usage_text:
         return float('inf')
 
-    if usage_text in {"free", "no charge", "0", "0.0", "£0", "€0", "$0"}:
+    if usage_text in {"0","free", "no charge", "0.0", "£0", "€0", "$0"}:
         return 0.0
 
     pence_match = re.search(r"(\d+(?:\.\d+)?)\s*p(?:\s*/\s*kwh)?", usage_text)
@@ -36,29 +35,29 @@ def parse_price(usage_cost):
             pass
     return float('inf')
 
-def extract_charger_features(charger):
-    raw_price = charger.get('price')
-    if raw_price is None:
-        price = parse_price(charger.get('UsageCost'))
+def extract_charger_data(charger):
+    price = charger.get('price')
+    if price is None:
+        price = price_value_to_decimal(charger.get('UsageCost'))
     else:
-        if isinstance(raw_price, str):
-            stripped = raw_price.strip()
+        if isinstance(price, str):
+            stripped = price.strip()
             if stripped:
                 try:
                     numeric_price = float(stripped)
                 except ValueError:
-                    numeric_price = parse_price(stripped)
+                    numeric_price = price_value_to_decimal(stripped)
             else:
                 numeric_price = float('inf')
-        elif isinstance(raw_price, (int, float)):
-            numeric_price = float(raw_price)
+        elif isinstance(price, (int, float)):
+            numeric_price = float(price)
         else:
             numeric_price = float('inf')
 
         if math.isfinite(numeric_price) and numeric_price >= 0:
             price = numeric_price
         else:
-            price = parse_price(charger.get('UsageCost'))
+            price = price_value_to_decimal(charger.get('UsageCost'))
     connections = charger.get('Connections', [])
     if connections:
         max_power = max((c.get('PowerKW', 0) or 0) for c in connections)
@@ -72,9 +71,9 @@ def extract_charger_features(charger):
     else:
         status = status_type.get('IsOperational', False)
     distance = charger.get('AddressInfo', {}).get('Distance', float('inf'))
-    raw_traffic_delay = charger.get('traffic_delay', 0)
+    traffic_delay = charger.get('traffic_delay', 0)
     try:
-        traffic_delay = float(raw_traffic_delay)
+        traffic_delay = float(traffic_delay)
     except (TypeError, ValueError):
         traffic_delay = 0.0
     if not math.isfinite(traffic_delay):
@@ -82,7 +81,7 @@ def extract_charger_features(charger):
     if traffic_delay < 0:
         traffic_delay = 0.0
    
-    meal_stop = charger.get('meal_stop', False)
+    meal_window = charger.get('meal_stop', False)
     distance_stop = charger.get('distance_stop', False)
     return {
         'price': price,
@@ -92,7 +91,7 @@ def extract_charger_features(charger):
         'status': status,
         'distance': distance,
         'traffic_delay': traffic_delay,
-        'meal_stop': meal_stop,
+        'meal_stop': meal_window,
         'distance_stop': distance_stop,
         'raw': charger
     }
@@ -131,28 +130,28 @@ def normalise_feature(values, ascendingVsDescending=True):
     return [(max_v - value) / (max_v - min_v) for value in clean_values]
 
 
-def _compute_priority_weights(priorities):
+def compute_users_priorities(priorities):
     return {p: 3 - i for i, p in enumerate(priorities)}
 
 
-def _normalize_for_priorities(features, priorities, ascendingVsDescending):
-    normed = {}
+def normalise_each_priority(features, priorities, ascendingVsDescending):
+    normalise = {}
     for p in priorities:
         vals = [f[p] if not isinstance(f[p], bool) else int(f[p]) for f in features]
-        normed[p] = normalise_feature(vals, ascendingVsDescending[p])
-    return normed
+        normalise[p] = normalise_feature(vals, ascendingVsDescending[p])
+    return normalise
 
 
-def _compute_scores(features, priorities, weights, normed):
+def charger_scores(features, priorities, weights, normalise):
     for i, f in enumerate(features):
         score = 0
         breakdown = {}
         missing_penalty = 0.0
         for p in priorities:
-            part = weights[p] * normed[p][i]
+            part = weights[p] * normalise[p][i]
             breakdown[p] = {
                 'weight': weights[p],
-                'normalized': normed[p][i],
+                'normalised': normalise[p][i],
                 'points': part
             }
             score += part
@@ -176,32 +175,25 @@ def _compute_scores(features, priorities, weights, normed):
         f['breakdown'] = breakdown
     return features
 
-
-def _sort_and_select(features, priorities):
+def rank_chargers(features, priorities):
     if 'price' in priorities:
-        def _price_missing(feature):
-            raw_price = feature.get('price')
-            try:
-                return not math.isfinite(float(raw_price))
-            except (TypeError, ValueError):
-                return True
-
-        def _price_value(feature):
-            if _price_missing(feature):
-                return float('inf')
-            return float(feature.get('price'))
-        features.sort(key=lambda f: (_price_missing(f), _price_value(f), -f['score']))
+        features.sort(
+            key=lambda f: (not math.isfinite(float(f.get('price'))) if isinstance(f.get('price'), (int, float, str)) else True,
+                float(f.get('price')) if isinstance(f.get('price'), (int, float)) and math.isfinite(float(f.get('price'))) else float('inf'),
+                -f['score']))
     else:
         features.sort(key=lambda f: f['score'], reverse=True)
+
     return features[:3]
 
-def rank_and_filter_chargers(chargers, priorities):
-    features = [extract_charger_features(c) for c in chargers]
+
+def overall_charger_ranking(chargers, priorities):
+    features = [extract_charger_data(c) for c in chargers]
     features = [f for f in features if f['status'] is not False]
     if not features:
         return []
 
-    ascendingVsDescending = {
+    ascVsDesc = {
         'price': False,
         'max_power': True,
         'is_fast': True,
@@ -212,65 +204,24 @@ def rank_and_filter_chargers(chargers, priorities):
         'distance_stop': True
     }
 
-    weights = _compute_priority_weights(priorities)
-    normed = _normalize_for_priorities(features, priorities, ascendingVsDescending)
-    features = _compute_scores(features, priorities, weights, normed)
-    return _sort_and_select(features, priorities)
+    weights = compute_users_priorities(priorities)
+    normalise = normalise_each_priority(features, priorities, ascVsDesc)
+    features = charger_scores(features, priorities, weights, normalise)
+    return rank_chargers(features, priorities)
 
-def get_user_priorities(input_str):
+def user_priorities_to_array(input_str):
     valid = {'price', 'max_power', 'is_fast', 'num_points', 'distance', 'traffic_delay'}
     return [p.strip() for p in input_str.lower().split(',') if p.strip() in valid][:3]
 
-if __name__ == "__main__":
-    import json
-    try:
-        with open('../output/baseline_chargers.json') as f:
-            chargers = json.load(f)
-    except Exception:
-        chargers = []
 
-    priorities_list = [
-        ("price", "Lowest price per kWh"),
-        ("max_power", "Highest charging power (kW)"),
-        ("is_fast", "Fast charge capable"),
-        ("num_points", "Most charging points"),
-        ("distance", "Closest distance"),
-        ("traffic_delay", "Least traffic delay (% increase)")
-    ]
-    print("\nSelect your top 3 priorities by number (comma separated):")
-    for idx, (key, desc) in enumerate(priorities_list, 1):
-        print(f"  {idx}. {key} - {desc}")
-    while True:
-        user_input = input("Enter 3 numbers (e.g. 1,3,6): ").strip()
-        nums = [n.strip() for n in user_input.split(',') if n.strip().isdigit()]
-        if len(nums) == 3 and all(1 <= int(n) <= len(priorities_list) for n in nums):
-            priorities = [priorities_list[int(n)-1][0] for n in nums]
-            break
-        else:
-            print("Invalid input. Please enter 3 numbers from the list above.")
-    if not chargers:
-        print("No baseline chargers loaded. Generate baseline_chargers.json before running this ranking script.")
-    else:
-        if 'traffic_delay' in priorities:
-            from backend.routing.traffic_calculations import get_traffic_delay_percent
-            start_lat = input("Enter your trip start latitude: ")
-            start_lon = input("Enter your trip start longitude: ")
-            start_coords = (float(start_lat), float(start_lon))
-            for c in chargers:
-                addr = c.get('AddressInfo', {})
-                charger_coords = (addr.get('Latitude'), addr.get('Longitude'))
-                if charger_coords[0] is not None and charger_coords[1] is not None:
-                    c['traffic_delay'] = get_traffic_delay_percent(start_coords, charger_coords)
-                else:
-                    c['traffic_delay'] = 0.0
-        ranked = rank_and_filter_chargers(chargers, priorities)
-        print("\nTop Charger Recommendations:")
-        for i, c in enumerate(ranked[:5], 1):
-            addr = c['raw'].get('AddressInfo', {}).get('Title', 'Unknown')
-            print(f"{i}. {addr} | Price: {c['price']} | Power: {c['max_power']} kW | Fast: {c['is_fast']} | Points: {c['num_points']} | Distance: {c['distance']:.2f} km | Traffic Delay: {c['traffic_delay']:.1f}%")
-            if i == 1:
-                print("  --- Breakdown for top charger ---")
-                for p in priorities:
-                    b = c['breakdown'][p]
-                    print(f"    {p}: weight={b['weight']}, normalized={b['normalized']:.2f}, points={b['points']:.2f}")
-                print(f"    Total score: {c['score']:.2f}")
+def rank_and_filter_chargers(chargers, priorities):
+    ranked = overall_charger_ranking(chargers, priorities)
+    output = []
+    for feature in ranked:
+        if 'meal_stop' not in feature:
+            feature['meal_stop'] = feature.pop('meal_window', False) if isinstance(feature, dict) else False
+        if 'distance_stop' not in feature:
+            feature['distance_stop'] = feature.get('distance_stop', False)
+        output.append(feature)
+    return output
+

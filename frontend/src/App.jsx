@@ -480,7 +480,6 @@ export default function App() {
         <div className="layout">
           <section className="panel">
             <div className="card section-card">
-              <p className="hint">System Loading...</p>
             </div>
           </section>
         </div>
@@ -496,9 +495,9 @@ export default function App() {
         </header>
         <div className="layout">
           <section className="panel">
-            <div className="card section-card">
-              <h2>Firebase setup error</h2>
-              <p className="error">{authInitError}</p>
+            <div className="card">
+              <h2>Unable to load application</h2>
+              <p className="error">The app was not able to be started. Please refresh.</p>
             </div>
           </section>
         </div>
@@ -518,14 +517,13 @@ export default function App() {
             <div className="profile-menu card">
               {currentUser ? (
                 <>
-                  <p className="hint">Signed in as {currentUser.email}</p>
                   <button type="button" onClick={toggleSavedDefaultsPanel}>
                     Defaults
                   </button>
                   {profileDefaultsOpen && (
                     <div className="profile-submenu">
                       <div className="profile-mini-form">
-                        {loadingSavedDefaults && <p className="hint">Refreshing saved defaults...</p>}
+                        {loadingSavedDefaults }
                         <label>
                           Car model
                           <select
@@ -534,7 +532,7 @@ export default function App() {
                             onChange={handleProfileDraftChange}
                             disabled={loadingModels}
                           >
-                            <option value="">Select a model</option>
+                            <option value="">Select a car model</option>
                             {models.map((modelName) => (
                               <option key={modelName} value={modelName}>{modelName}</option>
                             ))}
@@ -562,8 +560,6 @@ export default function App() {
                             <option value="meal">Meal-Based</option>
                           </select>
                         </label>
-
-                        <p className="hint">Default priorities (choose up to 2)</p>
                         <div className="profile-priority-row">
                           {PRIORITIES.map((priority) => (
                             <button
@@ -580,8 +576,6 @@ export default function App() {
                             </button>
                           ))}
                         </div>
-                        <p className="hint">Selection order sets weighting: 1 is stronger than 2.</p>
-
                         <div className="actions">
                           <button type="button" onClick={saveProfileDefaultsFromMenu}>Save defaults</button>
                           <button type="button" onClick={loadProfileDefaults}>Load into planner</button>
@@ -713,7 +707,7 @@ export default function App() {
                     <option key={m} value={m}>{m}</option>
                   ))}
                 </select>
-                {modelsError && <span className="hint error">{modelsError}</span>}
+                {modelsError}
               </label>
             </div>
           </section>
@@ -758,10 +752,8 @@ export default function App() {
                 </button>
               ))}
             </div>
-            <p className="hint priorities-hint">Selection order sets weighting: 1 is stronger than 2.</p>
-            {selectedPriorities.length >= 2 && (
-              <p className="hint priorities-hint">Only 2 priorities can be selected.</p>
-            )}
+  
+            {selectedPriorities.length >= 2}
           </section>
 
           <div className="actions">
@@ -771,27 +763,27 @@ export default function App() {
             <button type="button" onClick={loadProfileDefaults} disabled={!currentUser}>Load saved defaults</button>
             <button type="button" onClick={saveProfileDefaults} disabled={!currentUser}>Save as defaults</button>
             {selectedPriorities.length !== 2 && (
-              <span className="hint">Select exactly 2 priorities to match CLI.</span>
+              <span className="notice">Select 2 Filters</span>
             )}
-            {profileStatus && <span className="hint">{profileStatus}</span>}
+            {profileStatus}
           </div>
         </form>
 
         <section className="panel results">
           <div className="card summary-card">
-            <h2>Stats</h2>
+            <h2>Journey Statistics</h2>
             {error && <p className="error">{error}</p>}
-            {!error && !result && <p className="hint">Run a search to see recommendations.</p>}
+            {!error && !result}
             {result && (
               <>
                 <div className="summary">
                   <div>
-                    <span>Total Journey Distance</span>
-                    <strong>{result.total_km?.toFixed?.(1) ?? result.total_km} km</strong>
+                    <span>Total Trip Distance</span>
+                    <strong>{result.total_km?.toFixed?.(1) ?? result.total_km} KM</strong>
                   </div>
                   <div>
                     <span>Estimated EV Range</span>
-                    <strong>{result.est_range_km?.toFixed?.(1) ?? result.est_range_km} km</strong>
+                    <strong>{result.est_range_km?.toFixed?.(1) ?? result.est_range_km} KM</strong>
                   </div>
                 </div>
               </>
@@ -800,7 +792,7 @@ export default function App() {
 
           {showMealFallbackNotice && (
             <div className="card">
-              <p className="hint">Meal-Based options were unavailable for this time, so distance-based chargers are shown instead.</p>
+              <p className="notice">Meal-Based mode is not available at this time so distance mode results are shown instead.</p>
             </div>
           )}
 
@@ -808,7 +800,7 @@ export default function App() {
             <>
               {noChargingNeeded && (
                 <div className="card">
-                  <p className="hint">No charging stop is needed — your estimated EV range already covers this journey.</p>
+                  <p className="notice">You have enough charge to reach your destination, no chargers recommended for your trip.</p>
                 </div>
               )}
               <ul className="charger-list">
@@ -851,7 +843,7 @@ export default function App() {
                             ))}
                           </ul>
                         ) : (
-                          <p className="hint">No restaurants/cafes found nearby for this stop.</p>
+                          <p className="notice">No food places found nearby for this charger.</p>
                         )}
                       </details>
                     )}

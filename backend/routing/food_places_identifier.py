@@ -1,8 +1,9 @@
 import os
 from datetime import datetime, timedelta
 import requests
+import logging
 
-YELP_API_KEY = os.getenv("YELP_API_KEY")
+logger = logging.getLogger(__name__)
 REQUEST_TIMEOUT_SECONDS = float(os.getenv("EXTERNAL_API_TIMEOUT_SECONDS", "10"))
 
 YELP_SEARCH_URL = "https://api.yelp.com/v3/businesses/search"
@@ -25,7 +26,10 @@ DEFAULT_CATEGORIES = CATEGORIES_BY_WINDOW["lunch"]
 
 
 def _search_yelp_businesses(lat, lon, *, radius, limit, window_type):
-    if not YELP_API_KEY:
+    # Read the API key at call time so changes to env vars are picked up
+    yelp_key = os.getenv("YELP_API_KEY")
+    if not yelp_key:
+        logger.debug("YELP_API_KEY not set; skipping Yelp lookup")
         return []
 
     categories = CATEGORIES_BY_WINDOW.get(window_type, DEFAULT_CATEGORIES)
@@ -36,7 +40,7 @@ def _search_yelp_businesses(lat, lon, *, radius, limit, window_type):
         "categories": categories,
         "limit": limit,
     }
-    headers = {"Authorization": f"Bearer {YELP_API_KEY}"}
+    headers = {"Authorization": f"Bearer {yelp_key}"}
 
     try:
         resp = requests.get(
@@ -46,9 +50,11 @@ def _search_yelp_businesses(lat, lon, *, radius, limit, window_type):
             timeout=REQUEST_TIMEOUT_SECONDS,
         )
     except Exception:
+        logger.exception("Yelp API request failed")
         return []
 
     if resp.status_code != 200:
+        logger.debug("Yelp returned status %s", resp.status_code)
         return []
 
     try:

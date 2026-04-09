@@ -3,10 +3,7 @@ import os
 import logging
 from datetime import datetime
 
-logger = logging.getLogger(__name__)
-
-
-def _normalize_depart_at(depart_at):
+def normalise_departure_time(depart_at):
     if depart_at is None:
         return None
     if isinstance(depart_at, datetime):
@@ -19,9 +16,6 @@ def _normalize_depart_at(depart_at):
 
 
 def fetch_route_summary(start_lat, start_lon, end_lat, end_lon, depart_at=None):
-    # Prefer environment-provided key but fall back to the project's default
-    # TomTom key (used elsewhere in the repo) so traffic calculations still
-    # work when the env var is not set during local development.
     api_key = os.getenv("TOMTOM_API_KEY") or "AlmtymL0xYZG08ULKfWbjWOg6PzcZtEd"
     url = (
         f"https://api.tomtom.com/routing/1/calculateRoute/"
@@ -33,7 +27,7 @@ def fetch_route_summary(start_lat, start_lon, end_lat, end_lon, depart_at=None):
         "travelMode": "car",
         "computeTravelTimeFor": "all"
     }
-    depart_at_value = _normalize_depart_at(depart_at)
+    depart_at_value = normalise_departure_time(depart_at)
     if depart_at_value:
         params["departAt"] = depart_at_value
     try:
@@ -42,17 +36,33 @@ def fetch_route_summary(start_lat, start_lon, end_lat, end_lon, depart_at=None):
         data = response.json()
         routes = data.get("routes", [])
         if not routes:
-            logger.debug("TomTom response had no routes: %s", data)
             return None
         summary = routes[0].get("summary", {})
-        logger.debug("TomTom route summary: %s", summary)
         return summary
     except Exception as exc:
-        logger.exception("Error fetching TomTom route summary: %s", exc)
         return None
 
+def fetch_travel_time_from_coords(start_coords, dest_coords, depart_at=None):
+    return fetch_travel_time(
+        start_coords[0], start_coords[1], dest_coords[0], dest_coords[1], depart_at=depart_at)
+
 def fetch_travel_time(start_lat, start_lon, end_lat, end_lon, depart_at=None):
-    summary = fetch_route_summary(start_lat, start_lon, end_lat, end_lon, depart_at=depart_at)
-    if not summary:
+    totals = fetch_route_summary(start_lat, start_lon, end_lat, end_lon, depart_at=depart_at)
+    if not totals:
         return None
-    return summary.get("travelTimeInSeconds")
+    return totals.get("travelTimeInSeconds")
+
+def fetch_traffic_delay_percent(start_coords, dest_coords, depart_at=None):
+    summary = fetch_route_summary(
+        start_coords[0], start_coords[1], dest_coords[0], dest_coords[1], depart_at=depart_at)
+    if not summary:
+        return 0.0
+    try:
+        time_traffic_sec = summary.get("travelTimeInSeconds")
+        time_no_traffic_sec = summary.get("noTrafficTravelTimeInSeconds")
+        if time_traffic_sec and time_no_traffic_sec and time_no_traffic_sec > 0:
+            delay_percent = ((time_traffic_sec - time_no_traffic_sec) / time_no_traffic_sec) * 100
+        return max(delay_percent, 0.0)
+    except Exception:
+        return 0.0
+

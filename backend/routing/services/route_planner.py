@@ -1,11 +1,42 @@
 import math
 from typing import Optional, List, Dict, Any
 from backend.routing.find_meal_based_chargers import find_meal_based_chargers
-from backend.routing.traffic_calculations import get_traffic_delay_percent
-from backend.routing.services.geocoding import geocode_postcode
-from backend.routing.services.route_provider import get_route
-from backend.routing.services.charger_provider import get_chargers_near_route
-from backend.routing.services.simulation import trip_simulation, route_segment_distance
+from backend.routing.traffic_delay import fetch_traffic_delay_percent as get_traffic_delay_percent
+import os
+import polyline
+import requests
+from backend.routing.services.geocoding import postcode_to_coords
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+def get_route(start_coords, dest_coords):
+    """Fetch route polyline from OpenRouteService.
+
+    Inlined from `route_provider.py` to reduce indirection.
+    """
+    REQUEST_TIMEOUT_SECONDS = float(os.getenv("EXTERNAL_API_TIMEOUT_SECONDS", "10"))
+    key = os.getenv("ORS_API_KEY")
+    if not key or not key.strip():
+        raise RuntimeError("Missing required environment variable: ORS_API_KEY")
+
+    url = "https://api.openrouteservice.org/v2/directions/driving-car"
+    headers = {"Authorization": key}
+    body = {
+        "coordinates": [
+            [start_coords[1], start_coords[0]],
+            [dest_coords[1], dest_coords[0]],
+        ]
+    }
+    response = requests.post(url, json=body, headers=headers, timeout=REQUEST_TIMEOUT_SECONDS)
+    response.raise_for_status()
+    data = response.json()
+    if not data.get("routes"):
+        raise RuntimeError("ORS returned no route")
+    return polyline.decode(data["routes"][0]["geometry"])
+from backend.routing.services.ocm_retrieval import ocm_retrieval
+from backend.routing.services.ev_battery_simulation import trip_range_simulation as trip_simulation, haversine_formula as route_segment_distance
 from backend.routing.rank_chargers import rank_and_filter_chargers
 
 
@@ -71,8 +102,8 @@ def compute_route(
     else:
         journey_start_dt = datetime.now()
 
-    start_coords = geocode_postcode(start_postcode)
-    dest_coords = geocode_postcode(end_postcode)
+    start_coords = postcode_to_coords(start_postcode)
+    dest_coords = postcode_to_coords(end_postcode)
     route = get_route(start_coords, dest_coords)
 
     if car_model:
@@ -94,6 +125,7 @@ def compute_route(
             'chargers': [],
         }
 
+    meal_error = None
     try:
         if umbrella_choice == 'meal':
             ranked = find_meal_based_chargers(
@@ -134,7 +166,10 @@ def compute_route(
                         charger['distance'] = addr.get('Distance', 0.1)
                         all_chargers.append({'raw': charger, **charger})
             ranked = rank_and_filter_chargers(all_chargers, priorities or [])
-    except Exception:
+    except Exception as e:
+        # Log the error, keep behaviour but capture the exception for visibility
+        logger.exception("Error while computing meal-based chargers")
+        meal_error = str(e)
         ranked = []
 
     if not ranked:
@@ -150,7 +185,7 @@ def compute_route(
             seen = set()
             for point in sample_points:
                 try:
-                    found = get_chargers_near_route([point], max_results=10, distance_km=10)
+                    found = ocm_retrieval([point], max_results=10, distance_km=10)
                 except Exception:
                     found = []
 
@@ -231,4 +266,6 @@ def compute_route(
         'est_range_km': est_reachable_km,
         'start_coords': [start_coords[0], start_coords[1]],
         'chargers': out_chargers,
+        # expose meal-mode errors so frontend or tests can detect why meal-mode fell back
+        **({'meal_mode_error': meal_error} if meal_error else {}),
     }
