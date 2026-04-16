@@ -1,7 +1,7 @@
 import math
 from backend.routing.services.ocm_retrieval import ocm_retrieval
 
-#calculates distance between two points using harvesine formula.
+# Calculates distance between two points using harvesine formula.
 def haversine_formula(lat1, lon1, lat2, lon2):
     earths_radius_km = 6371.0
     p1, p2 = math.radians(lat1), math.radians(lat2)
@@ -12,7 +12,7 @@ def haversine_formula(lat1, lon1, lat2, lon2):
     return result
 
 
-#Simulates car driving to simulate battery usage. 
+# Simulates car driving to simulate battery usage. 
 def trip_range_simulation(route, car_specs, soc_percent, min_buffer_km=15):
     wh_per_km = car_specs["wh_per_km"]
     battery_kwh = car_specs["battery_kwh"]

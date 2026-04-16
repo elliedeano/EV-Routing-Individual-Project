@@ -213,6 +213,10 @@ def _save_profile(uid: str, email: str, payload: Dict[str, Any]) -> Dict[str, An
 
 
 def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> Dict[str, Optional[str]]:
+	# Dev-only bypass: when ALLOW_UNAUTH_LOCAL is truthy, return a local user
+	if os.getenv("ALLOW_UNAUTH_LOCAL", "").lower() in {"1", "true", "yes"}:
+		return {"uid": "local", "email": "local@example.com"}
+
 	if not credentials or not credentials.credentials:
 		raise HTTPException(
 			status_code=status.HTTP_401_UNAUTHORIZED,
@@ -297,12 +301,26 @@ def compute_route_debug(req: RouteRequest):
 @app.get('/api/v1/car-models', response_model=CarModelsResponse)
 def get_car_models(current_user: Dict[str, Optional[str]] = Depends(get_current_user)):
 	try:
-		csv_path = PROJECT_ROOT / "data" / "raw" / "car-energy-database-30.csv"
+		filename = "car-energy-database-30.csv"
+		candidates = [
+			PROJECT_ROOT / "data" / "raw" / filename,
+			Path.cwd() / "data" / "raw" / filename,
+			PROJECT_ROOT.parent / "data" / "raw" / filename,
+		]
+		csv_path = None
+		for p in candidates:
+			if p.exists():
+				csv_path = p
+				break
+		if csv_path is None:
+			err_msg = f"Missing car models CSV. Checked: {[str(p) for p in candidates]}"
+			print(err_msg)
+			raise HTTPException(status_code=500, detail=err_msg)
 		models: List[str] = []
 		with open(csv_path, newline='') as csvfile:
 			reader = csv.DictReader(csvfile)
 			for row in reader:
-				model = (row.get('Car Model ') or '').strip()
+				model = (row.get('Car Model') or '').strip()
 				if model:
 					models.append(model)
 		models = sorted(set(models))

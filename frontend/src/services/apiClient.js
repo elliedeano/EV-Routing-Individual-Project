@@ -3,9 +3,9 @@ const ENV_API_BASE = import.meta.env.VITE_API_BASE || '';
 const IS_LOCAL_HOST = typeof window !== 'undefined'
   && ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
-export const API_BASE = (!IS_LOCAL_HOST && ENV_API_BASE.includes('localhost'))
-  ? CLOUD_API_BASE
-  : (ENV_API_BASE || CLOUD_API_BASE);
+// Prefer a local backend when running the frontend on localhost.
+// Priority: explicit VITE_API_BASE > localhost default > cloud production.
+export const API_BASE = ENV_API_BASE || (IS_LOCAL_HOST ? 'http://127.0.0.1:8000' : CLOUD_API_BASE);
 
 const ensureOk = async (res, fallbackMessage) => {
   if (!res.ok) {
