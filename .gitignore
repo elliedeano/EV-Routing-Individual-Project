@@ -10,6 +10,8 @@ conda-env/
 
 # Data files (raw + generated)
 data/raw/*.csv
+# Keep this specific raw CSV tracked (override ignore)
+!data/raw/car-energy-database-30.csv
 data/processed/*.csv
 
 # Model artifacts
